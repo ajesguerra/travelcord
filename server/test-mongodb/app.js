@@ -16,7 +16,7 @@ module.exports = function(app)
     connectionString = 'mongodb://' + username + ':' + password;
     connectionString += '@ds129374.mlab.com:29374/heroku_z1vhpl40'; // use yours
   }
-
+ 
   var mongoose = require("mongoose");
     mongoose.connect(connectionString, {
       useMongoClient: true
