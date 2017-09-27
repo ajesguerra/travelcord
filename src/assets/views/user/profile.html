@@ -9,18 +9,18 @@
 
   <meta charset="UTF-8">
   <title>User Profile</title>
+  <!-- fix cdn -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-
+  <link href="../../css/assignment2.css" rel="stylesheet"/>
 
   <!-- STYLE sheet comes after all the libraries are loaded. Document style-->
 
-  <link href="../css/style.css" rel="stylesheet"/>
 </head>
 
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
+<nav class="navbar navbar-fixed-top">
+  <div class="container-fluid header-footer-blue-steel">
 
     <!--heading on the nav bar-->
     <p class="navbar-header pull-left">
@@ -31,16 +31,15 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right">
-      <a href="profile.html" class="navbar-link">
-        <span class="glyphicon glyphicon-ok"></span>
+      <a href="profile.html" class="">
+        <span class="glyphicon glyphicon-ok navbar-link"></span>
       </a>
     </p>
-
   </div>
 </nav>
 
 
-<div class="container">
+<div class="container main-content">
   <form>
     <div class="form-group">
       <label for="username">Username</label>
@@ -75,17 +74,21 @@
 
 </div>
 
+
 <!-- Footer -->
-<nav class="navbar navbar-default navbar-fixed-bottom">
-  <div class="container-fluid">
+<nav class="navbar navbar-fixed-bottom header-footer-blue-steel">
+  <div class="container-fluid header-footer-blue-steel">
+
+    <!--tick mark-->
     <p class="navbar-text pull-right">
-      <a href="profile.html">
-        <span class="glyphicon glyphicon-user"></span>
+      <a href="profile.html" class="nav-hover">
+        <span class="glyphicon glyphicon-user navbar-link"></span>
       </a>
     </p>
-
   </div>
 </nav>
+<!-- End Footer-->
+
 
 </body>
 </html>
