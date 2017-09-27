@@ -103,6 +103,9 @@ a.btn-block {
   border-color: #dedede;
   border-right-style: solid;
 }
+.textarea-3 {
+  height: 150px !important;
+}
 html, body, .aj-content-full-height, .aj-split-content-left {
   height: 100%;
 }
