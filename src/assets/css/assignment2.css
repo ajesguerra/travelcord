@@ -92,6 +92,9 @@ a.btn-block {
 .website-list-icon {
   text-align: right;
 }
+.website-page-icons {
+  padding-right: 30px;
+}
 .aj-website-description {
   height: 100px;
 }
