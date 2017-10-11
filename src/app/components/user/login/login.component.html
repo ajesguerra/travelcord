@@ -1,0 +1,15 @@
+<div class="container">
+  <h1>Login</h1>
+  <input [(ngModel)]="username"
+         placeholder="username"
+         type="text"
+         class="form-control"/>
+  <input placeholder="password"
+         [(ngModel)]="password"
+         type="password"
+         class="form-control"/>
+  <a class="btn btn-primary btn-block" (click)="login(username, password)">Login</a>
+  <a class="btn btn-success btn-block" [routerLink]="['/profile']">Profile</a>
+  <br/>
+  Username will be referenced here 00510/3:43: {{ password }}
+</div>
