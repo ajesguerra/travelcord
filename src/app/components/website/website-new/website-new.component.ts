@@ -21,8 +21,5 @@ export class WebsiteNewComponent implements OnInit {
           this.websites = this.websiteService.findWebsitesByUser(this.userId);
         }
       );
-
   }
-
-
 }
