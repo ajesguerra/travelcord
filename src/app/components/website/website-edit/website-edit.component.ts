@@ -9,23 +9,23 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class WebsiteEditComponent implements OnInit {
 
+  userId: string;
   websiteId: string;
-  website = {};
-  name: string;
-  description: string;
-  constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute) { }
+  theWebsite: {};
+  websites = [{}];
+  constructor(private websiteService: WebsiteService,  private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.activatedRoute.params
       .subscribe(
         (params: any) => {
-          this.websiteId = params['websiteId'];
+          this.userId = params['uid'];
+          this.websites = this.websiteService.findWebsitesByUser(this.userId);
+          this.websiteId = params['wid'];
+          this.theWebsite = this.websiteService.findWebsiteById(this.websiteId);
         }
       );
-    this.website = this.websiteService.findWebsiteById(this.websiteId);
-    this.name = this.website['name'];
-    this.description = this.website['description'];
-    // this.user = this.userService.findUserById(this.userId);
+
   }
 
 }

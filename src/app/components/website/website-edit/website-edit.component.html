@@ -5,7 +5,7 @@
 
     <div class="col-sm-3 col-xs-1 nav-padding-zero">
 
-      <a href="website-list.html" class="navbar-text-main-theme">
+      <a [routerLink]="['/user', userId, 'website']" class="navbar-text-main-theme">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
 
@@ -44,49 +44,13 @@
     <div class="row aj-content-full-height">
       <div class="col-sm-3 hidden-xs aj-split-content-left">
         <ul class="list-group">
-          <li class="list-group-item">
+          <li class="list-group-item" *ngFor="let aWebsite of websites">
             <div class="row">
               <div class="col-sm-9 nav-padding-zero">
-                <a href="../page/page-list.html">Address Book App</a>
+                <a [routerLink]="['/user', userId, 'website', aWebsite['_id'], 'page']">{{aWebsite['name']}}</a>
               </div>
               <div class="col-sm-3 nav-padding-zero">
-                <a href="website-edit.html">
-                  <span class="glyphicon glyphicon-cog pull-right"></span>
-                </a>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-sm-9 nav-padding-zero">
-                <a href="../page/page-list.html">Blogger</a>
-              </div>
-              <div class="col-sm-3 nav-padding-zero">
-                <a href="website-edit.html">
-                  <span class="glyphicon glyphicon-cog pull-right"></span>
-                </a>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-sm-9 nav-padding-zero">
-                <a href="../page/page-list.html">Blogging App</a>
-              </div>
-              <div class="col-sm-3 nav-padding-zero">
-                <a href="website-edit.html">
-                  <span class="glyphicon glyphicon-cog pull-right"></span>
-                </a>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-sm-9 nav-padding-zero">
-                <a href="../page/page-list.html">Script Testing App</a>
-              </div>
-              <div class="col-sm-3 nav-padding-zero">
-                <a href="website-edit.html">
+                <a [routerLink]="['/user', userId, 'website', aWebsite['_id']]">
                   <span class="glyphicon glyphicon-cog pull-right"></span>
                 </a>
               </div>
@@ -100,19 +64,19 @@
         <form>
           <div class="form-group">
             <label for="websitename">Website Name</label>
-            <input type="text" class="form-control" id="websitename" placeholder="Website Name" value="{{name}}">
+            <input type="text" class="form-control" id="websitename" placeholder="Website Name" value="{{theWebsite['name']}}">
           </div>
         </form>
 
         <form>
           <div class="form-group">
             <label for="websitedescription">Website Description</label>
-            <textarea class="form-control textarea-3" id="websitedescription" placeholder="Description">{{description}}</textarea>
+            <textarea class="form-control textarea-3" id="websitedescription" placeholder="Description">{{theWebsite['description']}}</textarea>
           </div>
         </form>
 
         <a class="btn btn-danger btn-block "
-           href="website-list.html">Delete</a>
+           [routerLink]="['/user']">Delete</a>
 
       </div>
 
@@ -136,3 +100,9 @@
     </div>
   </nav>
   <!-- End Footer-->
+
+
+
+
+
+

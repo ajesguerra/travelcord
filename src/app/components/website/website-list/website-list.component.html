@@ -2,13 +2,12 @@
   <div class="container-fluid header-footer-blue-steel">
 
     <p class="navbar-text pull-left">
-      <a href="../user/profile.html" class="">
+      <a [routerLink]="['/user/', userId]">
         <span class="glyphicon glyphicon-chevron-left glyphicon-nav header-main-text-color"></span>
       </a>
     </p>
 
 
-    <!--heading on the nav bar-->
     <p class="navbar-header pull-left">
       <a class="navbar-brand thick">
         <b>Websites</b>
@@ -34,7 +33,7 @@
             <a [routerLink]="['/user', userId, 'website', aWebsite['_id'], 'page']">{{aWebsite['name']}}</a>
           </div>
           <div class="col-xs-3 col-sm-1 website-list-icon website-page-icons">
-            <a href="website-edit.html">
+            <a [routerLink]="['/user', userId, 'website', aWebsite['_id']]">
               <span class="glyphicon glyphicon-cog"></span>
             </a>
           </div>

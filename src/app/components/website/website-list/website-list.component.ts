@@ -11,9 +11,6 @@ export class WebsiteListComponent implements OnInit {
 
   userId: string;
   websites = [{}];
-  websiteId: string;
-  name: string;
-  description: string;
   constructor(private websiteService: WebsiteService,  private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -23,8 +20,7 @@ export class WebsiteListComponent implements OnInit {
           this.userId = params['uid'];
         }
       );
-    this.websites = this.websiteService.findWebsiteById(this.userId);
-    console.log(this.websites);
+    this.websites = this.websiteService.findWebsitesByUser(this.userId);
   }
 
 }
