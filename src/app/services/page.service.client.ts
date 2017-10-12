@@ -17,8 +17,9 @@ export class PageService {
   createPage(websiteId, page) {
     page.websiteID = websiteId;
     this.pages.push(page);
-    // return page or something?
-    // generate or given _id?
+    return;
+    // return page or something? eventually some status information if successfull or not (e.g. error).
+    // generate or given _id? given
   }
 
   findPageByWebsiteId(websiteId) {
@@ -46,6 +47,7 @@ export class PageService {
         this.pages[x].name = page.name;
         this.pages[x].websiteId = page.websiteId;
         this.pages[x].description = page.description;
+        // don't need to do this this.pages[x] = page. database will do this in the future.
       }
     }
   }

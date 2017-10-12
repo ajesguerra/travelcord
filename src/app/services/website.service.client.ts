@@ -36,11 +36,13 @@ export class WebsiteService {
   }
 
   findWebsiteById(websiteId) {
+    const websitesByTheId = [];
     for (let x = 0; x < this.websites.length; x++) {
-      if (this.websites[x]._id === websiteId) {
-        return this.websites[x];
+      if (this.websites[x].developerId === websiteId) {
+        websitesByTheId.push(this.websites[x]);
       }
     }
+    return websitesByTheId;
   }
 
   updateWebsite(websiteId, website)  {
