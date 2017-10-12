@@ -3,9 +3,10 @@
 
   <div class="nav-header-content">
 
+
     <div class="col-sm-3 col-xs-1 nav-padding-zero">
 
-      <a href="website-list.html" class="navbar-text-main-theme">
+      <a [routerLink]="['/user', userId, 'website']" class="navbar-text-main-theme">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
 
@@ -14,7 +15,7 @@
       </div>
 
       <div class="navbar-split-padding hidden-xs nav-padding-zero pull-right">
-        <a href="website-new.html" class="navbar-text-main-theme nav-padding-zero">
+        <a [routerLink]="['/user', userId, 'website', 'new']" class="navbar-text-main-theme nav-padding-zero">
           <span class="glyphicon glyphicon-plus"></span>
         </a>
       </div>
@@ -27,7 +28,7 @@
     </div>
 
     <div class="col-xs-1 nav-padding-zero">
-      <a href="website-list.html" class="navbar-text-main-theme">
+      <a [routerLink]="['/user', userId, 'website']" class="navbar-text-main-theme">
         <span class="glyphicon glyphicon-ok pull-right"></span>
       </a>
     </div>
@@ -42,60 +43,23 @@
   <div class="container-fluid aj-content-full-height">
 
     <div class="row aj-content-full-height">
-      <div class="col-sm-3 hidden-xs aj-split-content-left">
 
+
+      <div class="col-sm-3 hidden-xs aj-split-content-left">
         <ul class="list-group">
-          <li class="list-group-item">
+          <li class="list-group-item" *ngFor="let aWebsite of websites">
             <div class="row">
               <div class="col-sm-9 nav-padding-zero">
-                <a href="../page/page-list.html">Address Book App</a>
+                <a [routerLink]="['/user', userId, 'website', aWebsite['_id'], 'page']">{{aWebsite['name']}}</a>
               </div>
               <div class="col-sm-3 nav-padding-zero">
-                <a href="website-edit.html">
-                  <span class="glyphicon glyphicon-cog pull-right"></span>
-                </a>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-sm-9 nav-padding-zero">
-                <a href="../page/page-list.html">Blogger</a>
-              </div>
-              <div class="col-sm-3 nav-padding-zero">
-                <a href="website-edit.html">
-                  <span class="glyphicon glyphicon-cog pull-right"></span>
-                </a>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-sm-9 nav-padding-zero">
-                <a href="../page/page-list.html">Blogging App</a>
-              </div>
-              <div class="col-sm-3 nav-padding-zero">
-                <a href="website-edit.html">
-                  <span class="glyphicon glyphicon-cog pull-right"></span>
-                </a>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-sm-9 nav-padding-zero">
-                <a href="../page/page-list.html">Script Testing App</a>
-              </div>
-              <div class="col-sm-3 nav-padding-zero">
-                <a href="website-edit.html">
+                <a [routerLink]="['/user', userId, 'website', aWebsite['_id']]">
                   <span class="glyphicon glyphicon-cog pull-right"></span>
                 </a>
               </div>
             </div>
           </li>
         </ul>
-
-
       </div>
 
       <div class="col-sm-9 col-sm-12 aj-split-content-right">
@@ -130,7 +94,7 @@
 
       <!--tick mark-->
       <p class="navbar-text pull-right">
-        <a href="../user/profile.html" class="nav-hover">
+        <a [routerLink]="['/user', userId]" class="nav-hover">
           <span class="glyphicon glyphicon-user navbar-link"></span>
         </a>
       </p>

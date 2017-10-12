@@ -11,7 +11,7 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right">
-      <a href="profile.html" class="">
+      <a [routerLink]="['/user', userId]" class="">
         <span class="glyphicon glyphicon-ok navbar-link"></span>
       </a>
     </p>
@@ -77,7 +77,7 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right">
-      <a href="profile.html" class="nav-hover">
+      <a [routerLink]="['/user', userId]" class="nav-hover">
         <span class="glyphicon glyphicon-user navbar-link"></span>
       </a>
     </p>

@@ -16,7 +16,7 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right">
-      <a href="../widget/widget-choose.html" class="">
+      <a [routerLink]="['/user', userId, 'website', 'new']">
         <span class="glyphicon glyphicon-plus navbar-link"></span>
       </a>
     </p>
@@ -49,7 +49,7 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right">
-      <a href="../user/profile.html" class="nav-hover">
+      <a [routerLink]="['/user', userId]" class="nav-hover">
         <span class="glyphicon glyphicon-user navbar-link"></span>
       </a>
     </p>
