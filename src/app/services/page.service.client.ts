@@ -18,7 +18,7 @@ export class PageService {
     page.websiteID = websiteId;
     this.pages.push(page);
     return;
-    // return page or something? eventually some status information if successfull or not (e.g. error).
+    // return page or something? eventually some status information if successful or not (e.g. error).
     // generate or given _id? given
   }
 
