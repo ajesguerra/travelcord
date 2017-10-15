@@ -18,22 +18,24 @@ export class RegisterComponent implements OnInit {
   anExistingUser: {};
   aNewUser: any;
   newUserId: string;
-
   constructor(private userService: UserService,
               private router: Router) {
   }
 
   ngOnInit() {
     this.errorFlag = false;
+    this.username = '';
+    this.password = '';
+    this.vpassword = '';
   }
 
   register() {
     this.anExistingUser = this.userService.findUserByUsername(this.username);
     if (this.anExistingUser) {
       this.errorFlag = true;
-    } else if (this.password !== this.vpassword) {
-      this.errorFlag = true;
     } else if (this.password === '' || this.username === '') {
+      this.errorFlag = true;
+    } else if (this.password !== this.vpassword) {
       this.errorFlag = true;
     } else {
       this.newUserId = Math.random().toString();

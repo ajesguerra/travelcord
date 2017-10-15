@@ -20,18 +20,21 @@ export class LoginComponent implements OnInit {
               private router: Router) { }
   ngOnInit() {
     this.errorFlag = false;
+    this.username = '';
+    this.password = '';
   }
   login(username: string, password: string) {
     // alert('username: ' + username + ' password: ' + password);
     this.username = username;
     this.password = password;
     const user = this.userService.findUserByUsername(this.username);
-    if (user.username === this.username && user.password === this.password) {
-      this.router.navigate(['/user/', user._id]); // change this to profile
-      // console.log('routing...');
-    } else {
-      // console.log('not found...');
+    if (this.username === '' || this.password === '') {
       this.errorFlag = true;
+    } else {
+      if (user.username === this.username && user.password === this.password) {
+        this.router.navigate(['/user/', user._id]); // change this to profile
+        // console.log('routing...');
+      }
     }
   }
 }
