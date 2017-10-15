@@ -36,7 +36,7 @@
         <div class="aj-widget">
           <div class="pull-right">
             <div>
-              <a href="widget-heading.html">
+              <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget['_id'], widget['widgetType']]">
                 <span class="glyphicon glyphicon-cog main-theme-color"></span>
               </a>
               <span class="glyphicon glyphicon-menu-hamburger"></span>

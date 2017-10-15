@@ -19,7 +19,6 @@ export class UserService {
   };
 
   createUser(user: any) {
-    user._id = Math.random();
     this.users.push(user);
     return user;
   }

@@ -45,9 +45,15 @@ export class WidgetHeaderComponent implements OnInit {
   }
 
   addData() {
-    this.aNewWidget = {_id: this.widgetId, widgetType: this.widgetType, pageId: this.pageId, size: this.widgetSize,
-      text: this.widgetText };
-    this.widgetService.createWidget(this.pageId, this.aNewWidget);
+    if (!this.widgetExists) {
+      this.aNewWidget = {_id: this.widgetId, widgetType: this.widgetType, pageId: this.pageId, size: this.widgetSize,
+        text: this.widgetText };
+      this.widgetService.createWidget(this.pageId, this.aNewWidget);
+    } else {
+      this.aNewWidget = {_id: this.widgetId, widgetType: this.widgetType, pageId: this.pageId, size: this.widgetSize,
+        text: this.widgetText };
+      this.widgetService.updateWidget(this.widgetId, this.aNewWidget);
+    }
     // console.log(this.aNewWidget);
     this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
   }
