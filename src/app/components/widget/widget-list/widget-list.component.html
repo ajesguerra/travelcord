@@ -29,7 +29,7 @@
 
   <div class="aj-split-content-right">
 
-    <div *ngFor="let widget of widgets" class="widget-container pull-full-width">
+    <div *ngFor="let widget of widgets" class="widget-container pull-full-width aj-widget-items">
 
       <!-- edit widget-->
       <div class="widget-container pull-full-width">
@@ -49,7 +49,6 @@
       <div [ngSwitch]="widget['widgetType']">
         <div *ngSwitchCase="'HEADING'">
           <div [ngSwitch]="widget['size']">
-
             <div *ngSwitchCase="'1'">
               <h1>{{widget['text']}}</h1>
             </div>

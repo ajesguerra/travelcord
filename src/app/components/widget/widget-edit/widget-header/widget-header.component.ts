@@ -19,11 +19,13 @@ export class WidgetHeaderComponent implements OnInit {
   widgetExists: boolean;
   widgetText: string;
   widgetSize: string;
-
+  errorFlag: boolean;
+  errorMsg = 'Those fields cannot be blank.';
   constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
+    this.errorFlag = false;
     this.activatedRoute.params
       .subscribe(
         (params: any) => {
@@ -37,6 +39,10 @@ export class WidgetHeaderComponent implements OnInit {
             this.widgetText = this.theWidget['text'];
             this.widgetSize = this.theWidget['size'];
             this.widgetExists = true;
+          } else {
+            this.widgetText = '';
+            this.widgetSize = '';
+            this.widgetExists = false;
           }
           // this.widgets = this.widgetService.findWidgetsByPageId(this.pageId);
           // this.thePage = this.widgetService.findPageById(this.pageId);
@@ -45,16 +51,20 @@ export class WidgetHeaderComponent implements OnInit {
   }
 
   addData() {
-    if (!this.widgetExists) {
-      this.aNewWidget = {_id: this.widgetId, widgetType: this.widgetType, pageId: this.pageId, size: this.widgetSize,
-        text: this.widgetText };
-      this.widgetService.createWidget(this.pageId, this.aNewWidget);
+    if (this.widgetText === '' || this.widgetSize === '') {
+      this.errorFlag = true;
     } else {
-      this.aNewWidget = {_id: this.widgetId, widgetType: this.widgetType, pageId: this.pageId, size: this.widgetSize,
-        text: this.widgetText };
-      this.widgetService.updateWidget(this.widgetId, this.aNewWidget);
+      if (!this.widgetExists) {
+        this.aNewWidget = {_id: this.widgetId, widgetType: this.widgetType, pageId: this.pageId, size: this.widgetSize,
+          text: this.widgetText };
+        this.widgetService.createWidget(this.pageId, this.aNewWidget);
+      } else {
+        this.aNewWidget = {_id: this.widgetId, widgetType: this.widgetType, pageId: this.pageId, size: this.widgetSize,
+          text: this.widgetText };
+        this.widgetService.updateWidget(this.widgetId, this.aNewWidget);
+      }
+      // console.log(this.aNewWidget);
+      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
     }
-    // console.log(this.aNewWidget);
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
   }
 }

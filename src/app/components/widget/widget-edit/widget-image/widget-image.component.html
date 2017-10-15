@@ -18,7 +18,6 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right">
-      test
       <a (click)="addData()">
         <span class="glyphicon glyphicon-ok navbar-text-colors-pages"></span>
       </a>
@@ -27,6 +26,10 @@
 </nav>
 
 <div class="aj-split-content-right">
+  <div *ngIf="errorFlag"
+       class="alert alert-danger">
+    {{errorMsg}}
+  </div>
   <div class="form-group">
     <label class="form-name-secondary" for="name">Name</label>
     <input type="text"
