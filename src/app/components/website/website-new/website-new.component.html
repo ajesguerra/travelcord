@@ -28,7 +28,7 @@
     </div>
 
     <div class="col-xs-1 nav-padding-zero">
-      <a [routerLink]="['/user', userId, 'website']" class="navbar-text-main-theme">
+      <a (click)="createWebsite()" class="navbar-text-main-theme">
         <span class="glyphicon glyphicon-ok pull-right"></span>
       </a>
     </div>
@@ -64,17 +64,33 @@
 
       <div class="col-sm-9 col-sm-12 aj-split-content-right">
 
+        <div *ngIf="errorFlag"
+             class="alert alert-danger">
+          {{errorMsg}}
+        </div>
         <form>
           <div class="form-group">
             <label for="websitename">Name</label>
-            <input type="text" class="form-control" id="websitename" placeholder="Name">
+            <input   placeholder="username"
+                     id="websitename"
+                     name="websitename"
+                     type="text"
+                     class="form-control"
+                     required
+                     [(ngModel)]="websitename"/>
           </div>
         </form>
 
         <form>
           <div class="form-group">
             <label for="websitedescription">Description</label>
-            <textarea class="form-control textarea-3" id="websitedescription" placeholder="Description"></textarea>
+            <input   placeholder="description"
+                     id="websitedescription"
+                     name="websitedescription"
+                     type="text"
+                     class="form-control"
+                     required
+                     [(ngModel)]="websitedescription"/>
           </div>
         </form>
 
