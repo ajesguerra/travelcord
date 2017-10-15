@@ -1,9 +1,8 @@
-
 <nav class="navbar navbar-fixed-top">
   <div class="container-fluid header-footer-pages pages-border-bottom">
 
     <p class="navbar-text pull-left">
-      <a href="../page/page-list.html" class="navbar-text-colors-pages">
+      <a [routerLink]="['/user', userId, 'website', websiteId, 'page']" class="navbar-text-colors-pages">
         <span class="glyphicon glyphicon-chevron-left glyphicon-nav navbar-text-colors-pages"></span>
       </a>
     </p>
@@ -18,7 +17,7 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right">
-      <a href="widget-choose.html">
+      <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', 'new']">
         <span class="glyphicon glyphicon-plus navbar-text-colors-pages"></span>
       </a>
     </p>
@@ -30,140 +29,80 @@
 
   <div class="aj-split-content-right">
 
-    <div class="widget-container pull-full-width">
-      <div class="aj-widget">
-        <div class="pull-right">
-          <div>
-            <a href="widget-heading.html">
-              <span class="glyphicon glyphicon-cog main-theme-color"></span>
-            </a>
-            <span class="glyphicon glyphicon-menu-hamburger"></span>
+    <div *ngFor="let widget of widgets" class="widget-container pull-full-width">
+
+      <!-- edit widget-->
+      <div class="widget-container pull-full-width">
+        <div class="aj-widget">
+          <div class="pull-right">
+            <div>
+              <a href="widget-heading.html">
+                <span class="glyphicon glyphicon-cog main-theme-color"></span>
+              </a>
+              <span class="glyphicon glyphicon-menu-hamburger"></span>
+            </div>
           </div>
         </div>
       </div>
-      <h3>Something happened here!</h3>
-    </div>
 
-    <div class="widget-container pull-full-width">
-      <div class="aj-widget">
-        <div class="pull-right">
-          <div>
-            <a href="widget-image.html">
-              <span class="glyphicon glyphicon-cog main-theme-color"></span>
-            </a>
-            <span class="glyphicon glyphicon-menu-hamburger"></span>
+      <!-- the actual widget-->
+      <div [ngSwitch]="widget['widgetType']">
+        <div *ngSwitchCase="'HEADING'">
+          <div [ngSwitch]="widget['size']">
+
+            <div *ngSwitchCase="'1'">
+              <h1>{{widget['text']}}</h1>
+            </div>
+            <div *ngSwitchCase="'2'">
+              <h2>{{widget['text']}}</h2>
+            </div>
+            <div *ngSwitchCase="'3'">
+              <h3>{{widget['text']}}</h3>
+            </div>
+            <div *ngSwitchCase="'4'">
+              <h4>{{widget['text']}}</h4>
+            </div>
           </div>
         </div>
-      </div>
-      <img src="https://www.placebear.com/300/100" class="pull-full-width">
-    </div>
 
+        <div *ngSwitchCase="'YOUTUBE'">
+          <iframe width="560" height="315" [src]="cleanURL(widget['url'])" frameborder="0"
+                  allowfullscreen class="pull-full-width"></iframe>
+        </div>
 
-    <div class="widget-container pull-full-width">
-      <div class="aj-widget">
-        <div class="pull-right">
-          <div>
-            <a href="#">
-              <span class="glyphicon glyphicon-cog main-theme-color"></span>
-            </a>
-            <span class="glyphicon glyphicon-menu-hamburger"></span>
-          </div>
+        <div *ngSwitchCase="'IMAGE'">
+          <img src="{{widget['url']}}" [style.width]="widget['width']">
+        </div>
+        <div *ngSwitchCase="'HTML'">
+          {{widget['text']}}
         </div>
       </div>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-        dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur.
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum.
-      </p>
     </div>
-
-
-    <div class="widget-container pull-full-width">
-      <div class="aj-widget">
-        <div class="pull-right">
-          <div>
-            <a href="widget-heading.html">
-              <span class="glyphicon glyphicon-cog main-theme-color"></span>
-            </a>
-            <span class="glyphicon glyphicon-menu-hamburger"></span>
-          </div>
-        </div>
-      </div>
-      <h3>Learn how to make this page! (warning: meta content)</h3>
-    </div>
-
-
-    <div class="widget-container pull-full-width">
-      <div class="aj-widget">
-        <div class="pull-right">
-          <div>
-            <a href="widget-youtube.html">
-              <span class="glyphicon glyphicon-cog main-theme-color"></span>
-            </a>
-            <span class="glyphicon glyphicon-menu-hamburger"></span>
-          </div>
-        </div>
-      </div>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/RY4rWrlY-qM?ecver=1" frameborder="0"
-              allowfullscreen class="pull-full-width"></iframe>
-    </div>
-
-
-    <div class="widget-container pull-full-width">
-      <div class="aj-widget">
-        <div class="pull-right">
-          <div>
-            <a href="#">
-              <span class="glyphicon glyphicon-cog main-theme-color"></span>
-            </a>
-            <span class="glyphicon glyphicon-menu-hamburger"></span>
-          </div>
-        </div>
-      </div>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-        dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur.
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum.
-      </p>
-    </div>
-
   </div>
-
-
 </div>
 
-<!-- Footer -->
-<nav class="navbar navbar-fixed-bottom header-footer-pages pages-border-top">
-  <div class="container-fluid header-footer-pages">
+  <!-- Footer -->
+  <nav class="navbar navbar-fixed-bottom header-footer-pages pages-border-top">
+    <div class="container-fluid header-footer-pages">
 
-    <p class="navbar-text pull-left">
-      <a href="profile.html" class="navbar-text-colors-pages">
-        <span class="glyphicon glyphicon-play glyphicon-nav navbar-text-colors-pages"></span>
-      </a>
-    </p>
+      <p class="navbar-text pull-left">
+        <a class="navbar-text-colors-pages">
+          <span class="glyphicon glyphicon-play glyphicon-nav navbar-text-colors-pages"></span>
+        </a>
+      </p>
 
-    <p class="navbar-text pull-left">
-      <a href="profile.html" class="navbar-text-colors-pages">
-        <span class="glyphicon glyphicon-eye-open glyphicon-nav navbar-text-colors-pages"></span>
-      </a>
-    </p>
+      <p class="navbar-text pull-left">
+        <a class="navbar-text-colors-pages">
+          <span class="glyphicon glyphicon-eye-open glyphicon-nav navbar-text-colors-pages"></span>
+        </a>
+      </p>
 
-    <!--tick mark-->
-    <p class="navbar-text pull-right">
-      <a href="../user/profile.html" class="nav-hover">
-        <span class="glyphicon glyphicon-user glyphicon-nav main-theme-color"></span>
-      </a>
-    </p>
-  </div>
-</nav>
-<!-- End Footer-->
+      <!--tick mark-->
+      <p class="navbar-text pull-right">
+        <a [routerLink]="['/user', userId]" class="nav-hover">
+          <span class="glyphicon glyphicon-user glyphicon-nav main-theme-color"></span>
+        </a>
+      </p>
+    </div>
+  </nav>
+  <!-- End Footer-->

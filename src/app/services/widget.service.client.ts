@@ -10,7 +10,7 @@ export class WidgetService {
     { '_id': '456', 'widgetType': 'HTML', 'pageId': '321', 'text': '<p>Lorem ipsum</p>'},
     { '_id': '567', 'widgetType': 'HEADING', 'pageId': '321', 'size': 4, 'text': 'Lorem ipsum'},
     { '_id': '678', 'widgetType': 'YOUTUBE', 'pageId': '321', 'width': '100%',
-      'url': 'https://youtu.be/AM2Ivdi9c4E' },
+      'url': 'https://www.youtube.com/embed/VkMU1mKdwPI?ecver=1' },
     { '_id': '789', 'widgetType': 'HTML', 'pageId': '321', 'text': '<p>Lorem ipsum</p>'}
   ];
   api = {
@@ -20,11 +20,12 @@ export class WidgetService {
     'updateWidget': this.updateWidget,
     'deleteWidget': this.deleteWidget
   };
-  createWidget(pageId, widget) {
+  createWidget(pageId: string, widget: any) {
     widget.pageId = pageId;
+    // widget._id = Math.random().toString();
     this.widgets.push(widget);
-    // return widget or something?
-    // generate or given _id?
+    console.log(this.widgets );
+    return widget;
   }
 
   findWidgetsByPageId(pageId) {

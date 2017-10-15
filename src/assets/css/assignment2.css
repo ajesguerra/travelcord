@@ -85,7 +85,7 @@ a.btn-block {
 }
 .main-body-content {
   padding-top: 50px;
-  padding-bottom: 50px;
+  padding-bottom: 60px !important;
 }
 .list-group-item {
   border: 0px #ffffff
