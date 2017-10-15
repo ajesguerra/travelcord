@@ -1,4 +1,4 @@
-<
+
 <nav class="navbar navbar-fixed-top">
   <div class="container-fluid header-footer-pages pages-border-bottom">
 
@@ -26,6 +26,11 @@
 </nav>
 
 <div class="container main-body-content">
+
+  <div *ngIf="errorFlag"
+       class="alert alert-danger">
+    {{errorMsg}}
+  </div>
 
   <div class="aj-split-content-right">
     <div class="form-group">

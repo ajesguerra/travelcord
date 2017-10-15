@@ -20,12 +20,15 @@ export class PageNewComponent implements OnInit {
   constructor(private pageService: PageService,  private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    this.errorFlag = false;
     this.activatedRoute.params
       .subscribe(
         (params: any) => {
           this.userId = params['uid'];
           this.websiteId = params['wid'];
           this.pages = this.pageService.findPageByWebsiteId(this.websiteId);
+          this.name = '';
+          this.description = '';
         }
       );
   }

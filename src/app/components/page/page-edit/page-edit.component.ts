@@ -17,9 +17,12 @@ export class PageEditComponent implements OnInit {
   name: string;
   description: string;
   aNewPage: any;
+  errorFlag: boolean;
+  errorMsg = 'Invalid username or password !';
   constructor(private pageService: PageService,  private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    this.errorFlag = false;
     this.activatedRoute.params
       .subscribe(
         (params: any) => {
@@ -34,10 +37,14 @@ export class PageEditComponent implements OnInit {
       );
   }
   editPage() {
-    this.aNewPage = {
-      _id: this.pageId, name: this.name, websiteId: this.websiteId, description: this.description};
-    this.pageService.updatePage(this.pageId, this.aNewPage);
-    this.router.navigate(['/user/', this.userId, 'website', this.websiteId, 'page']);
+    if (this.name === '' || this.description === '') {
+      this.errorFlag = true;
+    } else {
+      this.aNewPage = {
+        _id: this.pageId, name: this.name, websiteId: this.websiteId, description: this.description};
+      this.pageService.updatePage(this.pageId, this.aNewPage);
+      this.router.navigate(['/user/', this.userId, 'website', this.websiteId, 'page']);
+    }
   }
 
 }

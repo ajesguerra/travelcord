@@ -23,6 +23,7 @@ export class WebsiteEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.errorFlag = false;
     this.activatedRoute.params
       .subscribe(
         (params: any) => {
@@ -38,12 +39,16 @@ export class WebsiteEditComponent implements OnInit {
   }
 
   editWebsite() {
-    this.aNewWebsite = {
-      _id: this.websiteId, name: this.websitename,
-      developerId: this.userId, description: this.websitedescription
-    };
-    this.websiteService.updateWebsite(this.websiteId, this.aNewWebsite);
-    this.router.navigate(['/user/', this.userId, 'website']);
+    if (this.websitename === '' || this.websitedescription === '') {
+      this.errorFlag = true;
+    } else {
+      this.aNewWebsite = {
+        _id: this.websiteId, name: this.websitename,
+        developerId: this.userId, description: this.websitedescription
+      };
+      this.websiteService.updateWebsite(this.websiteId, this.aNewWebsite);
+      this.router.navigate(['/user/', this.userId, 'website']);
+    }
   }
 
 }
