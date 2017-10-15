@@ -27,7 +27,7 @@
     </div>
 
     <div class="col-xs-1 nav-padding-zero">
-      <a [routerLink]="['/user', userId, 'website']" class="navbar-text-main-theme">
+      <a (click)="editWebsite()" class="navbar-text-main-theme">
         <span class="glyphicon glyphicon-ok pull-right"></span>
       </a>
     </div>
@@ -64,14 +64,26 @@
         <form>
           <div class="form-group">
             <label for="websitename">Website Name</label>
-            <input type="text" class="form-control" id="websitename" placeholder="Website Name" value="{{theWebsite['name']}}">
+            <input   placeholder="username"
+                     id="websitename"
+                     name="websitename"
+                     type="text"
+                     class="form-control"
+                     required
+                     [(ngModel)]="websitename"/>
           </div>
         </form>
 
         <form>
           <div class="form-group">
             <label for="websitedescription">Website Description</label>
-            <textarea class="form-control textarea-3" id="websitedescription" placeholder="Description">{{theWebsite['description']}}</textarea>
+            <input   placeholder="username"
+                     id="websitedescription"
+                     name="websitedescription"
+                     type="text"
+                     class="form-control"
+                     required
+                     [(ngModel)]="websitedescription"/>
           </div>
         </form>
 

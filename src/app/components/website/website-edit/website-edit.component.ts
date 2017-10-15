@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {WebsiteService} from '../../../services/website.service.client';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-website-edit',
@@ -13,7 +13,14 @@ export class WebsiteEditComponent implements OnInit {
   websiteId: string;
   theWebsite: {};
   websites = [{}];
-  constructor(private websiteService: WebsiteService,  private activatedRoute: ActivatedRoute) { }
+  websitename: string;
+  websitedescription: string;
+  aNewWebsite: any;
+  errorFlag: boolean;
+  errorMsg = 'Those fields cannot be blank.';
+
+  constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute, private router: Router) {
+  }
 
   ngOnInit() {
     this.activatedRoute.params
@@ -23,9 +30,20 @@ export class WebsiteEditComponent implements OnInit {
           this.websites = this.websiteService.findWebsitesByUser(this.userId);
           this.websiteId = params['wid'];
           this.theWebsite = this.websiteService.findWebsiteById(this.websiteId);
+          this.websitename = this.theWebsite['name'];
+          this.websitedescription = this.theWebsite['description'];
         }
       );
 
+  }
+
+  editWebsite() {
+    this.aNewWebsite = {
+      _id: this.websiteId, name: this.websitename,
+      developerId: this.userId, description: this.websitedescription
+    };
+    this.websiteService.updateWebsite(this.websiteId, this.aNewWebsite);
+    this.router.navigate(['/user/', this.userId, 'website']);
   }
 
 }

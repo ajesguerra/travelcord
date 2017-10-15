@@ -46,10 +46,7 @@ export class WebsiteService {
   updateWebsite(websiteId, website)  {
     for (let x = 0; x < this.websites.length; x++) {
       if (this.websites[x]._id === websiteId) {
-        this.websites[x]._id = website.id;
-        this.websites[x].name = website.name;
-        this.websites[x].developerId = website.developerId;
-        this.websites[x].description = website.description;
+        this.websites[x] = website;
       }
     }
   }
