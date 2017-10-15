@@ -46,5 +46,8 @@ export class PageEditComponent implements OnInit {
       this.router.navigate(['/user/', this.userId, 'website', this.websiteId, 'page']);
     }
   }
-
+  deletePage() {
+    this.pageService.deletePage(this.pageId);
+    this.router.navigate(['/user/', this.userId, 'website', this.websiteId, 'page']);
+  }
 }
