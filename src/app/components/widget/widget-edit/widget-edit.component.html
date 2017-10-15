@@ -16,7 +16,10 @@
       </div>
     </div>
 
-    <a class="btn btn-danger btn-block" [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', 'new']">Delete</a>
+    <div *ngIf="doesWidgetExist">
+      <a class="btn btn-danger btn-block" (click)="deleteWidget()">Delete</a>
+    </div>
+
 
   </div>
 </div>

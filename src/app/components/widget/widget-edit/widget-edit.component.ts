@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {WidgetService} from '../../../services/widget.service.client';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-widget-edit',
@@ -14,11 +14,13 @@ export class WidgetEditComponent implements OnInit {
   pageId: string;
   widgetId: string;
   widgetType: string;
+  doesWidgetExist: boolean;
 
-  constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute) {
+  constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
+    this.doesWidgetExist = false;
     this.activatedRoute.params
       .subscribe(
         (params: any) => {
@@ -29,7 +31,14 @@ export class WidgetEditComponent implements OnInit {
           this.widgetType = params['wtype'];
           // this.widgets = this.widgetService.findWidgetsByPageId(this.pageId);
           // this.thePage = this.widgetService.findPageById(this.pageId);
+          if (this.widgetService.findWidgetById(this.widgetId)) {
+            this.doesWidgetExist = true;
+          }
         }
       );
+  }
+  deleteWidget() {
+    this.widgetService.deleteWidget(this.widgetId);
+    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
   }
 }
