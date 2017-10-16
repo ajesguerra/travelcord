@@ -21,10 +21,12 @@ import {PageEditComponent} from './components/page/page-edit/page-edit.component
 import {WidgetListComponent} from './components/widget/widget-list/widget-list.component';
 import {WidgetChooserComponent} from './components/widget/widget-chooser/widget-chooser.component';
 import {WidgetEditComponent} from './components/widget/widget-edit/widget-edit.component';
+import {TestComponent} from './components/test/test.component';
 // Import all other components here
 
 const APP_ROUTES: Routes = [
   { path : '' , component: LoginComponent},
+  { path : 'test', component: TestComponent},
   { path : 'login' , component: LoginComponent},
   { path : 'register' , component: RegisterComponent},
   { path : 'user/:userId' , component: ProfileComponent},
