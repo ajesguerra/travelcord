@@ -65,7 +65,7 @@
         </div>
 
         <div *ngSwitchCase="'YOUTUBE'">
-          <iframe width="560" height="315" [src]="cleanURL(widget['url'])" frameborder="0"
+          <iframe [style.width]="widget['width']" height="315" [src]="cleanURL(widget['url'])" frameborder="0"
                   allowfullscreen class="pull-full-width"></iframe>
         </div>
 
