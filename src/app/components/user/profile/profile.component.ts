@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit {
   email: string;
   firstName: string;
   lastName: string;
+  password: string;
 
   constructor(private userService: UserService, private activatedRoute: ActivatedRoute) { }
 
@@ -27,15 +28,25 @@ export class ProfileComponent implements OnInit {
           this.userId = params['userId'];
         }
       );
-    this.user = this.userService.findUserById(this.userId);
-    this.username = this.user['username'];
-    this.email = this.user['email'];
-    this.firstName = this.user['firstName'];
-    this.lastName = this.user['lastName'];
+    this.userService.findUserById(this.userId).subscribe((theUser: any) => {
+      this.username = theUser.username;
+      this.email = theUser.email;
+      this.firstName = theUser.firstName;
+      this.lastName = theUser.lastName;
+      this.password = theUser.password;
+    });
   }
   updateUser() {
-    this.user['firstName'] = this.firstName;
-    this.user['lastName'] = this.lastName;
-    this.userService.updateUser(this.userId, this.user);
+    this.user = {_id: this.userId,
+      username: this.username,
+      password: this.password,
+      firstName: this.firstName,
+      lastName: this.lastName };
+    this.userService.updateUser(this.userId, this.user).subscribe((theUser: any) => {
+      this.username = theUser.username;
+      this.email = theUser.email;
+      this.firstName = theUser.firstName;
+      this.lastName = theUser.lastName;
+    });
   }
 }
