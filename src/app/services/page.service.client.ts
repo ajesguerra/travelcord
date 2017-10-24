@@ -1,4 +1,6 @@
 import {Injectable} from '@angular/core';
+import {Http, Response} from '@angular/http';
+import 'rxjs/Rx';
 
 @Injectable()
 export class PageService {
@@ -7,29 +9,19 @@ export class PageService {
     { '_id': '432', 'name': 'Post 2', 'websiteId': '456', 'description': 'Lorem' },
     { '_id': '543', 'name': 'Post 3', 'websiteId': '456', 'description': 'Lorem' }
   ];
-  api = {
-    'createPage': this.createPage,
-    'findPageByWebsiteId': this.findPageByWebsiteId,
-    'findPageById': this.findPageById,
-    'updatePage': this.updatePage,
-    'deletePage': this.deletePage
-  };
+  constructor(private http: Http) {}
   createPage(websiteId, page) {
-    page.websiteID = websiteId;
-    this.pages.push(page);
-    return;
-    // return page or something? eventually some status information if successful or not (e.g. error).
-    // generate or given _id? given
+    const url = 'http://localhost:3100/api/website/' + websiteId + '/page';
+    return this.http.post(url, page).map((response: Response) => {
+      return response.json();
+    });
   }
 
   findPageByWebsiteId(websiteId) {
-    const pagesByThisWebsiteId = [];
-    for (let x = 0; x < this.pages.length; x++) {
-      if (this.pages[x].websiteId === websiteId) {
-        pagesByThisWebsiteId.push(this.pages[x]);
-      }
-    }
-    return pagesByThisWebsiteId;
+    const url = 'http://localhost:3100/api/website/' + websiteId + '/page';
+    return this.http.get(url).map((response: Response) => {
+      return response.json();
+    });
   }
 
   findPageById(pageId) {
