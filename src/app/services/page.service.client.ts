@@ -4,11 +4,6 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class PageService {
-  pages = [
-    { '_id': '321', 'name': 'Post 1', 'websiteId': '456', 'description': 'Lorem' },
-    { '_id': '432', 'name': 'Post 2', 'websiteId': '456', 'description': 'Lorem' },
-    { '_id': '543', 'name': 'Post 3', 'websiteId': '456', 'description': 'Lorem' }
-  ];
   constructor(private http: Http) {}
   createPage(websiteId, page) {
     const url = 'http://localhost:3100/api/website/' + websiteId + '/page';
@@ -25,30 +20,23 @@ export class PageService {
   }
 
   findPageById(pageId) {
-    for (let x = 0; x < this.pages.length; x++) {
-      if (this.pages[x]._id === pageId) {
-        return this.pages[x];
-      }
-    }
+    const url = 'http://localhost:3100/api/page/' + pageId;
+    return this.http.get(url).map((response: Response) => {
+      return response.json();
+    });
   }
 
   updatePage(pageId, page)  {
-    for (let x = 0; x < this.pages.length; x++) {
-      if (this.pages[x]._id === pageId) {
-        this.pages[x]._id = page._id;
-        this.pages[x].name = page.name;
-        this.pages[x].websiteId = page.websiteId;
-        this.pages[x].description = page.description;
-        // don't need to do this this.pages[x] = page. database will do this in the future.
-      }
-    }
+    const url = 'http://localhost:3100/api/page/' + pageId;
+    return this.http.put(url, page).map((response: Response) => {
+      return response.json();
+    });
   }
 
   deletePage(pageId) {
-    for (let x = 0; x < this.pages.length; x++) {
-      if (this.pages[x]._id === pageId) {
-        this.pages.splice(x, 1);
-      }
-    }
+    const url = 'http://localhost:3100/api/page/' + pageId;
+    return this.http.delete(url, pageId).map((response: Response) => {
+      return response.json();
+    });
   }
 }

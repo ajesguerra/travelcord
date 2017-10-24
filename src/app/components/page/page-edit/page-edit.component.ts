@@ -29,10 +29,14 @@ export class PageEditComponent implements OnInit {
           this.userId = params['uid'];
           this.websiteId = params['wid'];
           this.pageId = params['pid'];
-          this.pages = this.pageService.findPageByWebsiteId(this.websiteId);
-          this.thePage = this.pageService.findPageById(this.pageId);
-          this.name = this.thePage['name'];
-          this.description = this.thePage['description'];
+          this.pageService.findPageByWebsiteId(this.websiteId).subscribe((websites: any) => {
+            this.pages = websites;
+          });
+          this.pageService.findPageById(this.pageId).subscribe((page: any) => {
+            this.thePage = page;
+            this.name = this.thePage['name'];
+            this.description = this.thePage['description'];
+          });
         }
       );
   }
@@ -42,12 +46,14 @@ export class PageEditComponent implements OnInit {
     } else {
       this.aNewPage = {
         _id: this.pageId, name: this.name, websiteId: this.websiteId, description: this.description};
-      this.pageService.updatePage(this.pageId, this.aNewPage);
-      this.router.navigate(['/user/', this.userId, 'website', this.websiteId, 'page']);
+      this.pageService.updatePage(this.pageId, this.aNewPage).subscribe((page: any) => {
+        this.router.navigate(['/user/', this.userId, 'website', this.websiteId, 'page']);
+      });
     }
   }
   deletePage() {
-    this.pageService.deletePage(this.pageId);
-    this.router.navigate(['/user/', this.userId, 'website', this.websiteId, 'page']);
+    this.pageService.deletePage(this.pageId).subscribe((page: any) => {
+      this.router.navigate(['/user/', this.userId, 'website', this.websiteId, 'page']);
+    });
   }
 }

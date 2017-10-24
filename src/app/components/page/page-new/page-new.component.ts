@@ -26,7 +26,9 @@ export class PageNewComponent implements OnInit {
         (params: any) => {
           this.userId = params['uid'];
           this.websiteId = params['wid'];
-          this.pages = this.pageService.findPageByWebsiteId(this.websiteId);
+          this.pageService.findPageByWebsiteId(this.websiteId).subscribe((page: any) => {
+            this.pages = page;
+          });
           this.name = '';
           this.description = '';
         }
