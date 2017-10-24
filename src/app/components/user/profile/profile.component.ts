@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../../services/user.service.client';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
   lastName: string;
   password: string;
 
-  constructor(private userService: UserService, private activatedRoute: ActivatedRoute) { }
+  constructor(private userService: UserService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
 
@@ -47,6 +47,16 @@ export class ProfileComponent implements OnInit {
       this.email = theUser.email;
       this.firstName = theUser.firstName;
       this.lastName = theUser.lastName;
+    });
+  }
+  deleteUser() {
+    this.user = {_id: this.userId,
+      username: this.username,
+      password: this.password,
+      firstName: this.firstName,
+      lastName: this.lastName };
+    this.userService.deleteUser(this.user).subscribe((theUser: any) => {
+      this.router.navigate(['/login/']);
     });
   }
 }

@@ -4,6 +4,7 @@ module.exports = function (app) {
   app.put("/api/user/:userId", updateUser);
   app.get("/api/user/:userId", findUserById);
   app.get("/api/user", findUsers);
+  app.delete("/api/user/:userId", deleteUser);
 
   users = [
     {_id: '123', username: 'alice', password: 'alice', firstName: 'Alice', lastName: 'Wonder'},
@@ -17,7 +18,11 @@ module.exports = function (app) {
     var user = users.find(function (user) {
       return user._id === userId;
     });
-    res.json(user);
+    if (user) {
+      res.json(user);
+    } else {
+      res.json({});
+    }
   }
 
   function findUsers(req, res) {
@@ -54,6 +59,7 @@ module.exports = function (app) {
     const user = req.body;
     users.push(user);
     res.json(user);
+    return;
   }
 
   function updateUser(req, res) {
@@ -63,7 +69,18 @@ module.exports = function (app) {
       if (users[x]._id === userId) {
         users[x] = updatedUser;
         res.json(updatedUser);
-        console.log(users);
+        return;
+      }
+    }
+  }
+
+  function deleteUser(req, res) {
+    const user = req.body;
+    const userId = req.params['userId'];
+    for (var x = 0; x < this.users.length; x++) {
+      if (this.users[x]._id === userId) {
+        this.users.splice(x, 1);
+        res.json(user);
         return;
       }
     }

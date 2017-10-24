@@ -21,7 +21,6 @@ export class UserService {
   createUser(user: any) {
     const url = 'http://localhost:3100/api/user/';
     return this.http.post(url, user).map((response: Response) => {
-      console.log(response.json);
       return response.json();
     });
   }
@@ -41,22 +40,15 @@ export class UserService {
   }
 
   updateUser(userId, user) {
-    /**
-    for (let x = 0; x < this.users.length; x++) {
-      if (this.users[x]._id === userId) {
-        this.users[x] = user;
-      }
-    }**/
     const url = 'http://localhost:3100/api/user/' + userId;
     return this.http.put(url, user).map((response: Response) => {
       return response.json();
     });
   }
-  deleteUser(userId) {
-    for (let x = 0; x < this.users.length; x++) {
-      if (this.users[x]._id === userId) {
-        this.users.splice(x, 1);
-      }
-    }
+  deleteUser(user) {
+    const url = 'http://localhost:3100/api/user/' + user._id;
+    return this.http.delete(url, user).map((response: Response) => {
+      return response.json();
+    });
   }
 }

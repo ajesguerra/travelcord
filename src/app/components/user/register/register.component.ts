@@ -41,8 +41,9 @@ export class RegisterComponent implements OnInit {
 
       this.newUserId = Math.random().toString();
       this.aNewUser = {_id: this.newUserId, username: this.username, password: this.password};
-      this.userService.createUser(this.aNewUser).subscribe((user: any) => {});
-      this.router.navigate(['/user/', this.newUserId]);
+      this.userService.createUser(this.aNewUser).subscribe((user: any) => {
+        this.router.navigate(['/user/', this.newUserId]);
+      });
     }
   }
 }
