@@ -52,7 +52,11 @@ module.exports = function (app) {
     var user = users.find(function (user) {
       return (user.username === username);
     });
-    res.json(user);
+    if (user) {
+      res.json(user);
+    } else {
+      res.json(null);
+    }
   }
 
   function createUser(req, res) {

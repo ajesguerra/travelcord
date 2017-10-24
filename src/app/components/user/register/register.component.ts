@@ -30,20 +30,21 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.anExistingUser = this.userService.findUserByUsername(this.username);
-    if (this.anExistingUser === {}) {
-      this.errorFlag = true;
-    } else if (this.password === '' || this.username === '') {
-      this.errorFlag = true;
-    } else if (this.password !== this.vpassword) {
-      this.errorFlag = true;
-    } else {
-
-      this.newUserId = Math.random().toString();
-      this.aNewUser = {_id: this.newUserId, username: this.username, password: this.password};
-      this.userService.createUser(this.aNewUser).subscribe((user: any) => {
-        this.router.navigate(['/user/', this.newUserId]);
-      });
-    }
+    this.userService.findUserByUsername(this.username).subscribe((user: any) => {
+      this.anExistingUser = user;
+      if (this.anExistingUser !== null) {
+        this.errorFlag = true;
+      } else if (this.password === '' || this.username === '') {
+        this.errorFlag = true;
+      } else if (this.password !== this.vpassword) {
+        this.errorFlag = true;
+      } else {
+        this.newUserId = Math.random().toString();
+        this.aNewUser = {_id: this.newUserId, username: this.username, password: this.password};
+        this.userService.createUser(this.aNewUser).subscribe((user: any) => {
+          this.router.navigate(['/user/', this.newUserId]);
+        });
+      }
+    });
   }
 }
