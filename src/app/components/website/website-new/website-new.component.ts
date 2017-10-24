@@ -24,7 +24,9 @@ export class WebsiteNewComponent implements OnInit {
       .subscribe(
         (params: any) => {
           this.userId = params['uid'];
-          this.websites = this.websiteService.findWebsitesByUser(this.userId);
+          this.websiteService.findWebsitesByUser(this.userId).subscribe((websites: any) => {
+            this.websites = websites;
+          });
           this.websitename = '';
           this.websitedescription = '';
         }
@@ -36,8 +38,9 @@ export class WebsiteNewComponent implements OnInit {
     } else {
       this.aNewWebsite = {_id: Math.random().toString(), name: this.websitename,
         developerId: this.userId, description: this.websitedescription};
-      this.websiteService.createWebsite(this.userId, this.aNewWebsite);
-      this.router.navigate(['/user', this.userId, 'website']);
+      this.websiteService.createWebsite(this.userId, this.aNewWebsite).subscribe((websiteAdded: any) => {
+        this.router.navigate(['/user', this.userId, 'website']);
+      });
     }
   }
 }

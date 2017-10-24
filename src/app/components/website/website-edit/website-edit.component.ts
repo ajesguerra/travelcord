@@ -11,7 +11,6 @@ export class WebsiteEditComponent implements OnInit {
 
   userId: string;
   websiteId: string;
-  theWebsite: {};
   websites = [{}];
   websitename: string;
   websitedescription: string;
@@ -28,14 +27,16 @@ export class WebsiteEditComponent implements OnInit {
       .subscribe(
         (params: any) => {
           this.userId = params['uid'];
-          this.websites = this.websiteService.findWebsitesByUser(this.userId);
+          this.websiteService.findWebsitesByUser(this.userId).subscribe((websites: any) => {
+            this.websites = websites;
+          });
           this.websiteId = params['wid'];
-          this.theWebsite = this.websiteService.findWebsiteById(this.websiteId);
-          this.websitename = this.theWebsite['name'];
-          this.websitedescription = this.theWebsite['description'];
+          this.websiteService.findWebsiteById(this.websiteId).subscribe((website: any) => {
+            this.websitename = website.name;
+            this.websitedescription = website.description;
+          });
         }
       );
-
   }
 
   editWebsite() {
@@ -46,13 +47,15 @@ export class WebsiteEditComponent implements OnInit {
         _id: this.websiteId, name: this.websitename,
         developerId: this.userId, description: this.websitedescription
       };
-      this.websiteService.updateWebsite(this.websiteId, this.aNewWebsite);
-      this.router.navigate(['/user/', this.userId, 'website']);
+      this.websiteService.updateWebsite(this.websiteId, this.aNewWebsite).subscribe((website: any) => {
+        this.router.navigate(['/user/', this.userId, 'website']);
+      });
     }
   }
   deleteWebsite() {
-    this.websiteService.deleteWebsite(this.websiteId);
-    this.router.navigate(['/user/', this.userId, 'website']);
+    this.websiteService.deleteWebsite(this.websiteId).subscribe((websiteDeleted: any) => {
+      this.router.navigate(['/user/', this.userId, 'website']);
+    });
   }
 
 }
