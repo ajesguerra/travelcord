@@ -34,18 +34,18 @@ export class WidgetYoutubeComponent implements OnInit {
           this.pageId = params['pid'];
           this.widgetId = params['wgid'];
           this.widgetType = params['wtype'];
-          this.theWidget = this.widgetService.findWidgetById(this.widgetId);
-          if (this.theWidget) {
-            this.widgetURL = this.theWidget['url'];
-            this.widgetWidth = this.theWidget['width'];
-            this.widgetExists = true;
-          } else {
-            this.widgetURL = '';
-            this.widgetWidth = '';
-            this.widgetExists = false;
-          }
-          // this.widgets = this.widgetService.findWidgetsByPageId(this.pageId);
-          // this.thePage = this.widgetService.findPageById(this.pageId);
+          this.widgetService.findWidgetById(this.widgetId).subscribe((widget: any) => {
+            this.theWidget = widget;
+            if (this.theWidget) {
+              this.widgetURL = this.theWidget['url'];
+              this.widgetWidth = this.theWidget['width'];
+              this.widgetExists = true;
+            } else {
+              this.widgetURL = '';
+              this.widgetWidth = '';
+              this.widgetExists = false;
+            }
+          });
         }
       );
   }
@@ -57,9 +57,9 @@ export class WidgetYoutubeComponent implements OnInit {
       this.aNewWidget = {_id: this.widgetId, widgetType: this.widgetType, pageId: this.pageId,
         width: this.widgetWidth, url: this.widgetURL};
       if (this.widgetExists) {
-        this.widgetService.updateWidget(this.widgetId, this.aNewWidget);
+        this.widgetService.updateWidget(this.widgetId, this.aNewWidget).subscribe((widget: any) => {});
       } else {
-        this.widgetService.createWidget(this.pageId, this.aNewWidget);
+        this.widgetService.createWidget(this.pageId, this.aNewWidget).subscribe((widget: any) => {});
       }
       // console.log(this.aNewWidget);
       this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);

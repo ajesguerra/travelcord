@@ -25,9 +25,10 @@ export class WidgetChooserComponent implements OnInit {
           this.userId = params['uid'];
           this.websiteId = params['wid'];
           this.pageId = params['pid'];
-          this.widgets = this.widgetService.findWidgetsByPageId(this.pageId);
+          this.widgetService.findWidgetsByPageId(this.pageId).subscribe((widgets: any) => {
+            this.widgets = widgets;
+          });
           this.aRandomId = Math.random();
-          // this.thePage = this.widgetService.findPageById(this.pageId);
         }
       );
   }

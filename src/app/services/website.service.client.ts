@@ -36,7 +36,7 @@ export class WebsiteService {
 
   deleteWebsite(websiteId) {
     const url = 'http://localhost:3100/api/website/' + websiteId;
-    return this.http.put(url, websiteId).map((response: Response) => {
+    return this.http.delete(url, websiteId).map((response: Response) => {
       return response.json();
     });
   }

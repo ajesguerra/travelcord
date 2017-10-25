@@ -29,16 +29,17 @@ export class WidgetEditComponent implements OnInit {
           this.pageId = params['pid'];
           this.widgetId = params['wgid'];
           this.widgetType = params['wtype'];
-          // this.widgets = this.widgetService.findWidgetsByPageId(this.pageId);
-          // this.thePage = this.widgetService.findPageById(this.pageId);
-          if (this.widgetService.findWidgetById(this.widgetId)) {
-            this.doesWidgetExist = true;
-          }
+          this.widgetService.findWidgetById(this.widgetId).subscribe((widget: any) => {
+            if (widget !== null) {
+              this.doesWidgetExist = true;
+            }
+          });
         }
       );
   }
   deleteWidget() {
-    this.widgetService.deleteWidget(this.widgetId);
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+    this.widgetService.deleteWidget(this.widgetId).subscribe((widget: any) => {
+      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+    });
   }
 }
