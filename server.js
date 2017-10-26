@@ -8,7 +8,7 @@ const http = require('http');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // CORS
 app.use(function(req, res, next) {
