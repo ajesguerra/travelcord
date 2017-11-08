@@ -9,9 +9,6 @@ module.exports = function (app) {
   app.delete("/api/widget/:widgetId", deleteWidget);
 
   function createWidget(req, res) {
-    this.widgets.push(req.body);
-    res.json(req.body);
-
     var pageId = req.params['pageId'];
     var widget = req.body;
     WidgetModel.createWidget(pageId, widget)
