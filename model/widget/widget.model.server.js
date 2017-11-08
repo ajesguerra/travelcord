@@ -32,15 +32,15 @@ function findAllWidgetsForPage(pageId) {
 }
 
 function findWidgetById(widgetId) {
-  return PageModel.findOne({_id: widgetId});
+  return WidgetModel.findOne({_id: widgetId});
 }
 
 function updateWidget(widgetId, widget) {
-  return PageModel.update({_id: widgetId}, widget);
+  return WidgetModel.update({_id: widgetId}, widget);
 }
 
 function deleteWidget(widgetId) {
-  return PageModel.deleteOne({_id: widgetId});
+  return WidgetModel.deleteOne({_id: widgetId});
 }
 
 function reorderWidget(pageId, start, end) {

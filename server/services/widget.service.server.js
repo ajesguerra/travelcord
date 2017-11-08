@@ -1,5 +1,7 @@
 module.exports = function (app) {
 
+  var WidgetModel = require("../../model/widget/widget.model.server");
+
   app.post("/api/page/:pageId/widget", createWidget);
   app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
   app.get("/api/widget/:widgetId", findWidgetById);
@@ -21,45 +23,44 @@ module.exports = function (app) {
   function createWidget(req, res) {
     this.widgets.push(req.body);
     res.json(req.body);
+
+    var pageId = req.params['pageId'];
+    var widget = req.body;
+    WidgetModel.createWidget(pageId, widget)
+      .then(function (theWidget) {
+        WidgetModel.findAllWidgetsForPage(pageId)
+          .then(function (widgets) {
+            res.json(widgets);
+          });
+      });
   }
 
   function findAllWidgetsForPage(req, res) {
-    const widgetsByThisPageId = [];
-    for (var x = 0; x < this.widgets.length; x++) {
-      if (this.widgets[x].pageId === req.params['pageId']) {
-        widgetsByThisPageId.push(this.widgets[x]);
-      }
-    }
-    res.json(widgetsByThisPageId);
+    const pageId = req.params['pageId'];
+    WidgetModel.findAllWidgetsForPage(pageId)
+      .then(function (widgets) {
+        res.json(widgets);
+      });
   }
 
   function findWidgetById(req, res) {
-    for (var x = 0; x < this.widgets.length; x++) {
-      if (this.widgets[x]._id === req.params['widgetId']) {
-        res.json(this.widgets[x]);
-        return;
-      }
-    }
-    res.json(null);
+    WidgetModel.findWidgetById(req.params['widgetId'])
+      .then(function (widget) {
+        res.json(widget);
+      });
   }
 
   function updateWidget(req, res) {
-    for (var x = 0; x < this.widgets.length; x++) {
-      if (this.widgets[x]._id === req.params['widgetId']) {
-        // this.widgets[x] = widget; // can do this too
-        this.widgets.splice(x, 1);
-      }
-    }
-    this.widgets.push(req.body);
-    res.json(widgets);
+    WidgetModel.updateWidget(req.params['widgetId'], req.body)
+      .then(function (widgets) {
+        res.json(widgets);
+      });
   }
 
   function deleteWidget(req, res) {
-    for (var x = 0; x < this.widgets.length; x++) {
-      if (this.widgets[x]._id === req.params['widgetId']) {
-        this.widgets.splice(x, 1);
-      }
-    }
-    res.json(widgets);
+    WidgetModel.deleteWidget(req.params['widgetId'])
+      .then(function (widgets) {
+        res.json(widgets);
+      });
   }
 };

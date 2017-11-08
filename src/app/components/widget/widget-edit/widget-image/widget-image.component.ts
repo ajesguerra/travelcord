@@ -54,7 +54,7 @@ export class WidgetImageComponent implements OnInit {
     if (this.widgetURL === '' || this.widgetWidth === '') {
       this.errorFlag = true;
     } else {
-      this.aNewWidget = {_id: this.widgetId, widgetType: this.widgetType, pageId: this.pageId,
+      this.aNewWidget = {widgetType: this.widgetType, pageId: this.pageId,
         width: this.widgetWidth, url: this.widgetURL};
       if (this.widgetExists) {
         this.widgetService.updateWidget(this.widgetId, this.aNewWidget).subscribe((widget: any) => {

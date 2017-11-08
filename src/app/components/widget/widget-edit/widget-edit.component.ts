@@ -20,6 +20,7 @@ export class WidgetEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('here');
     this.doesWidgetExist = false;
     this.activatedRoute.params
       .subscribe(

@@ -1,4 +1,4 @@
-var WidgetSchema = require("./widget.schema.server");
+var WidgetSchema = require("../widget/widget.schema.server");
 var mongoose = require('mongoose');
 
 var PageSchema = mongoose.Schema ( {
