@@ -1,30 +1,34 @@
 module.exports = function (app) {
 
+  var userModel = require("../../model/user/user.model.server");
+
   app.post("/api/user", createUser);
   app.put("/api/user/:userId", updateUser);
   app.get("/api/user/:userId", findUserById);
   app.get("/api/user", findUsers);
   app.delete("/api/user/:userId", deleteUser);
 
-  users = [
-    {_id: '123', username: 'alice', password: 'alice', firstName: 'Alice', lastName: 'Wonder'},
-    {_id: '234', username: 'bob', password: 'bob', firstName: 'Bob', lastName: 'Marley'},
-    {_id: '345', username: 'charly', password: 'charly', firstName: 'Charly', lastName: 'Garcia'},
-    {_id: '456', username: 'jannunzi', password: 'jannunzi', firstName: 'Jose', lastName: 'Annunzi'}
-  ];
+  function createUser(req, res) {
+    const user = req.body;
+    userModel.createUser(user)
+      .then(function (user) {
+        res.json(user);
+      });
+  }
 
   function findUserById(req, res) {
     var userId = req.params['userId'];
-    var user = users.find(function (user) {
-      return user._id === userId;
+    userModel.findUserById(userId)
+      .then(function (user) {
+      if (user) {
+        res.json(user);
+      } else {
+        res.json({});
+      }
     });
-    if (user) {
-      res.json(user);
-    } else {
-      res.json({});
-    }
   }
 
+  // This function just redirects depending on what information is available.
   function findUsers(req, res) {
     var username = req.query["username"];
     var password = req.query["password"];
@@ -38,55 +42,41 @@ module.exports = function (app) {
   }
 
   function findUserByCredentials(req, res, username, password) {
-    var user = users.find(function (user) {
-      return (user.username === username && user.password === password);
-    });
-    if (user) {
-      res.json(user);
-    } else {
-      res.json({});
-    }
+    userModel.findUserByCredentials(username, password)
+      .then(function (user) {
+        if (user) {
+          res.json(user);
+        } else {
+          res.json({});
+        }
+      });
   }
 
   function findUserByUsername(req, res, username) {
-    var user = users.find(function (user) {
-      return (user.username === username);
-    });
-    if (user) {
-      res.json(user);
-    } else {
-      res.json(null);
-    }
-  }
-
-  function createUser(req, res) {
-    const user = req.body;
-    users.push(user);
-    res.json(user);
-    return;
+    userModel.findUserByUsername(username)
+      .then(function (user) {
+        if (user) {
+          res.json(user);
+        } else {
+          res.json(null);
+        }
+      });
   }
 
   function updateUser(req, res) {
     const updatedUser = req.body;
     const userId = req.params['userId'];
-    for (var x = 0; x < users.length; x++) {
-      if (users[x]._id === userId) {
-        users[x] = updatedUser;
+    userModel.updateUser(userId, updatedUser)
+      .then(function (updatedUser) {
         res.json(updatedUser);
-        return;
-      }
-    }
+      });
   }
 
   function deleteUser(req, res) {
-    const user = req.body;
     const userId = req.params['userId'];
-    for (var x = 0; x < this.users.length; x++) {
-      if (this.users[x]._id === userId) {
-        this.users.splice(x, 1);
+    userModel.deleteUser(userId)
+      .then(function (user) {
         res.json(user);
-        return;
-      }
-    }
+      });
   }
 };

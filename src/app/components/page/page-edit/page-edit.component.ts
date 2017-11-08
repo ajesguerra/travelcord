@@ -29,13 +29,13 @@ export class PageEditComponent implements OnInit {
           this.userId = params['uid'];
           this.websiteId = params['wid'];
           this.pageId = params['pid'];
-          this.pageService.findPageByWebsiteId(this.websiteId).subscribe((websites: any) => {
-            this.pages = websites;
+          this.pageService.findPageByWebsiteId(this.websiteId).subscribe((pages: any) => {
+            this.pages = pages;
           });
           this.pageService.findPageById(this.pageId).subscribe((page: any) => {
             this.thePage = page;
-            this.name = this.thePage['name'];
-            this.description = this.thePage['description'];
+            this.name = page.name;
+            this.description = page.description;
           });
         }
       );

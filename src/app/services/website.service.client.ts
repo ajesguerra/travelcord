@@ -8,7 +8,6 @@ export class WebsiteService {
   baseUrl = environment.baseUrl;
   constructor(private http: Http) {}
   createWebsite(userId, website) {
-    website.developerId = userId;
     const url = this.baseUrl + '/api/user/' + userId + '/website';
     return this.http.post(url, website).map((response: Response) => {
       return response.json();

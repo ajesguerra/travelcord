@@ -38,7 +38,7 @@ export class PageNewComponent implements OnInit {
     if (this.name === '' || this.description === '') {
       this.errorFlag = true;
     } else {
-      this.aNewPage = {_id: Math.random().toString(), name: this.name,
+      this.aNewPage = {name: this.name,
         websiteId: this.websiteId, description: this.description};
       this.pageService.createPage(this.websiteId, this.aNewPage).subscribe((page: any) => {
         this.router.navigate(['/user/', this.userId, 'website', this.websiteId, 'page']);

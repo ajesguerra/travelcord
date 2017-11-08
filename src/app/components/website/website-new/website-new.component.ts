@@ -36,11 +36,10 @@ export class WebsiteNewComponent implements OnInit {
     if (this.websitename === '' || this.websitedescription === '') {
       this.errorFlag = true;
     } else {
-      this.aNewWebsite = {_id: Math.random().toString(), name: this.websitename,
-        developerId: this.userId, description: this.websitedescription};
-      this.websiteService.createWebsite(this.userId, this.aNewWebsite).subscribe((websiteAdded: any) => {
-        this.router.navigate(['/user', this.userId, 'website']);
-      });
+      this.aNewWebsite = {developerId: this.userId, name: this.websitename,
+        description: this.websitedescription};
+      this.websiteService.createWebsite(this.userId, this.aNewWebsite).subscribe((theWebsites: any) => {});
+      this.router.navigate(['/user', this.userId, 'website']);
     }
   }
 }

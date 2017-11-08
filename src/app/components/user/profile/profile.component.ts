@@ -42,12 +42,7 @@ export class ProfileComponent implements OnInit {
       password: this.password,
       firstName: this.firstName,
       lastName: this.lastName };
-    this.userService.updateUser(this.userId, this.user).subscribe((theUser: any) => {
-      this.username = theUser.username;
-      this.email = theUser.email;
-      this.firstName = theUser.firstName;
-      this.lastName = theUser.lastName;
-    });
+    this.userService.updateUser(this.userId, this.user).subscribe((theUser: any) => {});
   }
   deleteUser() {
     this.user = {_id: this.userId,

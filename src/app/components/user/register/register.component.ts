@@ -17,7 +17,6 @@ export class RegisterComponent implements OnInit {
   errorMsg = 'Invalid!';
   anExistingUser: any;
   aNewUser: any;
-  newUserId: string;
   constructor(private userService: UserService,
               private router: Router) {
   }
@@ -39,10 +38,9 @@ export class RegisterComponent implements OnInit {
       } else if (this.password !== this.vpassword) {
         this.errorFlag = true;
       } else {
-        this.newUserId = Math.random().toString();
-        this.aNewUser = {_id: this.newUserId, username: this.username, password: this.password};
-        this.userService.createUser(this.aNewUser).subscribe((user: any) => {
-          this.router.navigate(['/user/', this.newUserId]);
+        this.aNewUser = {username: this.username, password: this.password};
+        this.userService.createUser(this.aNewUser).subscribe((aUser: any) => {
+          this.router.navigate(['/user/', aUser._id]);
         });
       }
     });
