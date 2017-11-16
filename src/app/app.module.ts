@@ -6,7 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 import { TestComponent } from './components/test/test.component';
 import {Routing} from './app.routing';
 import {HttpModule} from '@angular/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TestService} from './services/test.service.client';
 import { LoginComponent } from './components/user/login/login.component';
 import { ProfileComponent } from './components/user/profile/profile.component';
@@ -27,6 +27,9 @@ import { UserService } from './services/user.service.client';
 import { WebsiteService } from './services/website.service.client';
 import { PageService } from './services/page.service.client';
 import { WidgetService } from './services/widget.service.client';
+import { PlacestestComponent } from './components/placestest/placestest.component';
+import {PlaceService} from './services/place.service.client';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   // Declare components here
@@ -48,20 +51,29 @@ import { WidgetService } from './services/widget.service.client';
     WidgetListComponent,
     WidgetHeaderComponent,
     WidgetImageComponent,
-    WidgetYoutubeComponent
+    WidgetYoutubeComponent,
+    PlacestestComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
-    Routing
+    Routing,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyArbhF-owYmnIdhp4hXlxG-nCRUxc0HF2c', // 'AIzaSyDm-aq4PesgK2OJNJY-pKbUPkLKiBTPvjE',
+      libraries: ['places']
+    }),
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   // Client Side services here
   providers: [TestService,
     UserService,
     WebsiteService,
     PageService,
-    WidgetService],
+    WidgetService,
+    PlaceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

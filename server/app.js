@@ -4,6 +4,7 @@
 
 module.exports = function (app) {
   db = require("./../model/model.server");
+  require("./services/places.service.server")(app);
   require("./services/user.service.server")(app);
   require("./services/website.service.server")(app);
   require("./services/page.service.server")(app);

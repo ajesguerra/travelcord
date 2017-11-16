@@ -13,10 +13,11 @@ app.use(express.static(path.join(__dirname, 'dist')));
 // CORS
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", "Origin, x-requested-with, Content-Type, Accept, authorization, client-security-token, Accept-Encoding");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   next();
 });
+
 
 const port = process.env.PORT || '3100';
 app.set('port', port);
