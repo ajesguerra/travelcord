@@ -1,12 +1,3 @@
-/**
- * Created by sesha on 7/26/17.
-import {Routes, RouterModule} from '@angular/router';
-import {HomeComponent} from './components/home/home.component';
-import {ModuleWithProviders} from '@angular/core';
-import {TestComponent} from './components/test/test.component';
- */
-
-
 import {Routes, RouterModule} from '@angular/router';
 import {ModuleWithProviders} from '@angular/core';
 import {LoginComponent} from './components/user/login/login.component';
