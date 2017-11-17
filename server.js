@@ -26,7 +26,6 @@ const server = http.createServer(app);
 require("./server/app")(app);
 server.listen( port );
 
-
 // For Build: Catch all other routes and return the index file -- BUILDING
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
