@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from '../../../services/user.service.client';
+import {TravelerService} from '../../../services/traveler.service.client';
 import {Router} from '@angular/router';
 
 @Component({
@@ -10,37 +10,37 @@ import {Router} from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   // properties
-  username: string;
+  email: string;
   password: string;
   vpassword: string;
   errorFlag: boolean;
   errorMsg = 'Invalid!';
-  anExistingUser: any;
-  aNewUser: any;
-  constructor(private userService: UserService,
+  anExistingTraveler: any;
+  aNewTraveler: any;
+  constructor(private travelerService: TravelerService,
               private router: Router) {
   }
 
   ngOnInit() {
     this.errorFlag = false;
-    this.username = '';
+    this.email = '';
     this.password = '';
     this.vpassword = '';
   }
 
   register() {
-    this.userService.findUserByUsername(this.username).subscribe((user: any) => {
-      this.anExistingUser = user;
-      if (this.anExistingUser !== null) {
+    this.travelerService.findTravelerByEmail(this.email).subscribe((traveler: any) => {
+      this.anExistingTraveler = traveler;
+      if (this.anExistingTraveler !== null) {
         this.errorFlag = true;
-      } else if (this.password === '' || this.username === '') {
+      } else if (this.password === '' || this.email === '') {
         this.errorFlag = true;
       } else if (this.password !== this.vpassword) {
         this.errorFlag = true;
       } else {
-        this.aNewUser = {username: this.username, password: this.password};
-        this.userService.createUser(this.aNewUser).subscribe((aUser: any) => {
-          this.router.navigate(['/user/', aUser._id]);
+        this.aNewTraveler = {email: this.email, password: this.password};
+        this.travelerService.createTraveler(this.aNewTraveler).subscribe((aTraveler: any) => {
+          this.router.navigate(['/user/', aTraveler._id]);
         });
       }
     });

@@ -30,6 +30,7 @@ import { WidgetService } from './services/widget.service.client';
 import { PlacestestComponent } from './components/placestest/placestest.component';
 import {PlaceService} from './services/place.service.client';
 import { AgmCoreModule } from '@agm/core';
+import {TravelerService} from "./services/traveler.service.client";
 
 @NgModule({
   // Declare components here
@@ -70,6 +71,7 @@ import { AgmCoreModule } from '@agm/core';
   // Client Side services here
   providers: [TestService,
     UserService,
+    TravelerService,
     WebsiteService,
     PageService,
     WidgetService,
