@@ -45,7 +45,7 @@ export class EventNewComponent implements OnInit {
       this.aNewEvent = {eventName: this.eventname,
         description: this.description};
       this.eventService.createEvent(this.travelerId, this.aNewEvent).subscribe((theEvents: any) => {
-        this.router.navigate(['/traveler', this.travelerId, 'event']);
+        this.router.navigate(['/traveler', this.travelerId, 'event-list']);
       });
     }
   }

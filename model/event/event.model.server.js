@@ -12,22 +12,17 @@ EventModel.deleteEvent = deleteEvent;
 module.exports = EventModel;
 
 function createEvent(travelerId, event) {
-  console.log('getting to the model');
   var newEvent = null;
   return EventModel.create(event)
     .then(function (event) {
-      console.log('model made the event and the traveler id is ' + travelerId);
-      console.log(event);
       newEvent = event;
-      // newEvent.travelers.push(travelerId);
       TravelerModel.findTravelerById(travelerId)
         .then(function (traveler) {
-          console.log(traveler);
-          console.log('made it back from the traveler model');
+          event.travelers.push(traveler);
+          event.save();
           traveler.events.push(newEvent);
-          console.log(traveler);
           return traveler.save();
-        })
+        });
     });
 }
 

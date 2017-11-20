@@ -12,10 +12,8 @@ module.exports = function (app) {
     var travelerId = req.params['travelerId'];
     var event = req.body;
     var newEvent = null;
-    console.log('got here');
     eventModel.createEvent(travelerId, event)
       .then(function (event) {
-        console.log('got here too');
         eventModel.findAllEventsForTraveler(travelerId)
           .then(function (events) {
             res.json(events);
