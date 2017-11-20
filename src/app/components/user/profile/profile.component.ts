@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from '../../../services/user.service.client';
+import {TravelerService} from '../../../services/traveler.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -10,47 +10,45 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class ProfileComponent implements OnInit {
 
   // properties
-  userId: string;
-  user = {};
-  username: string;
+  travelerId: string;
+  traveler = {};
   email: string;
   firstName: string;
   lastName: string;
   password: string;
 
-  constructor(private userService: UserService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private travelerService: TravelerService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
 
     this.activatedRoute.params
       .subscribe(
         (params: any) => {
-          this.userId = params['userId'];
+          this.travelerId = params['travelerId'];
         }
       );
-    this.userService.findUserById(this.userId).subscribe((theUser: any) => {
-      this.username = theUser.username;
-      this.email = theUser.email;
-      this.firstName = theUser.firstName;
-      this.lastName = theUser.lastName;
-      this.password = theUser.password;
+    this.travelerService.findTravelerById(this.travelerId).subscribe((theTraveler: any) => {
+      this.email = theTraveler.email;
+      this.firstName = theTraveler.firstName;
+      this.lastName = theTraveler.lastName;
+      this.password = theTraveler.password;
     });
   }
-  updateUser() {
-    this.user = {_id: this.userId,
-      username: this.username,
+  updateTraveler() {
+    this.traveler = {_id: this.travelerId,
+      email: this.email,
       password: this.password,
       firstName: this.firstName,
       lastName: this.lastName };
-    this.userService.updateUser(this.userId, this.user).subscribe((theUser: any) => {});
+    this.travelerService.updateTraveler(this.travelerId, this.traveler).subscribe((theTraveler: any) => {});
   }
-  deleteUser() {
-    this.user = {_id: this.userId,
-      username: this.username,
+  deleteTraveler() {
+    this.traveler = {_id: this.travelerId,
+      email: this.email,
       password: this.password,
       firstName: this.firstName,
       lastName: this.lastName };
-    this.userService.deleteUser(this.user).subscribe((theUser: any) => {
+    this.travelerService.deleteTraveler(this.traveler).subscribe((theTraveler: any) => {
       this.router.navigate(['/login/']);
     });
   }

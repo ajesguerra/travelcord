@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
       } else {
         this.aNewTraveler = {email: this.email, password: this.password};
         this.travelerService.createTraveler(this.aNewTraveler).subscribe((aTraveler: any) => {
-          this.router.navigate(['/user/', aTraveler._id]);
+          this.router.navigate(['/traveler/', aTraveler._id]);
         });
       }
     });

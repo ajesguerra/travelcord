@@ -30,7 +30,10 @@ import { WidgetService } from './services/widget.service.client';
 import { PlacestestComponent } from './components/placestest/placestest.component';
 import {PlaceService} from './services/place.service.client';
 import { AgmCoreModule } from '@agm/core';
-import {TravelerService} from "./services/traveler.service.client";
+import {TravelerService} from './services/traveler.service.client';
+import {EventService} from './services/event.service.client';
+import {EventListComponent} from './components/event/event-list/event-list.component';
+import { EventNewComponent } from './components/event/event-new/event-new.component';
 
 @NgModule({
   // Declare components here
@@ -53,7 +56,9 @@ import {TravelerService} from "./services/traveler.service.client";
     WidgetHeaderComponent,
     WidgetImageComponent,
     WidgetYoutubeComponent,
-    PlacestestComponent
+    PlacestestComponent,
+    EventListComponent,
+    EventNewComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +80,8 @@ import {TravelerService} from "./services/traveler.service.client";
     WebsiteService,
     PageService,
     WidgetService,
-    PlaceService],
+    PlaceService,
+    EventService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -14,6 +14,8 @@ import {WidgetChooserComponent} from './components/widget/widget-chooser/widget-
 import {WidgetEditComponent} from './components/widget/widget-edit/widget-edit.component';
 import {TestComponent} from './components/test/test.component';
 import {PlacestestComponent} from './components/placestest/placestest.component';
+import {EventListComponent} from './components/event/event-list/event-list.component';
+import {EventNewComponent} from './components/event/event-new/event-new.component';
 // Import all other components here
 
 const APP_ROUTES: Routes = [
@@ -22,7 +24,9 @@ const APP_ROUTES: Routes = [
   { path : 'test', component: TestComponent},
   { path : 'login' , component: LoginComponent},
   { path : 'register' , component: RegisterComponent},
-  { path : 'user/:userId' , component: ProfileComponent},
+  { path : 'traveler/:travelerId' , component: ProfileComponent},
+  { path : 'traveler/:travelerId/event-list' , component: EventListComponent},
+  { path : 'traveler/:travelerId/event/new' , component: EventNewComponent},
   { path : 'user/:uid/website' , component: WebsiteListComponent},
   { path : 'user/:uid/website/new' , component: WebsiteNewComponent},
   { path : 'user/:uid/website/:wid' , component: WebsiteEditComponent},

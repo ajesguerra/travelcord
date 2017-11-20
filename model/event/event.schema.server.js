@@ -1,12 +1,11 @@
-var TravelerSchema = require("../traveler/traveler.schema.server");
 var mongoose = require('mongoose');
 
 var EventSchema = mongoose.Schema ( {
   eventName: String,
-  isPublic: boolean,
+  isPublic: Boolean,
   description: String,
   dateCreated: Date,
-  travelers[TravelerSchema]
+  travelers: [{type:mongoose.Schema.Types.ObjectId, ref: 'TravelerModel'}]
 }, {collection: 'event'});
 
 module.exports = EventSchema;

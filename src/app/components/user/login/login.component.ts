@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { Router} from '@angular/router';
-import { UserService } from '../../../services/user.service.client';
+import { TravelerService } from '../../../services/traveler.service.client';
 
 @Component({
   selector: 'app-login',
@@ -10,29 +10,28 @@ import { UserService } from '../../../services/user.service.client';
 export class LoginComponent implements OnInit {
 
   // properties
-  username: any;
+  email: any;
   password: any;
   errorFlag: boolean;
   errorMsg = 'Invalid username or password !';
-  user: any;
-  constructor(private userService: UserService,
+  traveler: any;
+  constructor(private travelerService: TravelerService,
               private router: Router) { }
   ngOnInit() {
     this.errorFlag = false;
-    this.username = '';
+    this.email = '';
     this.password = '';
   }
-  login(username: string, password: string) {
+  login(email: string, password: string) {
     // alert('username: ' + username + ' password: ' + password);
-    this.username = username;
+    this.email = email;
     this.password = password;
-    if (this.username === '' || this.password === '') {
+    if (this.email === '' || this.password === '') {
       this.errorFlag = true;
     } else {
-      this.userService.findUserByCredentials(this.username, this.password).subscribe((user: any) => {
-        if (user.username === this.username && user.password === this.password) {
-          this.router.navigate(['/user/', user._id]); // change this to profile
-          // console.log('routing...');
+      this.travelerService.findTravelerByCredentials(this.email, this.password).subscribe((traveler: any) => {
+        if (traveler.email === this.email && traveler.password === this.password) {
+          this.router.navigate(['/traveler/', traveler._id]);
         }
       });
     }

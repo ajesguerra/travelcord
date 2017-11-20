@@ -26,8 +26,7 @@ function createWebsiteForUser(userId, website) {
 
 function findAllWebsitesForUser(userId) {
   return WebsiteModel.find({developerId: userId})
-    .populate('developerId')
-    .exec();
+
 }
 
 function findWebsiteById(websiteId) {

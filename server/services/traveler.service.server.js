@@ -1,10 +1,12 @@
 module.exports = function (app) {
 
   var TravelerModel = require("../../model/traveler/traveler.model.server");
+  var EventModel = require("../../model/event/event.model.server");
 
   app.post("/api/traveler", createTraveler);
   app.put("/api/traveler/:travelerId", updateTraveler);
   app.get("/api/traveler/:travelerId", findTravelerById);
+  app.get("/api/traveler/:travelerId/event", findAllEventsForTraveler);
   app.get("/api/traveler", findTravelers);
   app.delete("/api/traveler/:travelerId", deleteTraveler);
 
@@ -13,6 +15,19 @@ module.exports = function (app) {
     TravelerModel.createTraveler(traveler)
       .then(function (traveler) {
         res.json(traveler);
+      });
+  }
+
+  function findAllEventsForTraveler(req, res) {
+    const travelerId = req.params['travelerId'];
+    var eventList = [];
+    TravelerModel.findTravelerById(travelerId)
+      .then(function (traveler) {
+        if (traveler) {
+          res.json(traveler);
+        } else {
+          res.json({});
+        }
       });
   }
 
@@ -29,7 +44,7 @@ module.exports = function (app) {
   }
 
   // This function just redirects depending on what information is available.
-  function findTravelerss(req, res) {
+  function findTravelers(req, res) {
     var email = req.query["email"];
     var password = req.query["password"];
     if (email && password) {

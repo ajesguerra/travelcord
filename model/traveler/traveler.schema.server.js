@@ -1,4 +1,3 @@
-var EventSchema = require("../event/event.schema.server");
 var mongoose = require('mongoose');
 
 var TravelerSchema = mongoose.Schema ( {
@@ -11,7 +10,7 @@ var TravelerSchema = mongoose.Schema ( {
   dateCreated: Date,
   fbLogin: String,
   gLogin: String,
-  events: [EventSchema]
+  events: [{type:mongoose.Schema.Types.ObjectId, ref: 'EventModel'}]
 }, {collection: 'traveler'});
 
 module.exports = TravelerSchema;
