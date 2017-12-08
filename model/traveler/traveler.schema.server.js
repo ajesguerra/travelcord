@@ -10,7 +10,9 @@ var TravelerSchema = mongoose.Schema ( {
   dateCreated: Date,
   fbLogin: String,
   gLogin: String,
-  events: [{type:mongoose.Schema.Types.ObjectId, ref: 'EventModel'}]
+  events: [{type:mongoose.Schema.Types.ObjectId, ref: 'EventModel'}],
+  suggestionUpVotes: [{type:mongoose.Schema.Types.ObjectId, ref: 'ActivitySuggestionModel'}],
+  suggestionDownVotes: [{type:mongoose.Schema.Types.ObjectId, ref: 'ActivitySuggestionModel'}]
 }, {collection: 'traveler'});
 
 module.exports = TravelerSchema;

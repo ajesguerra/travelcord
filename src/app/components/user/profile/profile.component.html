@@ -20,7 +20,7 @@
 <div class="container main-content">
   <form>
     <div class="form-group">
-      <label for="username">Email</label>
+      <label for="email">Email</label>
       <input [(ngModel)]="email"
              type="text"
              class="form-control"
@@ -67,7 +67,9 @@
     </div>
   </form>
   <a class="btn btn-primary btn-block"
-     [routerLink]="['/traveler', travelerId, 'event-list']">Events</a>
+     [routerLink]="['/event-list']">View Your Events</a>
+  <a class="btn btn-primary btn-block"
+     [routerLink]="['/allTravelers']">View Users</a>
   <a class="btn btn-danger btn-block"
      [routerLink]="['/login']">Logout</a>
   <a class="btn btn-danger btn-block"
@@ -80,7 +82,7 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right">
-      <a [routerLink]="['/traveler', travelerId]" class="nav-hover">
+      <a [routerLink]="['/traveler']" class="nav-hover">
         <span class="glyphicon glyphicon-user navbar-link"></span>
       </a>
     </p>

@@ -1,16 +1,84 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Http, RequestOptions, Response} from '@angular/http';
 import 'rxjs/Rx';
 import {environment} from '../../environments/environment';
 import {EventService} from './event.service.client';
+import {SharedService} from './shared.service.client';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class TravelerService {
+  options: RequestOptions = new RequestOptions();
   baseUrl = environment.baseUrl;
-  constructor(private http: Http) {}
+  constructor(private http: Http,
+              private sharedService: SharedService,
+              private router: Router) {}
+
+  register(email, password) {
+    const url = this.baseUrl + '/api/register';
+    const credentials = {
+      email: email,
+      password: password
+    };
+    this.options.withCredentials = true;
+    return this.http.post(url, credentials, this.options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  login(email, password) {
+    console.log('trying to login from user client service with...' + email + password);
+    this.options.withCredentials = true;
+    const url = this.baseUrl + '/api/login';
+    const credentials = {
+      email: email,
+      password: password
+    };
+    return this.http.post(url, credentials, this.options)
+      .map((response: Response) => {
+        console.log('received back from server. in the traveler service client');
+        console.log(response.json());
+        return response.json();
+      });
+  }
+
+  loggedIn() {
+    this.options.withCredentials = true;
+    return this.http.post(this.baseUrl + '/api/loggedIn', '', this.options)
+      .map(
+        (res: Response) => {
+          const user = res.json();
+          if (user !== 0) {
+            this.sharedService.user = user; // setting user so as to share with all components
+            return true;
+          } else {
+            this.router.navigate(['/login']);
+            return false;
+          }
+        }
+      );
+  }
+
+  logout() {
+    this.options.withCredentials = true;
+    return this.http.post(this.baseUrl + '/api/logout', '', this.options)
+      .map(
+        (res: Response) => {
+          const data = res;
+        }
+      );
+  }
 
   findTravelerByCredentials(email, password) {
     const url = this.baseUrl + '/api/traveler?email=' + email + '&password=' + password;
+    return this.http.get(url).map((response: Response) => {
+      return response.json();
+    });
+  }
+
+  findAllTravelers() {
+    const url = this.baseUrl + '/api/traveler/all';
     return this.http.get(url).map((response: Response) => {
       return response.json();
     });
@@ -29,8 +97,8 @@ export class TravelerService {
     // Get the traveler
     return this.http.get(url).map((response: Response) => {
       // For each event in the traveler's profile, send another HTTP request to get the event details.
-      for (let i = 0; i < response.json().events.length; i++) {
-        const url2 = this.baseUrl + '/api/event/' + response.json().events[i];
+      for (let i = 0; i < response.json().length; i++) {
+        const url2 = this.baseUrl + '/api/event/' + response.json()[i];
         this.http.get(url2).subscribe((response2: Response) => {
           events.push(response2.json());
         });

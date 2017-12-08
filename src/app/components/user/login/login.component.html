@@ -8,12 +8,12 @@
 
   <!--<form (ngSubmit) = "login()" #f="ngForm">-->
 
-    <input   placeholder="username"
-             name="username"
+    <input   placeholder="email"
+             name="email"
              type="text"
              class="form-control"
              required
-             [(ngModel)]="username"/>
+             [(ngModel)]="email"/>
 
     <input   placeholder="password"
              name="password"
@@ -22,7 +22,7 @@
              [(ngModel)]="password"
              required/>
 
-  <button class="btn btn-primary btn-block" (click)="login(username, password)"
+  <button class="btn btn-primary btn-block" (click)="login(email, password)"
           type="submit">Login</button>
   <button class="btn btn-success btn-block" [routerLink]="['/register']"
           type="submit">Register</button>

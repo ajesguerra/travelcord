@@ -6,7 +6,7 @@
 
     <div class="col-sm-3 col-xs-1 nav-padding-zero">
 
-      <a [routerLink]="['/traveler', travelerId, 'event-list']" class="navbar-text-main-theme">
+      <a [routerLink]="['/event-list']" class="navbar-text-main-theme">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
 
@@ -15,7 +15,7 @@
       </div>
 
       <div class="navbar-split-padding hidden-xs nav-padding-zero pull-right">
-        <a [routerLink]="['/traveler', travelerId, 'event', 'new']" class="navbar-text-main-theme nav-padding-zero">
+        <a [routerLink]="['/event', 'new']" class="navbar-text-main-theme nav-padding-zero">
           <span class="glyphicon glyphicon-plus"></span>
         </a>
       </div>
@@ -49,10 +49,10 @@
           <li class="list-group-item" *ngFor="let anEvent of events">
             <div class="row">
               <div class="col-sm-9 nav-padding-zero">
-                <a [routerLink]="['/traveler', travelerId, 'event', anEvent['_id'], 'page']">{{anEvent['eventName']}}</a>
+                <a [routerLink]="['/event', anEvent['_id'], 'page']">{{anEvent['eventName']}}</a>
               </div>
               <div class="col-sm-3 nav-padding-zero">
-                <a [routerLink]="['/traveler', travelerId, 'event', anEvent['_id']]">
+                <a [routerLink]="['/event', anEvent['_id']]">
                   <span class="glyphicon glyphicon-cog pull-right"></span>
                 </a>
               </div>

@@ -5,7 +5,9 @@ var EventSchema = mongoose.Schema ( {
   isPublic: Boolean,
   description: String,
   dateCreated: Date,
-  travelers: [{type:mongoose.Schema.Types.ObjectId, ref: 'TravelerModel'}]
+  owner: {type:mongoose.Schema.Types.ObjectId, ref: 'TravelerModel'},
+  travelers: [{type:mongoose.Schema.Types.ObjectId, ref: 'TravelerModel'}],
+  activities: [{type:mongoose.Schema.Types.ObjectId, ref: 'ActivityModel'}]
 }, {collection: 'event'});
 
 module.exports = EventSchema;

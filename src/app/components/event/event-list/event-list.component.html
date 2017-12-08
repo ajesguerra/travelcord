@@ -2,7 +2,7 @@
   <div class="container-fluid header-footer-blue-steel">
 
     <p class="navbar-text pull-left">
-      <a [routerLink]="['/traveler/', travelerId]">
+      <a [routerLink]="['/traveler']">
         <span class="glyphicon glyphicon-chevron-left glyphicon-nav header-main-text-color"></span>
       </a>
     </p>
@@ -16,7 +16,7 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right">
-      <a [routerLink]="['/traveler', travelerId, 'event', 'new']">
+      <a [routerLink]="['/event', 'new']">
         <span class="glyphicon glyphicon-plus navbar-link"></span>
       </a>
     </p>
@@ -30,10 +30,12 @@
     <li class="list-group-item" *ngFor="let anEvent of events">
       <div class="row">
         <div class="col-xs-9 col-sm-11">
-          <a [routerLink]="['/traveler', travelerId, 'event', anEvent['_id'], 'page']">{{anEvent['eventName']}}</a>
+          {{anEvent['_id']}}
+
+          <a [routerLink]="['/event', anEvent['_id'], 'activity']">{{anEvent['eventName']}}</a>
         </div>
         <div class="col-xs-3 col-sm-1 website-list-icon website-page-icons">
-          <a [routerLink]="['/traveler', travelerId, 'event', anEvent['_id']]">
+          <a [routerLink]="['/event', anEvent['_id']]">
             <span class="glyphicon glyphicon-cog"></span>
           </a>
         </div>
@@ -49,7 +51,7 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right">
-      <a [routerLink]="['/traveler', travelerId]" class="nav-hover">
+      <a [routerLink]="['/traveler']" class="nav-hover">
         <span class="glyphicon glyphicon-user navbar-link"></span>
       </a>
     </p>

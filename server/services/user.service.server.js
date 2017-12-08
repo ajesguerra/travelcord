@@ -2,12 +2,6 @@ module.exports = function (app) {
 
   var userModel = require("../../model/user/user.model.server");
 
-  app.post("/api/user", createUser);
-  app.put("/api/user/:userId", updateUser);
-  app.get("/api/user/:userId", findUserById);
-  app.get("/api/user", findUsers);
-  app.delete("/api/user/:userId", deleteUser);
-
   function createUser(req, res) {
     const user = req.body;
     userModel.createUser(user)

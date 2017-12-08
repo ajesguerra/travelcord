@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TravelerService} from '../../../services/traveler.service.client';
 import {Router} from '@angular/router';
+import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,8 @@ export class RegisterComponent implements OnInit {
   anExistingTraveler: any;
   aNewTraveler: any;
   constructor(private travelerService: TravelerService,
-              private router: Router) {
+              private router: Router,
+              private sharedService: SharedService) {
   }
 
   ngOnInit() {
@@ -38,9 +40,9 @@ export class RegisterComponent implements OnInit {
       } else if (this.password !== this.vpassword) {
         this.errorFlag = true;
       } else {
-        this.aNewTraveler = {email: this.email, password: this.password};
-        this.travelerService.createTraveler(this.aNewTraveler).subscribe((aTraveler: any) => {
-          this.router.navigate(['/traveler/', aTraveler._id]);
+        this.travelerService.register(this.email, this.password).subscribe((aTraveler: any) => {
+          this.sharedService.user = aTraveler;
+          this.router.navigate(['/traveler']);
         });
       }
     });

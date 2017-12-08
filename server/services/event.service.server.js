@@ -9,9 +9,10 @@ module.exports = function (app) {
   app.delete("/api/traveler/:eventId", deleteEvent);
 
   function createEvent(req, res) {
-    var travelerId = req.params['travelerId'];
+    var travelerId = req.body.owner;
     var event = req.body;
     var newEvent = null;
+    console.log(event);
     eventModel.createEvent(travelerId, event)
       .then(function (event) {
         eventModel.findAllEventsForTraveler(travelerId)

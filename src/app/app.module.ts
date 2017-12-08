@@ -34,6 +34,14 @@ import {TravelerService} from './services/traveler.service.client';
 import {EventService} from './services/event.service.client';
 import {EventListComponent} from './components/event/event-list/event-list.component';
 import { EventNewComponent } from './components/event/event-new/event-new.component';
+import { ActivityListComponent } from './components/activity/activity-list/activity-list.component';
+import { ActivityNewComponent } from './components/activity/activity-new/activity-new.component';
+import { ActivitysuggestionNewComponent } from './components/activity/activitysuggestion-new/activitysuggestion-new.component';
+import { ActivitysuggestionListComponent } from './components/activity/activitysuggestion-list/activitysuggestion-list.component';
+import {SharedService} from './services/shared.service.client';
+import {AuthGuard} from './services/auth-guard.service';
+import {ActivitiesService} from './services/activities.service.client';
+import {ViewTravelersComponent} from './components/travelers/view-travelers/view-travelers.component';
 
 @NgModule({
   // Declare components here
@@ -58,7 +66,12 @@ import { EventNewComponent } from './components/event/event-new/event-new.compon
     WidgetYoutubeComponent,
     PlacestestComponent,
     EventListComponent,
-    EventNewComponent
+    EventNewComponent,
+    ActivityListComponent,
+    ActivityNewComponent,
+    ActivitysuggestionNewComponent,
+    ActivitysuggestionListComponent,
+    ViewTravelersComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +94,10 @@ import { EventNewComponent } from './components/event/event-new/event-new.compon
     PageService,
     WidgetService,
     PlaceService,
-    EventService],
+    EventService,
+    SharedService,
+    AuthGuard,
+    ActivitiesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
