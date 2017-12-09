@@ -28,22 +28,7 @@
              name="email"
              />
     </div>
-  </form>
 
-  <!-- EMAIL FORM MISSING
-  <form>
-    <div class="form-group">
-      <label for="email">Email address</label>
-      <input [(ngModel)]="email"
-             type="text"
-             class="form-control"
-             id="email"
-             name="email"
-             />
-    </div>
-  </form>
-  -->
-  <form>
     <div class="form-group">
       <label for="firstName">First Name</label>
       <input [(ngModel)]="firstName"
@@ -53,9 +38,7 @@
              name="firstName"
              />
     </div>
-  </form>
 
-  <form>
     <div class="form-group">
       <label for="lastName">Last Name</label>
       <input [(ngModel)]="lastName"
@@ -65,16 +48,29 @@
              name="lastName"
              />
     </div>
+
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input [(ngModel)]="phone"
+             type="text"
+             class="form-control"
+             id="phone"
+             name="phone"
+      />
+    </div>
   </form>
   <a class="btn btn-primary btn-block"
      [routerLink]="['/event-list']">View Your Events</a>
   <a class="btn btn-primary btn-block"
      [routerLink]="['/allTravelers']">View Users</a>
   <a class="btn btn-danger btn-block"
+     [routerLink]="['/following']">Following</a>
+  <a class="btn btn-danger btn-block"
      [routerLink]="['/login']">Logout</a>
   <a class="btn btn-danger btn-block"
      (click)="deleteTraveler()">Delete Account</a>
-
+<br>
+  Member since {{monthJoined}} / {{yearJoined}}
 </div>
 <!-- Footer -->
 <nav class="navbar navbar-fixed-bottom header-footer-blue-steel">

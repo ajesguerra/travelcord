@@ -13,17 +13,20 @@ import {ActivitiesService} from '../../../services/activities.service.client';
 export class ActivityListComponent implements OnInit {
   travelerId: string;
   activities: [{}];
-
+  eventId: string;
   constructor(private activitiesService: ActivitiesService,
               private eventService: EventService,
               private activatedRoute: ActivatedRoute,
               private sharedService: SharedService) { }
 
   ngOnInit() {
-
-    this.activitiesService.findAllActivitiesForEvent(this.activatedRoute.params['eventId']).subscribe((allActivities: any) => {
+    this.activatedRoute.params
+      .subscribe((params: any) => {
+        this.eventId = params['eventId'];
+      });
+    this.activitiesService.findAllActivitiesForEvent(this.eventId).subscribe((allActivities: any) => {
       if (allActivities) {
-        this.activities = allActivities ;
+        this.activities = allActivities;
       }
     });
 

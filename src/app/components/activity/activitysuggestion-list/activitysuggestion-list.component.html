@@ -1,2 +1,63 @@
-activity-list works
+<nav class="navbar navbar-fixed-top">
+  <div class="container-fluid header-footer-blue-steel">
 
+    <p class="navbar-text pull-left">
+      <a [routerLink]="['/traveler']">
+        <span class="glyphicon glyphicon-chevron-left glyphicon-nav header-main-text-color"></span>
+      </a>
+    </p>
+
+
+    <p class="navbar-header pull-left">
+      <a class="navbar-brand thick">
+        <b>Suggestions</b>
+      </a>
+    </p>
+
+    <!--tick mark-->
+    <p class="navbar-text pull-right">
+      <a [routerLink]="['/event', eventId, activityId, 'newSuggestion']">
+        <span class="glyphicon glyphicon-plus navbar-link"></span>
+      </a>
+    </p>
+  </div>
+</nav>
+
+
+
+<div class="main-body-content">
+  <ul class="list-group">
+    list of suggestions
+    <li class="list-group-item" *ngFor="let suggestion of suggestions">
+      <div class="row">
+        <div class="col-xs-9 col-sm-11">
+          ID: {{suggestion['_id']}}
+          <br><a (click)="upVote(suggestion['_id'])">Upvote</a>
+          <br>Total upvotes: {{suggestion['travelerUpVoters'].length}}
+          <br>Suggestion Name: {{suggestion['activitySuggestionName']}}
+          <br>Location: {{suggestion['suggestionLocation']}}
+        </div>
+        <div class="col-xs-3 col-sm-1 website-list-icon website-page-icons">
+          <a [routerLink]="['/event']">
+            <span class="glyphicon glyphicon-cog"></span>
+          </a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+
+<!-- Footer -->
+<nav class="navbar navbar-fixed-bottom header-footer-blue-steel">
+  <div class="container-fluid header-footer-blue-steel">
+
+    <!--tick mark-->
+    <p class="navbar-text pull-right">
+      <a [routerLink]="['/traveler']" class="nav-hover">
+        <span class="glyphicon glyphicon-user navbar-link"></span>
+      </a>
+    </p>
+  </div>
+</nav>
+<!-- End Footer-->

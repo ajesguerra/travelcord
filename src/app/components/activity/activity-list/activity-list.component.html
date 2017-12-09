@@ -16,7 +16,7 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right">
-      <a [routerLink]="['/event', 'new']">
+      <a [routerLink]="['/event', eventId, 'activity', 'new']">
         <span class="glyphicon glyphicon-plus navbar-link"></span>
       </a>
     </p>
@@ -27,10 +27,20 @@
 
 <div class="main-body-content">
   <ul class="list-group">
-    list of activities will go here.
-    <li class="list-group-item">
+    list of activities
+    <li class="list-group-item" *ngFor="let activity of activities">
       <div class="row">
-        
+        <div class="col-xs-9 col-sm-11">
+          {{activity['_id']}}
+
+
+          <a [routerLink]="['/event', eventId, activity['_id']]">{{activity.activityName}}</a>
+        </div>
+        <div class="col-xs-3 col-sm-1 website-list-icon website-page-icons">
+          <a [routerLink]="['/event', activity['_id']]">
+            <span class="glyphicon glyphicon-cog"></span>
+          </a>
+        </div>
       </div>
     </li>
   </ul>

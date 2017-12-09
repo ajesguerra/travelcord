@@ -1,3 +1,49 @@
-<p>
-  activitysuggestion-new works!
-</p>
+
+
+<div class="main-body-content">
+  <ul class="list-group">
+    <li class="list-group-item">
+      Search for a place
+      <input   placeholder="Golden Gate Bridge"
+               name="username"
+               type="text"
+               class="form-control"
+               required
+               [(ngModel)]="searchTerm"/>
+      <a class="btn btn-primary btn-block"
+         (click)="placesAutoComplete()">Predict</a>
+    </li>
+    <li class="list-group-item">
+      <div class="row" *ngFor="let aResult of result">
+        <div class="col-xs-9 col-sm-11">
+          <a class="btn"
+             (click)="moreDetails(aResult.place_id)">More Details</a> {{aResult.description}} || =>
+          <a (click)="addSuggestion(aResult.place_id)">Suggest as activity.</a>
+          <br>
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div *ngIf="detailsFlag">
+        Address: {{details['formatted_address']}}
+        <br>
+        OverallRating: {{details['rating']}}
+        <br>
+        <br>
+
+        <div class="row" *ngFor="let review of reviews">
+          Review by {{review.author_name}} gives a {{review.rating}}
+          <br>
+          <img src="{{review.profile_photo_url}}"/>
+          <br>
+          {{review.text}}
+          <br>
+          <br>
+
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+

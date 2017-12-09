@@ -15,10 +15,10 @@ module.exports = function (app) {
   app.post('/api/login', passport.authenticate('local'), login);
   app.post('/api/register', register);
   app.post("/api/traveler", createTraveler);
+  app.post("/api/traveler/:travelerId/follow/:personToFollow", followTraveler);
   app.put("/api/traveler/:travelerId", updateTraveler);
   app.get("/api/traveler/all", findAllTravelers);
   app.get("/api/traveler/:travelerId", findTravelerById);
-  app.get("/api/traveler/:travelerId/event", findAllEventsForTraveler);
   app.get("/api/traveler", findTravelers);
   app.delete("/api/traveler/:travelerId", deleteTraveler);
 
@@ -113,18 +113,7 @@ module.exports = function (app) {
       });
   }
 
-  function findAllEventsForTraveler(req, res) {
-    const travelerId = req.params['travelerId'];
-    // Finds the traveler, then sends back just the events array/field.
-    TravelerModel.findTravelerById(travelerId)
-      .then(function (traveler) {
-        if (traveler) {
-          res.json(traveler.events);
-        } else {
-          res.json({});
-        }
-      });
-  }
+
 
   function findAllTravelers(req, res) {
     TravelerModel.findAllTravelers()
@@ -195,5 +184,21 @@ module.exports = function (app) {
       .then(function (traveler) {
         res.json(traveler);
       });
+  }
+
+  function followTraveler(req, res) {
+
+    const personToFollow = req.params['personToFollow'];
+    const travelerId = req.params['travelerId'];
+    console.log('in the server, traveler service, trying to follow ' + personToFollow);
+    TravelerModel.findTravelerById(travelerId)
+      .then(function (traveler) {
+        if (traveler.following.includes(personToFollow)) {
+        } else {
+          traveler.following.push(personToFollow);
+          traveler.save();
+        }
+        res.json(traveler);
+      })
   }
 };

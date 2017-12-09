@@ -16,6 +16,7 @@ module.exports = TravelerModel;
 
 //call the db specific functions.
 function createTraveler(traveler) {
+  traveler.dateCreated = new Date(Date.now());
   return TravelerModel.create(traveler);
 }
 

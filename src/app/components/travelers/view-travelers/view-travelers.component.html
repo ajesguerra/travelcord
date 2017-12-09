@@ -9,7 +9,7 @@
 
 
     <p class="navbar-header pull-left">
-      tbd
+
     </p>
 
     <!--tick mark-->
@@ -26,12 +26,13 @@
   <ul class="list-group">
 
     Click a traveler to see their events
-    <li class="list-group-item" *ngFor="let traveler of travelers">
+    <li class="list-group-item" *ngFor="let anotherTraveler of travelers">
       <div class="row">
         <div class="col-xs-9 col-sm-11">
 
 
-          <a [routerLink]="['/event-list', traveler['_id']]">ID: {{traveler['_id']}} | FirstName: {{traveler['firstName']}}</a>
+          <a [routerLink]="['/event-list', anotherTraveler['_id']]">FirstName: {{anotherTraveler['firstName']}}</a> ||
+          <a (click)="follow(anotherTraveler['_id'])">Follow</a>
         </div>
         <div class="col-xs-3 col-sm-1 website-list-icon website-page-icons">
 

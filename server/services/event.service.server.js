@@ -5,6 +5,7 @@ module.exports = function (app) {
 
   app.post("/api/event/:travelerId/newevent", createEvent);
   app.get("/api/event/:eventId", findEventById);
+  app.get("/api/traveler/:travelerId/event", findAllEventsForTraveler);
   app.put("/api/traveler/:eventId", updateEvent);
   app.delete("/api/traveler/:eventId", deleteEvent);
 
@@ -24,9 +25,14 @@ module.exports = function (app) {
 
   function findAllEventsForTraveler(req, res) {
     const travelerId = req.params['travelerId'];
-    travelerModel.findAllEventsForTraveler(travelerId)
-      .then(function (events) {
-        res.json(events);
+    // Finds the traveler, then sends back just the events array/field.
+    travelerModel.findTravelerById(travelerId)
+      .then(function (traveler) {
+        if (traveler) {
+          res.json(traveler.events);
+        } else {
+          res.json({});
+        }
       });
   }
 

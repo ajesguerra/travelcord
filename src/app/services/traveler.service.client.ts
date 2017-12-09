@@ -28,7 +28,6 @@ export class TravelerService {
   }
 
   login(email, password) {
-    console.log('trying to login from user client service with...' + email + password);
     this.options.withCredentials = true;
     const url = this.baseUrl + '/api/login';
     const credentials = {
@@ -37,8 +36,6 @@ export class TravelerService {
     };
     return this.http.post(url, credentials, this.options)
       .map((response: Response) => {
-        console.log('received back from server. in the traveler service client');
-        console.log(response.json());
         return response.json();
       });
   }
@@ -121,6 +118,24 @@ export class TravelerService {
     });
   }
 
+  follow(travelerId, personToFollow) {
+    console.log('in traveler service client.  trying to follow..' + personToFollow);
+    const url = this.baseUrl + '/api/traveler/' + travelerId + '/follow/' + personToFollow;
+    return this.http.post(url, personToFollow).map((response: Response) => {
+      return response.json();
+    });
+  }
+
+  getFollowing(travelerId) {
+    const travelersFollowing = [];
+    for (let i = 0; i < this.sharedService.user['following'].length; i++) {
+      const url = this.baseUrl + '/api/traveler/' + travelerId;
+      return this.http.get(url).subscribe((response: Response) => {
+        travelersFollowing.push(response.json());
+      });
+    }
+    return travelersFollowing;
+  }
   updateTraveler(travelerId, traveler) {
     const url = this.baseUrl + '/api/traveler/' + travelerId;
     return this.http.put(url, traveler).map((response: Response) => {

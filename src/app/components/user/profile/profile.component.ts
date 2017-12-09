@@ -17,6 +17,10 @@ export class ProfileComponent implements OnInit {
   firstName: string;
   lastName: string;
   password: string;
+  phone: string;
+  dateCreated: Date;
+  monthJoined: any;
+  yearJoined: any;
 
   constructor(private travelerService: TravelerService,
               private activatedRoute: ActivatedRoute,
@@ -30,12 +34,16 @@ export class ProfileComponent implements OnInit {
     this.email = this.traveler['email'];
     this.firstName = this.traveler['firstName'];
     this.lastName = this.traveler['lastName'];
-    this.password = this.traveler['password'];
+    this.phone = this.traveler['phone'];
+    this.dateCreated = new Date(this.traveler['dateCreated']);
+    this.monthJoined = this.dateCreated.getMonth();
+    this.yearJoined = this.dateCreated.getFullYear();
   }
   updateTraveler() {
     this.sharedService.user['email'] = this.email;
     this.sharedService.user['firstName'] = this.firstName;
     this.sharedService.user['lastName'] = this.lastName;
+    this.sharedService.user['phone'] = this.phone;
     this.travelerService.updateTraveler(this.sharedService.user['_id'], this.sharedService.user).subscribe((theTraveler: any) => {});
   }
   deleteTraveler() {
