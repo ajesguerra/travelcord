@@ -14,6 +14,8 @@ export class RegisterComponent implements OnInit {
   email: string;
   password: string;
   vpassword: string;
+  firstName: string;
+  lastName: string;
   errorFlag: boolean;
   errorMsg = 'Invalid!';
   anExistingTraveler: any;
@@ -29,6 +31,8 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.errorFlag = false;
     this.email = '';
+    this.firstName = '';
+    this.lastName = '';
     this.password = '';
     this.vpassword = '';
   }
@@ -38,7 +42,7 @@ export class RegisterComponent implements OnInit {
       this.anExistingTraveler = traveler;
       if (this.anExistingTraveler !== null) {
         this.errorFlag = true;
-      } else if (this.password === '' || this.email === '') {
+      } else if (this.password === '' || this.email === '' || this.firstName === '' || this.lastName === '') {
         this.errorFlag = true;
       } else if (this.password !== this.vpassword) {
         this.errorFlag = true;

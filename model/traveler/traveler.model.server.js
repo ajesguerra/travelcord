@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var TravelerSchema = require("./traveler.schema.server");
 var TravelerModel = mongoose.model("TravelerModel", TravelerSchema);
+var EventModel = require('../event/event.model.server');
 
 //are bound to the functions below. this is essentially defining the api.
 TravelerModel.createTraveler = createTraveler;
@@ -29,7 +30,9 @@ function findAllTravelers() {
 }
 
 function findTravelerById(travelerId) {
-  return TravelerModel.findOne({_id: travelerId});
+  return TravelerModel.findOne({_id: travelerId})
+    .populate('event')
+    .exec();
 }
 
 function findTravelerByEmail(email) {

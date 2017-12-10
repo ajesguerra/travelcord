@@ -10,11 +10,11 @@ module.exports = function (app) {
   app.get("/api/traveler/:travelerId/event", findAllEventsForTraveler);
   app.put("/api/event/:eventId", updateEvent);
   app.delete("/api/event/:eventId", deleteEvent);
+  app.delete("/api/event/:eventId/:travelerId", removeTravelerFromEvent);
 
   function createEvent(req, res) {
     var travelerId = req.body.owner;
     var event = req.body;
-    console.log(event);
     eventModel.createEvent(travelerId, event)
       .then(function (event) {
         eventModel.findAllEventsForTraveler(travelerId)
@@ -52,9 +52,27 @@ module.exports = function (app) {
   }
 
   function deleteEvent(req, res) {
-    eventModel.deleteEvent(req.params['eventId'])
+    eventModel.findEventById(req.params['eventId'])
       .then(function (event) {
-        res.json(event);
+        // for every traveler in the event...
+        for (var z = 0; z < event['travelers'].length; z++) {
+            travelerModel.findTravelerById(event['travelers'][z]['_id'])
+            .then(function (traveler) {
+              // for every event in the traveler's events.
+              for (var x = 0; x < traveler['events'].length; x++) {
+                //if the event matches in what the traveler has, delete it.
+                if (traveler['events'][x] == req.params['eventId']) {
+                  traveler.events.splice(x, 1);
+                  traveler.save();
+                }
+              }
+              // then delete the whole event.
+              eventModel.deleteEvent(req.params['eventId'])
+                .then(function (event) {
+                  res.json(event);
+                });
+            });
+        }
       });
   }
 
@@ -76,6 +94,30 @@ module.exports = function (app) {
     eventModel.findAllEvents()
       .then(function (events) {
         res.json(events);
+      });
+  }
+
+  function removeTravelerFromEvent(req, res) {
+    travelerModel.findTravelerById(req.params['travelerId'])
+      .then(function (traveler) {
+        for (var j = 0; j < traveler.events.length; j++) {
+          if (traveler.events[j]['_id'] == req.params['eventsId']) {
+            traveler.events.splice(j, 1);
+            traveler.save();
+          }
+        }
+
+        eventModel.findEventById(req.params['eventId'])
+          .then(function (event) {
+            for (var i = 0; i < event.travelers.length; i++) {
+              if (event.travelers[i]['_id'] == req.params['travelersId']) {
+                event.travelers.splice(i, 1);
+                event.save();
+                res.json(event);
+              }
+            }
+          })
+
       });
   }
 };

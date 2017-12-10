@@ -49,6 +49,13 @@ export class EventEditComponent implements OnInit {
     });
   }
 
+  removeTravelerFromEvent() {
+    this.eventService.removeTravelerFromEvent(this.sharedService.user['_id'], this.event['_id'])
+      .subscribe((event: any) => {
+        this.router.navigate(['/event-list']);
+      });
+  }
+
   deleteEvent() {
     this.eventService.deleteEvent(this.event['_id']).subscribe((event: any) => {
       this.router.navigate(['/main']);

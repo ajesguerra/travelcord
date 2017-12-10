@@ -42,7 +42,9 @@
               <br>
               <a (click)="unVote(suggestion['_id'])">undo vote</a>
             </div>
-            <app-prompt-to-login-or-register></app-prompt-to-login-or-register>
+            <div *ngIf="!isLoggedIn">
+              <app-prompt-to-login-or-register></app-prompt-to-login-or-register>
+            </div>
             <br>
             People who voted for this suggestion:
             <div *ngFor="let voter of suggestion['travelerUpVoters']">

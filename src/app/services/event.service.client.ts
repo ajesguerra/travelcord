@@ -43,7 +43,15 @@ export class EventService {
   }
 
   deleteEvent(eventId) {
+    console.log(eventId);
     const url = this.baseUrl + '/api/event/' + eventId;
+    return this.http.delete(url, eventId).map((response: Response) => {
+      return response.json();
+    });
+  }
+
+  removeTravelerFromEvent(travelerId, eventId) {
+    const url = this.baseUrl + '/api/event/' + eventId + '/' + travelerId;
     return this.http.delete(url, eventId).map((response: Response) => {
       return response.json();
     });
