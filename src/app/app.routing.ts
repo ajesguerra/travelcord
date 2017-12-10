@@ -14,7 +14,8 @@ import {ActivityNewComponent} from './components/activity/activity-new/activity-
 import {ActivitysuggestionListComponent} from './components/activity/activitysuggestion-list/activitysuggestion-list.component';
 import {ActivitysuggestionNewComponent} from './components/activity/activitysuggestion-new/activitysuggestion-new.component';
 import {ViewFollowingComponent} from './components/travelers/view-following/view-following.component';
-import {MainComponent} from "./components/user/main/main.component";
+import {MainComponent} from './components/user/main/main.component';
+import {ActivitysuggestionEditComponent} from './components/activity/activitysuggestion-edit/activitysuggestion-edit.component';
 
 const APP_ROUTES: Routes = [
   { path : 'places' , component: PlacestestComponent},
@@ -31,6 +32,7 @@ const APP_ROUTES: Routes = [
   { path : 'event/:eventId/activity/new' , component: ActivityNewComponent, canActivate: [AuthGuard]},
   { path : 'event/:eventId/:activityId' , component: ActivitysuggestionListComponent, canActivate: [AuthGuard]},
   { path : 'event/:eventId/:activityId/newSuggestion' , component: ActivitysuggestionNewComponent, canActivate: [AuthGuard]},
+  { path : 'event/:eventId/:activityId/:suggestionId' , component: ActivitysuggestionEditComponent, canActivate: [AuthGuard]},
   { path : 'following' , component: ViewFollowingComponent, canActivate: [AuthGuard]},
   { path : 'allTravelers' , component: ViewTravelersComponent, canActivate: [AuthGuard]}
 ];

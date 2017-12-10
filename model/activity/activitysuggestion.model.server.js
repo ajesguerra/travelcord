@@ -4,6 +4,8 @@ var ActivitySuggestionModel = mongoose.model("ActivitySuggestionModel", Activity
 
 ActivitySuggestionModel.createSuggestion = createSuggestion;
 ActivitySuggestionModel.findSuggestionById = findSuggestionById;
+ActivitySuggestionModel.updateSuggestion = updateSuggestion;
+ActivitySuggestionModel.deleteSuggestion = deleteSuggestion;
 
 module.exports = ActivitySuggestionModel;
 
@@ -15,4 +17,12 @@ function findSuggestionById(suggestionId) {
   return ActivitySuggestionModel.findOne({_id: suggestionId})
     .populate('travelerUpVoters')
     .exec();
+}
+
+function updateSuggestion(suggestionId, suggestion) {
+  return ActivitySuggestionModel.update({_id: suggestionId}, suggestion);
+}
+
+function deleteSuggestion(suggestionId) {
+  return ActivitySuggestionModel.deleteOne({_id: suggestionId});
 }

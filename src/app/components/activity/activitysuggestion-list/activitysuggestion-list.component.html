@@ -51,10 +51,8 @@
             <br>Total upvotes: {{suggestion['travelerUpVoters'].length}}
             <br>Suggestion Name: {{suggestion['activitySuggestionName']}}
             <br>Location: {{suggestion['suggestionLocation']}}
-          </div>
-          <div class="col-xs-3 col-sm-1 website-list-icon website-page-icons">
-            <a [routerLink]="['/event']">
-              <span class="glyphicon glyphicon-cog"></span>
+            <br><a [routerLink]="['/event', eventId, activityId, suggestion['_id']]">
+              Edit Suggestion
             </a>
           </div>
         </div>

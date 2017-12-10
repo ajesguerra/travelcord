@@ -25,6 +25,7 @@ export class ActivitysuggestionListComponent implements OnInit {
         this.eventId = params['eventId'];
       });
     this.activitiesService.findAllSuggestionsForActivity(this.activityId).subscribe((allSuggestions: any) => {
+      console.log(allSuggestions);
       if (allSuggestions) {
         this.suggestions = allSuggestions;
       }

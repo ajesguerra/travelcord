@@ -35,6 +35,8 @@ import { EventDetailsComponent } from './components/event/event-details/event-de
 import { ActivityDetailsComponent } from './components/activity/activity-details/activity-details.component';
 import { EventEditComponent } from './components/event/event-edit/event-edit.component';
 import { ActivityEditComponent } from './components/activity/activity-edit/activity-edit.component';
+import { ActivitysuggestionEditComponent } from './components/activity/activitysuggestion-edit/activitysuggestion-edit.component';
+import {SuggestionService} from './services/suggestion.service.client';
 
 @NgModule({
   // Declare components here
@@ -60,7 +62,8 @@ import { ActivityEditComponent } from './components/activity/activity-edit/activ
     EventDetailsComponent,
     ActivityDetailsComponent,
     EventEditComponent,
-    ActivityEditComponent
+    ActivityEditComponent,
+    ActivitysuggestionEditComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +86,8 @@ import { ActivityEditComponent } from './components/activity/activity-edit/activ
     EventService,
     SharedService,
     AuthGuard,
-    ActivitiesService],
+    ActivitiesService,
+    SuggestionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,36 @@
+<div *ngIf="isEventOwner">
+  <div *ngIf="errorFlag"
+       class="alert alert-danger">
+    {{errorMsg}}
+  </div>
+  <form>
+    <div class="form-group">
+      <label for="activitySuggestionName">Suggestion Name</label>
+      <input placeholder="McDonalds"
+             id="activitySuggestionName"
+             name="activitySuggestionName"
+             type="text"
+             class="form-control"
+             required
+             [(ngModel)]="activitySuggestionName"/>
+    </div>
+
+    <div class="form-group">
+      <label for="suggestionLocation">Location</label>
+      <input placeholder="1337 Leet Lane"
+             id="suggestionLocation"
+             name="suggestionLocation"
+             type="text"
+             class="form-control"
+             required
+             [(ngModel)]="suggestionLocation"/>
+    </div>
+
+    <a class="btn btn-primary btn-block"
+       (click)="updateSuggestion()">Update</a>
+
+    <a class="btn btn-danger btn-block"
+       (click)="deleteSuggestion()">Delete</a>
+
+  </form>
+</div>

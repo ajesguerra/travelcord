@@ -19,7 +19,6 @@ module.exports = function (app) {
       language: 'en'
     }, function (err, response) {
       if (!err) {
-        console.log(response.json.predictions);
         res.send(response.json.predictions);
       }
     });
@@ -33,7 +32,6 @@ module.exports = function (app) {
       language: 'en'
     }, function (err, response) {
       if (!err) {
-        console.log(response.json.predictions);
         res.send(response.json.predictions);
       }
     });
@@ -47,7 +45,6 @@ module.exports = function (app) {
       language: 'en'
     }, function (err, response) {
       if (!err) {
-        console.log(response.json.predictions);
         res.send(response.json.predictions);
       }
     });
@@ -55,13 +52,11 @@ module.exports = function (app) {
 
   function placeDetails(req, res) {
     var placeid = req.params['placeid'];
-    console.log('the place id is: ' + placeid);
     googleMapsClient.place({
       placeid: placeid,
       language: 'en'
     }, function (err, response) {
       if (!err) {
-        console.log(response.json.result);
         res.send(response.json.result);
       }
     });
@@ -76,7 +71,6 @@ module.exports = function (app) {
       maxheight: 500
     }, function (err, response) {
       if (!err) {
-        console.log(response.json.predictions);
         res.send(response.json.predictions);
       }
     });

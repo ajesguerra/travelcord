@@ -5,6 +5,7 @@
 module.exports = function (app) {
   db = require("./../model/model.server");
   require("./services/activity.service.server")(app);
+  require("./services/suggestion.service.server")(app);
   require("./services/loggedin.server.service")(app);
   require("./services/places.service.server")(app);
   require("./services/traveler.service.server")(app);

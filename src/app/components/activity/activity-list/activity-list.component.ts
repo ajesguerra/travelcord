@@ -33,7 +33,10 @@ export class ActivityListComponent implements OnInit {
         if (this.event['owner']['_id'] === this.sharedService.user['_id']) {
           this.userIsOwner = true;
         }
-        this.activities = this.event['activities'];
+        if (this.event['activities']) {
+          this.activities = this.event['activities'];
+        }
+        console.log(this.activities);
       }
     });
 

@@ -44,15 +44,8 @@ export class ActivitiesService {
 
   findAllSuggestionsForActivity(activityId) {
     const url = this.baseUrl + '/api/activity/' + activityId;
-    const suggestions = [];
     return this.http.get(url).map((response: Response) => {
-      for (let i = 0; i < response.json().activitySuggestions.length; i++) {
-        const url2 = this.baseUrl + '/api/suggestion/' + response.json().activitySuggestions[i];
-        this.http.get(url2).subscribe((response2: Response) => {
-          suggestions.push(response2.json());
-        });
-      }
-      return suggestions;
+      return response.json().activitySuggestions;
     });
   }
 

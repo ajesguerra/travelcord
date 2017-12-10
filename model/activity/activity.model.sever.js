@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 var ActivitySchema = require("./activity.schema.server");
 var ActivityModel = mongoose.model("ActivityModel", ActivitySchema);
 var EventModel = require('../event/event.model.server');
+var ActivitiesSuggestionModel = require('../activity/activitysuggestion.model.server');
+var TravelerModel = require('../traveler/traveler.model.server');
 
 ActivityModel.createActivity = createActivity;
 ActivityModel.findActivityById = findActivityById;
@@ -21,6 +23,14 @@ function createActivity(activity) {
 
 function findActivityById(activityId) {
   return ActivityModel.findOne({_id: activityId})
+    .populate({
+      path: 'activitySuggestions',
+      model: ActivitiesSuggestionModel,
+      populate: {
+        path: 'travelerUpVoters',
+        model: TravelerModel
+      }
+    })
     .populate('decidedActivity')
     .exec();
 }
