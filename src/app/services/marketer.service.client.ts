@@ -27,8 +27,9 @@ export class MarketerService {
   }
 
   login(email, password) {
+    console.log('in client service marketer');
     this.options.withCredentials = true;
-    const url = this.baseUrl + '/api/login';
+    const url = this.baseUrl + '/api/login/marketer';
     const credentials = {
       email: email,
       password: password
@@ -41,7 +42,7 @@ export class MarketerService {
 
   loggedIn() {
     this.options.withCredentials = true;
-    return this.http.post(this.baseUrl + '/api/loggedIn', '', this.options)
+    return this.http.post(this.baseUrl + '/api/loggedIn/marketer', '', this.options)
       .map(
         (res: Response) => {
           const user = res.json();
@@ -58,7 +59,7 @@ export class MarketerService {
 
   logout() {
     this.options.withCredentials = true;
-    return this.http.post(this.baseUrl + '/api/logout', '', this.options)
+    return this.http.post(this.baseUrl + '/api/logout/marketer', '', this.options)
       .map(
         (res: Response) => {
           const data = res;
@@ -66,33 +67,33 @@ export class MarketerService {
       );
   }
 
-  findTravelerByCredentials(email, password) {
-    const url = this.baseUrl + '/api/traveler?email=' + email + '&password=' + password;
+  findMarketerByCredentials(email, password) {
+    const url = this.baseUrl + '/api/marketer?email=' + email + '&password=' + password;
     return this.http.get(url).map((response: Response) => {
       return response.json();
     });
   }
 
-  findAllTravelers() {
-    const url = this.baseUrl + '/api/traveler/all';
+  findAllMarketers() {
+    const url = this.baseUrl + '/api/marketer/all';
     return this.http.get(url).map((response: Response) => {
       return response.json();
     });
   }
 
-  createTraveler(traveler: any) {
-    const url = this.baseUrl + '/api/traveler/';
-    return this.http.post(url, traveler).map((response: Response) => {
+  createMarketer(marketer: any) {
+    const url = this.baseUrl + '/api/marketer/';
+    return this.http.post(url, marketer).map((response: Response) => {
       return response.json();
     });
   }
 
-  findAllEventsForTraveler(travelerId) {
-    const url = this.baseUrl + '/api/traveler/' + travelerId + '/event';
+  findAllEventsForMarketer(marketerId) {
+    const url = this.baseUrl + '/api/marketer/' + marketerId + '/event';
     const events = [];
-    // Get the traveler
+    // Get the marketer
     return this.http.get(url).map((response: Response) => {
-      // For each event in the traveler's profile, send another HTTP request to get the event details.
+      // For each event in the marketer's profile, send another HTTP request to get the event details.
       for (let i = 0; i < response.json().length; i++) {
         const url2 = this.baseUrl + '/api/event/' + response.json()[i];
         this.http.get(url2).subscribe((response2: Response) => {
@@ -103,36 +104,36 @@ export class MarketerService {
     });
   }
 
-  findTravelerById(travelerId) {
-    const url = this.baseUrl + '/api/traveler/' + travelerId;
+  findMarketerById(marketerId) {
+    const url = this.baseUrl + '/api/marketer/' + marketerId;
     return this.http.get(url).map((response: Response) => {
       return response.json();
     });
   }
 
-  findTravelerByEmail(email: string) {
-    const url = this.baseUrl + '/api/traveler?email=' + email;
+  findMarketerByEmail(email: string) {
+    const url = this.baseUrl + '/api/marketer?email=' + email;
     return this.http.get(url).map((response: Response) => {
       return response.json();
     });
   }
 
-  follow(travelerId, personToFollow) {
-    const url = this.baseUrl + '/api/traveler/' + travelerId + '/follow/' + personToFollow;
+  follow(marketerId, personToFollow) {
+    const url = this.baseUrl + '/api/marketer/' + marketerId + '/follow/' + personToFollow;
     return this.http.post(url, personToFollow).map((response: Response) => {
       return response.json();
     });
   }
-  updateTraveler(travelerId, traveler) {
-    const url = this.baseUrl + '/api/traveler/' + travelerId;
-    return this.http.put(url, traveler).map((response: Response) => {
+  updateMarketer(marketerId, marketer) {
+    const url = this.baseUrl + '/api/marketer/' + marketerId;
+    return this.http.put(url, marketer).map((response: Response) => {
       return response.json();
     });
   }
 
-  deleteTraveler(traveler) {
-    const url = this.baseUrl + '/api/traveler/' + traveler._id;
-    return this.http.delete(url, traveler).map((response: Response) => {
+  deleteMarketer(marketer) {
+    const url = this.baseUrl + '/api/marketer/' + marketer._id;
+    return this.http.delete(url, marketer).map((response: Response) => {
       return response.json();
     });
   }

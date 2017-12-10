@@ -17,6 +17,8 @@ import {ViewFollowingComponent} from './components/travelers/view-following/view
 import {MainComponent} from './components/user/main/main.component';
 import {ActivitysuggestionEditComponent} from './components/activity/activitysuggestion-edit/activitysuggestion-edit.component';
 import {EventBrowseComponent} from './components/event/event-browse/event-browse.component';
+import {ProfileMarketerComponent} from './components/marketer/profile/profile.component';
+import {MarketerGuard} from './services/marketerGuard';
 
 const APP_ROUTES: Routes = [
   { path : 'places' , component: PlacestestComponent},
@@ -28,6 +30,7 @@ const APP_ROUTES: Routes = [
   { path : 'traveler' , component: ProfileComponent, canActivate: [AuthGuard]},
   { path : 'event-list/:tid' , component: EventListComponent, canActivate: [AuthGuard]},
   { path : 'event-list' , component: MainComponent, canActivate: [AuthGuard]},
+  { path : 'marketer' , component: ProfileMarketerComponent, canActivate: [MarketerGuard]},
   { path : 'browseEvents' , component: EventBrowseComponent},
   { path : 'event/new' , component: EventNewComponent, canActivate: [AuthGuard]},
   { path : 'event/:eventId/activity' , component: ActivityListComponent},

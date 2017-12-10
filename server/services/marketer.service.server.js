@@ -4,16 +4,15 @@ module.exports = function (app) {
   var passport  = require('passport');
   var MarketerModel = require("../../model/marketer/marketer.model.server");
   var LocalStrategy = require('passport-local').Strategy;
-  var PromotionModel = require("../../model/promotion/promotion.model.server");
 
   passport.use(new LocalStrategy({usernameField:"email", passwordField:"password"}, localStrategy));
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);
 
-  app.post('/api/loggedIn', loggedIn);
-  app.post('/api/logout', logout);
-  app.post('/api/login', passport.authenticate('local'), login);
-  app.post('/api/register', register);
+  app.post('/api/loggedIn/marketer', loggedIn);
+  app.post('/api/logout/marketer', logout);
+  app.post('/api/login/marketer', passport.authenticate('local'), login);
+  app.post('/api/register/marketer', register);
   app.post("/api/marketer", createMarketer);
   app.put("/api/marketer/:marketerId", updateMarketer);
   app.get("/api/marketer/all", findAllMarketers);
@@ -23,10 +22,12 @@ module.exports = function (app) {
 
 
   function localStrategy(email, password, done) {
+    console.log('in marketer localstrategy');
     MarketerModel
       .findMarketerByEmail(email)
       .then(
         function(marketer) {
+          console.log('found marketer by email');
           if(marketer.email === email && bcrypt.compareSync(password, marketer.password)) {
             return done(null, marketer);
           } else {
@@ -42,10 +43,12 @@ module.exports = function (app) {
   }
 
   function serializeUser(marketer, done) {
+    console.log('serialize marketer');
     done(null, marketer);
   }
 
   function deserializeUser(marketer, done) {
+    console.log('deserialize marketer');
     MarketerModel
       .findMarketerById(marketer._id)
       .then(
@@ -59,7 +62,9 @@ module.exports = function (app) {
   }
 
   function login(req, res) {
+    console.log('trying to login as marketer');
     var marketer = req.user;
+    console.log(marketer);
     MarketerModel.findMarketerById(marketer._id)
       .then(function (marketerFromModel) {
         if(marketerFromModel && (marketerFromModel.password === marketer.password)) {
@@ -71,6 +76,7 @@ module.exports = function (app) {
   }
 
   function loggedIn(req, res) {
+    console.log('loggedin marketer');
     if(req.isAuthenticated()) {
       res.json(req.user);
     } else {
@@ -79,6 +85,7 @@ module.exports = function (app) {
   }
 
   function logout(req, res) {
+    console.log('logout marketer');
     req.logOut();
     res.send(200);
   }

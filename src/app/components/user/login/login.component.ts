@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {TravelerService} from '../../../services/traveler.service.client';
 import {SharedService} from '../../../services/shared.service.client';
+import {MarketerService} from '../../../services/marketer.service.client';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private travelerService: TravelerService,
               private router: Router,
-              private sharedService: SharedService) {
+              private sharedService: SharedService,
+              private marketerService: MarketerService) {
   }
 
   ngOnInit() {
@@ -30,7 +32,6 @@ export class LoginComponent implements OnInit {
   }
 
   login(email: string, password: string) {
-    // alert('username: ' + username + ' password: ' + password);
     this.email = email;
     this.password = password;
     if (this.email === '' || this.password === '') {
@@ -45,5 +46,17 @@ export class LoginComponent implements OnInit {
   }
 
   loginAsMarketer(email, password) {
+    this.email = email;
+    this.password = password;
+    if (this.email === '' || this.password === '') {
+      this.errorFlag = true;
+    } else {
+      console.log('in component marketer');
+      this.marketerService.login(this.email, this.password)
+        .subscribe((marketer: any) => {
+          this.sharedService.user = marketer;
+          this.router.navigate(['/marketer']);
+        });
+    }
   }
 }

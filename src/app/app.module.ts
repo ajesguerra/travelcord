@@ -43,6 +43,8 @@ import { PromotionNewComponent } from './components/promotion/promotion-new/prom
 import { PromotionListComponent } from './components/promotion/promotion-list/promotion-list.component';
 import {MarketerService} from './services/marketer.service.client';
 import {PromotionService} from './services/promotion.service.client';
+import {ProfileMarketerComponent} from './components/marketer/profile/profile.component';
+import {MarketerGuard} from './services/marketerGuard';
 
 
 @NgModule({
@@ -74,7 +76,8 @@ import {PromotionService} from './services/promotion.service.client';
     PromptToLoginOrRegisterComponent,
     PromotionEditComponent,
     PromotionNewComponent,
-    PromotionListComponent
+    PromotionListComponent,
+    ProfileMarketerComponent
   ],
   imports: [
     BrowserModule,
@@ -97,6 +100,7 @@ import {PromotionService} from './services/promotion.service.client';
     EventService,
     SharedService,
     AuthGuard,
+    MarketerGuard,
     ActivitiesService,
     SuggestionService,
     MarketerService,
