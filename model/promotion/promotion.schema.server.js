@@ -6,9 +6,18 @@ var PromotionSchema = mongoose.Schema ( {
   businessName: String,
   businessURL: String,
   dateCreated: Date,
-  views: Number,
-  markedAsDecision: Number,
-  addedToActivitiesTotal: Number
+  views: {
+    type: Number,
+    default: 0
+  },
+  markedAsDecision: {
+    type: Number,
+    default: 0
+  },
+  addedToActivitiesTotal: {
+    type: Number,
+    default: 0
+  }
 }, {collection: 'promotion'});
 
 module.exports = PromotionSchema;

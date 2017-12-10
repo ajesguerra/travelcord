@@ -2,10 +2,7 @@
   {{event['eventName']}}
   <br>
   {{event['description']}}
-  <div *ngIf="isLoggedIn">
-    <br>Owner: {{event['owner']['email']}}
-  </div>
-  <app-prompt-to-login-or-register></app-prompt-to-login-or-register>
+  <br>Owner: {{event['owner']['email']}}
 
 </div>
 <div *ngIf="isEventOwner"><a (click)="showEdit=!showEdit">Edit event</a></div>

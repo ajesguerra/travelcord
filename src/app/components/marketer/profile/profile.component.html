@@ -1,3 +1,54 @@
-<p>
-  profile works!
-</p>
+<nav class="navbar navbar-fixed-top">
+  <div class="container-fluid header-footer-blue-steel">
+  </div>
+</nav>
+
+
+<div class="container main-content">
+  <!--Left-->
+  <div class="col-sm-3 col-xs-1">
+    <div *ngIf="loggedIn">
+      Welcome {{user['firstName']}}!
+    </div>
+    <div *ngIf="!loggedIn">
+      <button class="btn btn-primary btn-block" [routerLink]="['/login']"
+              type="submit">Login
+      </button>
+      <button class="btn btn-success btn-block" [routerLink]="['/register']"
+              type="submit">Register
+      </button>
+    </div>
+  </div>
+
+  <!--Middle-->
+  <div class="col-sm-6 col-xs-1">
+    <div *ngIf="loggedIn">
+      Your Promotions |
+      <a [routerLink]="['/promotion', 'new']">Add
+        <span class="glyphicon glyphicon-plus"></span>
+      </a>
+      <app-promotion-list></app-promotion-list>
+    </div>
+  </div>
+
+  <!--Right-->
+  <div class="col-sm-3 col-xs-1">
+  </div>
+
+
+</div>
+
+
+<!-- Footer -->
+<nav class="navbar navbar-fixed-bottom header-footer-blue-steel">
+  <div class="container-fluid header-footer-blue-steel">
+
+    <!--tick mark-->
+    <p class="navbar-text pull-right">
+      <a [routerLink]="['/traveler']" class="nav-hover">
+        <span class="glyphicon glyphicon-user navbar-link"></span>
+      </a>
+    </p>
+  </div>
+</nav>
+<!-- End Footer-->

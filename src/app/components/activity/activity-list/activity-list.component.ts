@@ -23,25 +23,26 @@ export class ActivityListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isLoggedIn = false;
     this.activatedRoute.params
       .subscribe((params: any) => {
         this.eventId = params['eventId'];
+        this.event = this.eventService.findEventById(this.eventId).subscribe((event: any) => {
+          if (event) {
+            this.event = event;
+            if (this.event['owner']['_id'] === this.sharedService.user['_id']) {
+              this.userIsOwner = true;
+            }
+            if (this.event['activities']) {
+              this.activities = this.event['activities'];
+            }
+            if (this.sharedService.user['_id']) {
+              this.isLoggedIn = true;
+            } else {
+              this.isLoggedIn = false;
+            }
+          }
+        });
       });
-    this.event = this.eventService.findEventById(this.eventId).subscribe((event: any) => {
-      if (event) {
-        this.event = event;
-        if (this.event['owner']['_id'] === this.sharedService.user['_id']) {
-          this.userIsOwner = true;
-        }
-        if (this.event['activities']) {
-          this.activities = this.event['activities'];
-        }
-      }
-    });
-    if (this.sharedService.user['_id']) {
-      this.isLoggedIn = true;
-    }
   }
 
 }

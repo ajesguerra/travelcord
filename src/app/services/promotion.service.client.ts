@@ -7,9 +7,12 @@ import {environment} from '../../environments/environment';
 export class PromotionService {
   baseUrl = environment.baseUrl;
   constructor(private http: Http) {}
-  createActivity(eventId, activity) {
-    const url = this.baseUrl + '/api/activity/' + eventId + '/newActivity';
-    return this.http.post(url, activity).map((response: Response) => {
+
+  createPromotion(travelerId, promotion) {
+    const url = this.baseUrl + '/api/promotion/' + travelerId + '/newPromotion';
+    return this.http.post(url, promotion).map((response: Response) => {
+      console.log('back from server');
+      console.log(response.json());
       return response.json();
     });
   }

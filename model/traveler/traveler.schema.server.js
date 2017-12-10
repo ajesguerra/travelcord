@@ -13,6 +13,7 @@ var TravelerSchema = mongoose.Schema ( {
     default: 'TRAVELER',
     enum: ['TRAVELER', 'MARKETER', 'ADMIN']},
   events: [{type:mongoose.Schema.Types.ObjectId, ref: 'EventModel'}],
+  myPromotions: [{type:mongoose.Schema.Types.ObjectId, ref: 'PromotionModel'}],
   promotionDeploys: {
     type: Number,
     default: 0

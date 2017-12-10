@@ -32,6 +32,7 @@ function findAllTravelers() {
 function findTravelerById(travelerId) {
   return TravelerModel.findOne({_id: travelerId})
     .populate('event')
+    .populate('myPromotions')
     .exec();
 }
 

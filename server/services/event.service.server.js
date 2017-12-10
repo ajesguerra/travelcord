@@ -100,18 +100,18 @@ module.exports = function (app) {
   function removeTravelerFromEvent(req, res) {
     travelerModel.findTravelerById(req.params['travelerId'])
       .then(function (traveler) {
-        for (var j = 0; j < traveler.events.length; j++) {
-          if (traveler.events[j]['_id'] == req.params['eventsId']) {
-            traveler.events.splice(j, 1);
+        for (var j = 0; j < traveler['events'].length; j++) {
+          if (traveler['events'][j]['_id'] == req.params['eventsId']) {
+            traveler['events'].splice(j, 1);
             traveler.save();
           }
         }
 
         eventModel.findEventById(req.params['eventId'])
           .then(function (event) {
-            for (var i = 0; i < event.travelers.length; i++) {
-              if (event.travelers[i]['_id'] == req.params['travelersId']) {
-                event.travelers.splice(i, 1);
+            for (var i = 0; i < event['travelers'].length; i++) {
+              if (event['travelers'][i]['_id'] == req.params['travelersId']) {
+                event['travelers'].splice(i, 1);
                 event.save();
                 res.json(event);
               }

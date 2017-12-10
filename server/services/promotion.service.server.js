@@ -1,6 +1,11 @@
 module.exports = function (app) {
 
-  app.post('/api/promotion/:eventId/newPromotion', createPromotion);
+  var PromotionModel = require("../../model/promotion/promotion.model.server");
+  var travelerModel = require("../../model/traveler/traveler.model.server");
+
+  app.post('/api/promotion/:travelerId/newPromotion', createPromotion);
+
+
   app.post('/api/promotion/:promotionId/markDecision/:suggestionId', markDecision);
   app.get('/api/promotion/:eventId/allActivities', findAllActivitiesForEvent);
   app.get('/api/promotion/:promotionId', findPromotionById);
@@ -13,6 +18,10 @@ module.exports = function (app) {
   app.get('/api/suggestion/:suggestionId', findSuggestionById);
 
   function createPromotion(req, res) {
+    PromotionModel.createPromotion(req.params['travelerId'], req.body)
+      .then(function (promotion) {
+        res.json(promotion);
+      });
   }
 
   function addSuggestion(req, res) {

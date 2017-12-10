@@ -21,6 +21,7 @@ import {ProfileMarketerComponent} from './components/marketer/profile/profile.co
 import {AdminServiceClient} from './services/admin.service.client';
 import {MarketerServiceClient} from './services/marketer.service.client';
 import {AllUsersGuardService} from './services/all-users-guard.service';
+import {PromotionNewComponent} from "./components/promotion/promotion-new/promotion-new.component";
 
 const APP_ROUTES: Routes = [
   { path : 'places' , component: PlacestestComponent},
@@ -35,6 +36,7 @@ const APP_ROUTES: Routes = [
   { path : 'marketer' , component: ProfileMarketerComponent, canActivate: [MarketerServiceClient]},
   { path : 'browseEvents' , component: EventBrowseComponent},
   { path : 'event/new' , component: EventNewComponent, canActivate: [AuthGuard]},
+  { path : 'promotion/new' , component: PromotionNewComponent, canActivate: [MarketerServiceClient]},
   { path : 'event/:eventId/activity' , component: ActivityListComponent},
   { path : 'event/:eventId/activity/new' , component: ActivityNewComponent, canActivate: [AuthGuard]},
   { path : 'event/:eventId/:activityId' , component: ActivitysuggestionListComponent},

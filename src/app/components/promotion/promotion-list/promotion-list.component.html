@@ -1,3 +1,11 @@
-<p>
-  promotion-list works!
-</p>
+<div *ngIf="promotionExists">
+  <ul class="list-group">
+
+    <li class="list-group-item" *ngFor="let aPromotion of promotions">
+      <div class="row">
+        <a [routerLink]="['/promotion', aPromotion['_id']]">{{aPromotion['suggestionName']}}</a>
+      </div>
+    </li>
+
+  </ul>
+</div>

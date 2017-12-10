@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var PromotionSchema = require("./promotion.schema.server");
 var PromotionModel = mongoose.model("PromotionModel", PromotionSchema);
+var TravelerModel = require('../traveler/traveler.model.server');
 
 PromotionModel.createPromotion = createPromotion;
 PromotionModel.findPromotionById = findPromotionById;
@@ -9,8 +10,17 @@ PromotionModel.deletePromotion = deletePromotion;
 
 module.exports = PromotionModel;
 
-function createPromotion(promotion) {
-  return PromotionModel.create(promotion);
+function createPromotion(travelerId, promotion) {
+  promotion.dateCreated = new Date(Date.now());
+  return PromotionModel.create(promotion)
+    .then(function (dbPromotion) {
+      TravelerModel.findTravelerById(travelerId)
+        .then(function (traveler) {
+          traveler.myPromotions.push(dbPromotion);
+          traveler.save();
+        });
+      return dbPromotion;
+    });
 }
 
 function findPromotionById(promotionId) {

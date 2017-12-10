@@ -49,13 +49,9 @@
 
   <div class="col-xs-4">
     Users in this event:
-    <div *ngIf="isLoggedIn">
       <div *ngFor="let traveler of event['travelers']">
         {{traveler.firstName}} {{traveler.lastName}}
       </div>
-      <br>
-    </div>
-    <app-prompt-to-login-or-register></app-prompt-to-login-or-register>
     <div *ngIf="userIsOwner">
       Add Users To This Event:
       <br>
