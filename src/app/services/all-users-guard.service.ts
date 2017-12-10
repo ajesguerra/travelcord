@@ -4,14 +4,13 @@ import {TravelerService} from './traveler.service.client';
 import {SharedService} from './shared.service.client';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AllUsersGuardService implements CanActivate {
 
   constructor(private travelerService: TravelerService,
               private router: Router,
               private sharedService: SharedService) {}
 
   canActivate() {
-    return (this.travelerService.loggedIn()
-      && this.travelerService.isTraveler());
+    return this.travelerService.loggedIn();
   }
 }

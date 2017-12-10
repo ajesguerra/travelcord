@@ -18,6 +18,7 @@ app.use(session({ secret: 'secret1337' })); //process.env.SESSION_SECRET
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 // CORS
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:4200"); // change to *

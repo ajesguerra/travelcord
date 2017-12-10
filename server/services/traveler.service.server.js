@@ -18,6 +18,9 @@ module.exports = function (app) {
   app.post("/api/traveler/:travelerId/follow/:personToFollow", followTraveler);
   app.put("/api/traveler/:travelerId", updateTraveler);
   app.get("/api/traveler/all", findAllTravelers);
+  app.get('/api/admin/isAdmin', isAdmin);
+  app.get('/api/traveler/isMarketer', isMarketer);
+  app.get('/api/traveler/isTraveler', isTraveler);
   app.get("/api/traveler/:travelerId", findTravelerById);
   app.get("/api/traveler", findTravelers);
   app.delete("/api/traveler/:travelerId", deleteTraveler);
@@ -199,4 +202,29 @@ module.exports = function (app) {
         res.json(traveler);
       })
   }
+
+  function isAdmin(req, res) {
+    if(req.isAuthenticated() && req.user.role === 'ADMIN') {
+      res.json(req.user);
+    } else {
+      res.send('0');
+    }
+  }
+
+  function isMarketer(req, res) {
+    if(req.isAuthenticated() && ((req.user.role === 'MARKETER') || (req.user.role === 'ADMIN'))) {
+      res.json(req.user);
+    } else {
+      res.send('0');
+    }
+  }
+
+  function isTraveler(req, res) {
+    if(req.isAuthenticated() && ((req.user.role === 'TRAVELER') || (req.user.role === 'ADMIN'))) {
+      res.json(req.user);
+    } else {
+      res.send('0');
+    }
+  }
+
 };

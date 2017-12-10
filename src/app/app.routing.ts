@@ -18,7 +18,9 @@ import {MainComponent} from './components/user/main/main.component';
 import {ActivitysuggestionEditComponent} from './components/activity/activitysuggestion-edit/activitysuggestion-edit.component';
 import {EventBrowseComponent} from './components/event/event-browse/event-browse.component';
 import {ProfileMarketerComponent} from './components/marketer/profile/profile.component';
-import {MarketerGuard} from './services/marketerGuard';
+import {AdminServiceClient} from './services/admin.service.client';
+import {MarketerServiceClient} from './services/marketer.service.client';
+import {AllUsersGuardService} from './services/all-users-guard.service';
 
 const APP_ROUTES: Routes = [
   { path : 'places' , component: PlacestestComponent},
@@ -27,10 +29,10 @@ const APP_ROUTES: Routes = [
   { path : 'login' , component: LoginComponent},
   { path : 'main' , component: MainComponent},
   { path : 'register' , component: RegisterComponent},
-  { path : 'traveler' , component: ProfileComponent, canActivate: [AuthGuard]},
+  { path : 'traveler' , component: ProfileComponent, canActivate: [AllUsersGuardService]},
   { path : 'event-list/:tid' , component: EventListComponent, canActivate: [AuthGuard]},
   { path : 'event-list' , component: MainComponent, canActivate: [AuthGuard]},
-  { path : 'marketer' , component: ProfileMarketerComponent, canActivate: [MarketerGuard]},
+  { path : 'marketer' , component: ProfileMarketerComponent, canActivate: [MarketerServiceClient]},
   { path : 'browseEvents' , component: EventBrowseComponent},
   { path : 'event/new' , component: EventNewComponent, canActivate: [AuthGuard]},
   { path : 'event/:eventId/activity' , component: ActivityListComponent},

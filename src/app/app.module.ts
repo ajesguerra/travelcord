@@ -41,10 +41,11 @@ import { PromptToLoginOrRegisterComponent } from './components/travelers/prompt-
 import { PromotionEditComponent } from './components/promotion/promotion-edit/promotion-edit.component';
 import { PromotionNewComponent } from './components/promotion/promotion-new/promotion-new.component';
 import { PromotionListComponent } from './components/promotion/promotion-list/promotion-list.component';
-import {MarketerService} from './services/marketer.service.client';
 import {PromotionService} from './services/promotion.service.client';
 import {ProfileMarketerComponent} from './components/marketer/profile/profile.component';
-import {MarketerGuard} from './services/marketerGuard';
+import {AdminServiceClient} from './services/admin.service.client';
+import {MarketerServiceClient} from './services/marketer.service.client';
+import {AllUsersGuardService} from './services/all-users-guard.service';
 
 
 @NgModule({
@@ -85,7 +86,7 @@ import {MarketerGuard} from './services/marketerGuard';
     FormsModule,
     Routing,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyArbhF-owYmnIdhp4hXlxG-nCRUxc0HF2c', // 'AIzaSyDm-aq4PesgK2OJNJY-pKbUPkLKiBTPvjE',
+      apiKey: 'AIzaSyArbhF-owYmnIdhp4hXlxG-nCRUxc0HF2c', // PUT INTO ENV VARIABLE!!
       libraries: ['places']
     }),
     BrowserModule,
@@ -100,10 +101,11 @@ import {MarketerGuard} from './services/marketerGuard';
     EventService,
     SharedService,
     AuthGuard,
-    MarketerGuard,
+    AllUsersGuardService,
+    AdminServiceClient,
+    MarketerServiceClient,
     ActivitiesService,
     SuggestionService,
-    MarketerService,
     PromotionService],
   bootstrap: [AppComponent]
 })

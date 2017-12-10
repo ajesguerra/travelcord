@@ -10,9 +10,11 @@ import {Router} from '@angular/router';
 export class TravelerService {
   options: RequestOptions = new RequestOptions();
   baseUrl = environment.baseUrl;
+
   constructor(private http: Http,
               private sharedService: SharedService,
-              private router: Router) {}
+              private router: Router) {
+  }
 
   register(email, password) {
     const url = this.baseUrl + '/api/register';
@@ -124,6 +126,7 @@ export class TravelerService {
       return response.json();
     });
   }
+
   updateTraveler(travelerId, traveler) {
     const url = this.baseUrl + '/api/traveler/' + travelerId;
     return this.http.put(url, traveler).map((response: Response) => {
@@ -136,5 +139,53 @@ export class TravelerService {
     return this.http.delete(url, traveler).map((response: Response) => {
       return response.json();
     });
+  }
+
+  isAdmin() {
+    const url = this.baseUrl + '/api/admin/isAdmin';
+    this.options.withCredentials = true;
+    return this.http.get(url, this.options)
+      .map((res: Response) => {
+        const user = res.json();
+        if (user !== 0) {
+          this.sharedService.user = user;
+          return true;
+        } else {
+          this.router.navigate(['/login']);
+          return false;
+        }
+      });
+  }
+
+  isMarketer() {
+    const url = this.baseUrl + '/api/traveler/isMarketer';
+    this.options.withCredentials = true;
+    return this.http.get(url, this.options)
+      .map((res: Response) => {
+        const user = res.json();
+        if (user !== 0) {
+          this.sharedService.user = user;
+          return true;
+        } else {
+          this.router.navigate(['/login']);
+          return false;
+        }
+      });
+  }
+
+  isTraveler() {
+    const url = this.baseUrl + '/api/traveler/isTraveler';
+    this.options.withCredentials = true;
+    return this.http.get(url, this.options)
+      .map((res: Response) => {
+        const user = res.json();
+        if (user !== 0) {
+          this.sharedService.user = user;
+          return true;
+        } else {
+          this.router.navigate(['/login']);
+          return false;
+        }
+      });
   }
 }

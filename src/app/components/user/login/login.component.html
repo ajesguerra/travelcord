@@ -21,38 +21,9 @@
            [(ngModel)]="password"
            required/>
 
-
-    <input name="userType"
-           id="traveler"
-           value="traveler"
-           type="radio"
-           class="form-control"
-           required
-           [(ngModel)]="userType"/>
-    <label for="traveler">Traveler</label>
-
-    <input name="userType"
-           id="marketer"
-           value="marketer"
-           type="radio"
-           class="form-control"
-           required
-           [(ngModel)]="userType"/>
-    <label for="marketer">Marketer</label>
-
-    <div [ngSwitch]="userType">
-      <div *ngSwitchCase="'traveler'">
-        <button class="btn btn-primary btn-block" (click)="login(email, password)"
-                type="submit">Login as Traveler
-        </button>
-      </div>
-      <div *ngSwitchCase="'marketer'">
-        <button class="btn btn-primary btn-block" (click)="loginAsMarketer(email, password)"
-                type="submit">Login as Marketer
-        </button>
-      </div>
-    </div>
-
+    <button class="btn btn-primary btn-block" (click)="login(email, password)"
+            type="submit">Login
+    </button>
   </form>
   <button class="btn btn-success btn-block" [routerLink]="['/register']"
           type="submit">Register

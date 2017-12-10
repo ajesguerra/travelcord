@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {TravelerService} from '../../../services/traveler.service.client';
 import {SharedService} from '../../../services/shared.service.client';
-import {MarketerService} from '../../../services/marketer.service.client';
 
 @Component({
   selector: 'app-login',
@@ -21,8 +20,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private travelerService: TravelerService,
               private router: Router,
-              private sharedService: SharedService,
-              private marketerService: MarketerService) {
+              private sharedService: SharedService) {
   }
 
   ngOnInit() {
@@ -40,22 +38,13 @@ export class LoginComponent implements OnInit {
       this.travelerService.login(this.email, this.password)
         .subscribe((traveler: any) => {
           this.sharedService.user = traveler;
-          this.router.navigate(['/event-list']);
-        });
-    }
-  }
-
-  loginAsMarketer(email, password) {
-    this.email = email;
-    this.password = password;
-    if (this.email === '' || this.password === '') {
-      this.errorFlag = true;
-    } else {
-      console.log('in component marketer');
-      this.marketerService.login(this.email, this.password)
-        .subscribe((marketer: any) => {
-          this.sharedService.user = marketer;
-          this.router.navigate(['/marketer']);
+          if (this.sharedService.user['role'] === 'MARKETER') {
+            this.router.navigate(['/marketer']);
+          } else if (this.sharedService.user['role'] === 'ADMIN') {
+            this.router.navigate(['/event-list']);
+          } else {
+            this.router.navigate(['/event-list']);
+          }
         });
     }
   }
