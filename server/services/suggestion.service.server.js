@@ -39,7 +39,6 @@ module.exports = function (app) {
             activity.save();
           }
         }
-        console.log('checking decision');
         //Check if the decided activity is also the suggestion you are deleting. If so, remove it and make activity undecided.
         if (activity.decidedActivity._id == req.params['suggestionId']) {
           console.log('decision matched');
@@ -48,10 +47,6 @@ module.exports = function (app) {
           activity.save();
         }
 
-        console.log('result');
-        console.log(activity);
-
-        console.log('about to delete from suggestions');
         // Then delete the suggestion.
         suggestionModel.deleteSuggestion(req.params['suggestionId'])
           .then(function (suggestion) {
