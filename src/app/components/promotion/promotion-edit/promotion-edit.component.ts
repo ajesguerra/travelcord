@@ -68,4 +68,10 @@ export class PromotionEditComponent implements OnInit {
       this.router.navigate(['/marketer']);
     });
   }
+
+  deployPromotion() {
+    this.promotionService.deployPromotion(this.thePromotion['_id'], this.thePromotion).subscribe((thePromotion: any) => {
+      this.router.navigate(['/marketer']);
+    });
+  }
 }

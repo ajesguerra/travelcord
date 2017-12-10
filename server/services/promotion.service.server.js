@@ -8,6 +8,8 @@ module.exports = function (app) {
   app.get('/api/promotion/:promotionId', findPromotionById);
   app.put('/api/promotion/update', updatePromotion);
   app.delete('/api/promotion/delete/:promotionId/:travelerId', deletePromotion);
+  app.delete('/api/promotion/deleteOne/:promotionId/:activityId', removePromotionForMe);
+  app.put('/api/promotion/deploy/:promotionId', deployPromotion);
   //everything above this line has been completed.
 
   app.post('/api/promotion/:promotionId/markDecision/:suggestionId', markDecision);
@@ -68,6 +70,31 @@ module.exports = function (app) {
           .then(function (promotion) {
             res.json(promotion);
           });
+      });
+  }
+
+  function deployPromotion(req, res) {
+    ActivityModel.findAllActivities()
+      .then(function (allActivities) {
+        for (var x = 0; x < allActivities.length; x++) {
+          allActivities[x]['promotions'].push(req.body);
+          allActivities[x].save();
+          res.json(req.body);
+        }
+      });
+  }
+
+  function removePromotionForMe(req, res) {
+    ActivityModel.findActivityById(req.params['activityId'])
+      .then(function (activity) {
+        for (var i = 0; i < activity['promotions'].length; i++) {
+          if (activity['promotions'][i]['_id'] == req.params['promotionId']) {
+            console.log('trying to splice');
+            activity.promotions.splice(i, 1);
+            activity.save();
+            res.send(activity);
+          }
+        }
       });
   }
 

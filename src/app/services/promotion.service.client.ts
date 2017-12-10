@@ -39,4 +39,18 @@ export class PromotionService {
       return response.json();
     });
   }
+
+  deployPromotion(promotionId, promotion) {
+    const url = this.baseUrl + '/api/promotion/deploy/' + promotionId;
+    return this.http.put(url, promotion).map((response: Response) => {
+      return response.json();
+    });
+  }
+
+  removePromotionForMe(activityId, promotionId) {
+    const url = this.baseUrl + '/api/promotion/deleteOne/' + promotionId + '/' + activityId;
+    return this.http.delete(url, promotionId).map((response: Response) => {
+      return response.json();
+    });
+  }
 }

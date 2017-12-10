@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivitiesService} from '../../../services/activities.service.client';
 import {EventService} from '../../../services/event.service.client';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {SharedService} from '../../../services/shared.service.client';
+import {PromotionService} from '../../../services/promotion.service.client';
 
 @Component({
   selector: 'app-activitysuggestion-list',
@@ -15,10 +16,16 @@ export class ActivitysuggestionListComponent implements OnInit {
   eventId: string;
   isEventOwner: boolean;
   isLoggedIn: boolean;
+  promotions: any;
+  activity: any;
+
   constructor(private activitiesService: ActivitiesService,
               private eventService: EventService,
+              private router: Router,
+              private promotionService: PromotionService,
               private activatedRoute: ActivatedRoute,
-              private sharedService: SharedService) { }
+              private sharedService: SharedService) {
+  }
 
   ngOnInit() {
     this.isEventOwner = false;
@@ -41,6 +48,12 @@ export class ActivitysuggestionListComponent implements OnInit {
         this.suggestions = allSuggestions;
       }
     });
+
+    this.activitiesService.findActivityById(this.activityId).subscribe((activity: any) => {
+      this.activity = activity;
+      this.promotions = this.activity['promotions'];
+    });
+
     if (this.sharedService.user['_id']) {
       this.isLoggedIn = true;
     }
@@ -61,5 +74,12 @@ export class ActivitysuggestionListComponent implements OnInit {
   markAsDecided(suggestionId) {
     this.activitiesService.markAsDecided(this.activityId, suggestionId).subscribe((activity: any) => {
     });
+  }
+
+  removePromotionForMe(promotionId) {
+    this.promotionService.removePromotionForMe(this.activityId, promotionId)
+      .subscribe((removed: any) => {
+        this.router.navigate(['/event-list']);
+      });
   }
 }
