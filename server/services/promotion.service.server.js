@@ -1,37 +1,37 @@
 module.exports = function (app) {
 
   var eventModel = require('../../model/event/event.model.server');
-  var activityModel = require('../../model/activity/activity.model.sever');
-  var suggestionModel = require('../../model/activity/activitysuggestion.model.server');
+  var promotionModel = require('../../model/promotion/promotion.model.sever');
+  var suggestionModel = require('../../model/promotion/promotionsuggestion.model.server');
   var travelerModel = require('../../model/traveler/traveler.model.server');
 
-  app.post('/api/activity/:eventId/newActivity', createActivity);
-  app.post('/api/activity/:activityId/markDecision/:suggestionId', markDecision);
-  app.get('/api/activity/:eventId/allActivities', findAllActivitiesForEvent);
-  app.get('/api/activity/:activityId', findActivityById);
-  app.put('/api/activity/:activityId', updateActivity);
-  app.delete('/api/activity/:activityId', deleteActivity);
+  app.post('/api/promotion/:eventId/newPromotion', createPromotion);
+  app.post('/api/promotion/:promotionId/markDecision/:suggestionId', markDecision);
+  app.get('/api/promotion/:eventId/allActivities', findAllActivitiesForEvent);
+  app.get('/api/promotion/:promotionId', findPromotionById);
+  app.put('/api/promotion/:promotionId', updatePromotion);
+  app.delete('/api/promotion/:promotionId', deletePromotion);
 
-  app.post('/api/suggestion/:activityId', addSuggestion);
+  app.post('/api/suggestion/:promotionId', addSuggestion);
   app.post('/api/suggestion/upvote/:suggestionId/:travelerId', upVote);
   app.post('/api/suggestion/unvote/:suggestionId/:travelerId', unVote);
   app.get('/api/suggestion/:suggestionId', findSuggestionById);
 
-  function createActivity(req, res) {
+  function createPromotion(req, res) {
     var eventId = req.params['eventId'];
-    var activity = req.body;
+    var promotion = req.body;
     suggestionModel.createSuggestion(null)
       .then(function (suggestion) {
-        activity.decidedActivity = suggestion;
+        promotion.decidedPromotion = suggestion;
       });
-    activity.isDecided = false;
-    activityModel.createActivity(activity)
-      .then(function (dbActivity) {
+    promotion.isDecided = false;
+    promotionModel.createPromotion(promotion)
+      .then(function (dbPromotion) {
         eventModel.findEventById(eventId)
           .then(function (event) {
-            event.activities.push(dbActivity);
+            event.activities.push(dbPromotion);
             event.save();
-            res.json(dbActivity);
+            res.json(dbPromotion);
           });
       });
   }
@@ -39,10 +39,10 @@ module.exports = function (app) {
   function addSuggestion(req, res) {
     suggestionModel.createSuggestion(req.body)
       .then(function (dbSuggestion) {
-        activityModel.findActivityById(req.params['activityId'])
-          .then(function (activity) {
-            activity.activitySuggestions.push(dbSuggestion);
-            activity.save();
+        promotionModel.findPromotionById(req.params['promotionId'])
+          .then(function (promotion) {
+            promotion.promotionSuggestions.push(dbSuggestion);
+            promotion.save();
             res.json(dbSuggestion);
           })
       })
@@ -55,10 +55,10 @@ module.exports = function (app) {
       });
   }
 
-  function findActivityById(req, res) {
-    activityModel.findActivityById(req.params['activityId'])
-      .then(function (activity) {
-        res.json(activity);
+  function findPromotionById(req, res) {
+    promotionModel.findPromotionById(req.params['promotionId'])
+      .then(function (promotion) {
+        res.json(promotion);
       });
   }
 
@@ -116,29 +116,29 @@ module.exports = function (app) {
   }
 
   function markDecision(req, res) {
-    activityModel.findActivityById(req.params['activityId'])
-      .then(function (activity) {
-        activity.isDecided = true;
+    promotionModel.findPromotionById(req.params['promotionId'])
+      .then(function (promotion) {
+        promotion.isDecided = true;
         suggestionModel.findSuggestionById(req.params['suggestionId'])
           .then(function (suggestion) {
-            activity.decidedActivity = suggestion;
-            activity.save();
-            res.json(activity);
+            promotion.decidedPromotion = suggestion;
+            promotion.save();
+            res.json(promotion);
           })
       })
   }
 
-  function updateActivity(req, res) {
-    activityModel.updateActivity(req.params['activityId'], req.body)
-      .then(function (activity) {
-        res.json(activity);
+  function updatePromotion(req, res) {
+    promotionModel.updatePromotion(req.params['promotionId'], req.body)
+      .then(function (promotion) {
+        res.json(promotion);
       });
   }
 
-  function deleteActivity(req, res) {
-    activityModel.deleteActivity(req.params['activityId'])
-      .then(function (activity) {
-        res.json(activity);
+  function deletePromotion(req, res) {
+    promotionModel.deletePromotion(req.params['promotionId'])
+      .then(function (promotion) {
+        res.json(promotion);
       });
   }
 };

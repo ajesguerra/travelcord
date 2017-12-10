@@ -28,20 +28,15 @@ module.exports = function (app) {
     activityModel.findActivityById(req.params['activityId'])
       .then(function (activity) {
         // Find every case of the suggestion in the activity.
-        console.log('deleting... activity found.');
-        console.log(activity);
         for (var j = 0; j < activity.activitySuggestions.length; j++) {
-          console.log(j);
           if (activity.activitySuggestions[j]._id == req.params['suggestionId']) {
             // Delete it.
-            console.log('matched a suggestion');
             activity.activitySuggestions.splice(j, 1);
             activity.save();
           }
         }
         //Check if the decided activity is also the suggestion you are deleting. If so, remove it and make activity undecided.
         if (activity.decidedActivity._id == req.params['suggestionId']) {
-          console.log('decision matched');
           activity.decidedActivity = null;
           activity.isDecided = false;
           activity.save();

@@ -14,12 +14,14 @@ export class EventDetailsComponent implements OnInit {
   eventExists: boolean;
   showEdit: boolean;
   isEventOwner: boolean;
+  isLoggedIn: boolean;
   constructor(private eventService: EventService,
               private activatedRoute: ActivatedRoute,
               private sharedService: SharedService) {
   }
 
   ngOnInit() {
+    this.isLoggedIn = false;
     this.showEdit = false;
     this.eventExists = false;
     this.activatedRoute.params
@@ -37,5 +39,8 @@ export class EventDetailsComponent implements OnInit {
             });
         }
       });
+    if (this.sharedService.user['_id']) {
+      this.isLoggedIn = true;
+    }
   }
 }

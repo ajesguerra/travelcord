@@ -16,6 +16,7 @@ import {ActivitysuggestionNewComponent} from './components/activity/activitysugg
 import {ViewFollowingComponent} from './components/travelers/view-following/view-following.component';
 import {MainComponent} from './components/user/main/main.component';
 import {ActivitysuggestionEditComponent} from './components/activity/activitysuggestion-edit/activitysuggestion-edit.component';
+import {EventBrowseComponent} from './components/event/event-browse/event-browse.component';
 
 const APP_ROUTES: Routes = [
   { path : 'places' , component: PlacestestComponent},
@@ -27,10 +28,11 @@ const APP_ROUTES: Routes = [
   { path : 'traveler' , component: ProfileComponent, canActivate: [AuthGuard]},
   { path : 'event-list/:tid' , component: EventListComponent, canActivate: [AuthGuard]},
   { path : 'event-list' , component: MainComponent, canActivate: [AuthGuard]},
+  { path : 'browseEvents' , component: EventBrowseComponent},
   { path : 'event/new' , component: EventNewComponent, canActivate: [AuthGuard]},
-  { path : 'event/:eventId/activity' , component: ActivityListComponent, canActivate: [AuthGuard]},
+  { path : 'event/:eventId/activity' , component: ActivityListComponent},
   { path : 'event/:eventId/activity/new' , component: ActivityNewComponent, canActivate: [AuthGuard]},
-  { path : 'event/:eventId/:activityId' , component: ActivitysuggestionListComponent, canActivate: [AuthGuard]},
+  { path : 'event/:eventId/:activityId' , component: ActivitysuggestionListComponent},
   { path : 'event/:eventId/:activityId/newSuggestion' , component: ActivitysuggestionNewComponent, canActivate: [AuthGuard]},
   { path : 'event/:eventId/:activityId/:suggestionId' , component: ActivitysuggestionEditComponent, canActivate: [AuthGuard]},
   { path : 'following' , component: ViewFollowingComponent, canActivate: [AuthGuard]},

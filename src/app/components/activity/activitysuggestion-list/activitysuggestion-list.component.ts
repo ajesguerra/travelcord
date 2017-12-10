@@ -13,23 +13,37 @@ export class ActivitysuggestionListComponent implements OnInit {
   suggestions: any;
   activityId: string;
   eventId: string;
+  isEventOwner: boolean;
+  isLoggedIn: boolean;
   constructor(private activitiesService: ActivitiesService,
               private eventService: EventService,
               private activatedRoute: ActivatedRoute,
               private sharedService: SharedService) { }
 
   ngOnInit() {
+    this.isEventOwner = false;
+    this.isLoggedIn = false;
     this.activatedRoute.params
       .subscribe((params: any) => {
         this.activityId = params['activityId'];
         this.eventId = params['eventId'];
+
+        this.eventService.findEventById(params['eventId']).subscribe((theEvent: any) => {
+          if (theEvent) {
+            if (this.sharedService.user['_id'] == theEvent['owner']['_id']) {
+              this.isEventOwner = true;
+            }
+          }
+        });
       });
     this.activitiesService.findAllSuggestionsForActivity(this.activityId).subscribe((allSuggestions: any) => {
-      console.log(allSuggestions);
       if (allSuggestions) {
         this.suggestions = allSuggestions;
       }
     });
+    if (this.sharedService.user['_id']) {
+      this.isLoggedIn = true;
+    }
   }
 
   upVote(suggestionId) {

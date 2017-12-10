@@ -16,13 +16,14 @@ export class ActivityListComponent implements OnInit {
   eventId: string;
   event = {};
   userIsOwner: boolean;
-
+  isLoggedIn: boolean;
   constructor(private eventService: EventService,
               private activatedRoute: ActivatedRoute,
               private sharedService: SharedService) {
   }
 
   ngOnInit() {
+    this.isLoggedIn = false;
     this.activatedRoute.params
       .subscribe((params: any) => {
         this.eventId = params['eventId'];
@@ -36,10 +37,11 @@ export class ActivityListComponent implements OnInit {
         if (this.event['activities']) {
           this.activities = this.event['activities'];
         }
-        console.log(this.activities);
       }
     });
-
+    if (this.sharedService.user['_id']) {
+      this.isLoggedIn = true;
+    }
   }
 
 }

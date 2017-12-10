@@ -17,7 +17,9 @@ export class RegisterComponent implements OnInit {
   errorFlag: boolean;
   errorMsg = 'Invalid!';
   anExistingTraveler: any;
+  userType: string;
   aNewTraveler: any;
+
   constructor(private travelerService: TravelerService,
               private router: Router,
               private sharedService: SharedService) {
@@ -46,5 +48,8 @@ export class RegisterComponent implements OnInit {
         });
       }
     });
+  }
+
+  registerAsMarketer() {
   }
 }

@@ -2,12 +2,11 @@ import {Injectable} from '@angular/core';
 import {Http, RequestOptions, Response} from '@angular/http';
 import 'rxjs/Rx';
 import {environment} from '../../environments/environment';
-import {EventService} from './event.service.client';
 import {SharedService} from './shared.service.client';
 import {Router} from '@angular/router';
 
 @Injectable()
-export class TravelerService {
+export class MarketerService {
   options: RequestOptions = new RequestOptions();
   baseUrl = environment.baseUrl;
   constructor(private http: Http,
@@ -15,7 +14,7 @@ export class TravelerService {
               private router: Router) {}
 
   register(email, password) {
-    const url = this.baseUrl + '/api/register';
+    const url = this.baseUrl + '/api/register/marketer';
     const credentials = {
       email: email,
       password: password

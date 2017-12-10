@@ -35,12 +35,14 @@
       <li class="list-group-item" *ngFor="let suggestion of suggestions">
         <div class="row">
           <div class="col-xs-9 col-sm-11">
-            ID: {{suggestion['_id']}}
-            <br><a (click)="upVote(suggestion['_id'])">Upvote</a>
-            | <a (click)="markAsDecided(suggestion['_id'])">Mark as decided</a>
 
-            <br>
-            <a (click)="unVote(suggestion['_id'])">undo vote</a>
+            <div *ngIf="isLoggedIn">
+              <a (click)="upVote(suggestion['_id'])">Upvote</a>
+              | <a (click)="markAsDecided(suggestion['_id'])">Mark as decided</a>
+              <br>
+              <a (click)="unVote(suggestion['_id'])">undo vote</a>
+            </div>
+            <app-prompt-to-login-or-register></app-prompt-to-login-or-register>
             <br>
             People who voted for this suggestion:
             <div *ngFor="let voter of suggestion['travelerUpVoters']">
@@ -51,9 +53,12 @@
             <br>Total upvotes: {{suggestion['travelerUpVoters'].length}}
             <br>Suggestion Name: {{suggestion['activitySuggestionName']}}
             <br>Location: {{suggestion['suggestionLocation']}}
-            <br><a [routerLink]="['/event', eventId, activityId, suggestion['_id']]">
+
+            <div *ngIf="isEventOwner">
+              <br><a [routerLink]="['/event', eventId, activityId, suggestion['_id']]">
               Edit Suggestion
             </a>
+            </div>
           </div>
         </div>
       </li>

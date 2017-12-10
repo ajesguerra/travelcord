@@ -8,7 +8,7 @@
   <!--Left-->
   <div class="col-sm-3 col-xs-1">
     <div *ngIf="loggedIn">
-      {{user['firstName']}}
+      Welcome {{user['firstName']}}!
     </div>
     <div *ngIf="!loggedIn">
       <button class="btn btn-primary btn-block" [routerLink]="['/login']"
@@ -29,7 +29,7 @@
       </a>
       <app-event-list></app-event-list>
 
-      <a [routerLink]="['/event', 'new']">
+      <a [routerLink]="['/browseEvents']">
         <button class="btn btn-success btn-block" [routerLink]="['/register']"
                 type="submit">Browse Events
         </button>

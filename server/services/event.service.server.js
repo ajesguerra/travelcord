@@ -3,12 +3,12 @@ module.exports = function (app) {
   var eventModel = require("../../model/event/event.model.server");
   var travelerModel = require("../../model/traveler/traveler.model.server");
 
-  app.get("/api/event/findAllEvents", findAllEvents);
   app.post("/api/event/:travelerId/newevent", createEvent);
+  app.post("/api/event/addTraveler/:eventId/:travelerId", addTravelerToEvent);
+  app.get("/api/event/findAllEvents", findAllEvents);
   app.get("/api/event/:eventId", findEventById);
   app.get("/api/traveler/:travelerId/event", findAllEventsForTraveler);
   app.put("/api/event/:eventId", updateEvent);
-  app.post("/api/event/addTraveler/:eventId/:travelerId", addTravelerToEvent);
   app.delete("/api/event/:eventId", deleteEvent);
 
   function createEvent(req, res) {

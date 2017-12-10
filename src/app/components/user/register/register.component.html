@@ -4,26 +4,52 @@
        class="alert alert-danger">
     {{errorMsg}}
   </div>
-  <input   placeholder="email"
-           name="email"
-           type="text"
-           class="form-control"
-           required
-           [(ngModel)]="email"/>
-  <input   name="password"
-           type="password"
-           class="form-control"
-           placeholder="password"
-           required
-           [(ngModel)]="password"/>
-  <input   name="vpassword"
-           type="password"
-           placeholder="verify password"
-           class="form-control"
-           required
-           [(ngModel)]="vpassword"/>
-  <a class="btn btn-primary btn-block"
-     (click)="register()">Register</a>
+  <input placeholder="email"
+         name="email"
+         type="text"
+         class="form-control"
+         required
+         [(ngModel)]="email"/>
+  <input name="password"
+         type="password"
+         class="form-control"
+         placeholder="password"
+         required
+         [(ngModel)]="password"/>
+  <input name="vpassword"
+         type="password"
+         placeholder="verify password"
+         class="form-control"
+         required
+         [(ngModel)]="vpassword"/>
+  <input name="userType"
+         id="traveler"
+         value="traveler"
+         type="radio"
+         class="form-control"
+         required
+         [(ngModel)]="userType"/>
+  <label for="traveler">Traveler</label>
+
+  <input name="userType"
+         id="marketer"
+         value="marketer"
+         type="radio"
+         class="form-control"
+         required
+         [(ngModel)]="userType"/>
+  <label for="marketer">Marketer</label>
+
+  <div [ngSwitch]="userType">
+    <div *ngSwitchCase="'traveler'">
+      <a class="btn btn-primary btn-block"
+         (click)="register()">Register as Traveler</a>
+    </div>
+    <div *ngSwitchCase="'marketer'">
+      <a class="btn btn-primary btn-block"
+         (click)="registerAsMarketer()">Register as Marketer</a>
+    </div>
+  </div>
   <a class="btn btn-danger btn-block"
-     [routerLink]="['/login']" >Cancel</a>
+     [routerLink]="['/login']">Cancel</a>
 </div>

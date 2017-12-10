@@ -37,6 +37,13 @@ import { EventEditComponent } from './components/event/event-edit/event-edit.com
 import { ActivityEditComponent } from './components/activity/activity-edit/activity-edit.component';
 import { ActivitysuggestionEditComponent } from './components/activity/activitysuggestion-edit/activitysuggestion-edit.component';
 import {SuggestionService} from './services/suggestion.service.client';
+import { PromptToLoginOrRegisterComponent } from './components/travelers/prompt-to-login-or-register/prompt-to-login-or-register.component';
+import { PromotionEditComponent } from './components/promotion/promotion-edit/promotion-edit.component';
+import { PromotionNewComponent } from './components/promotion/promotion-new/promotion-new.component';
+import { PromotionListComponent } from './components/promotion/promotion-list/promotion-list.component';
+import {MarketerService} from './services/marketer.service.client';
+import {PromotionService} from './services/promotion.service.client';
+
 
 @NgModule({
   // Declare components here
@@ -63,7 +70,11 @@ import {SuggestionService} from './services/suggestion.service.client';
     ActivityDetailsComponent,
     EventEditComponent,
     ActivityEditComponent,
-    ActivitysuggestionEditComponent
+    ActivitysuggestionEditComponent,
+    PromptToLoginOrRegisterComponent,
+    PromotionEditComponent,
+    PromotionNewComponent,
+    PromotionListComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +98,9 @@ import {SuggestionService} from './services/suggestion.service.client';
     SharedService,
     AuthGuard,
     ActivitiesService,
-    SuggestionService],
+    SuggestionService,
+    MarketerService,
+    PromotionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

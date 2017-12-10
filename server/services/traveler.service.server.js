@@ -187,10 +187,8 @@ module.exports = function (app) {
   }
 
   function followTraveler(req, res) {
-
     const personToFollow = req.params['personToFollow'];
     const travelerId = req.params['travelerId'];
-    console.log('in the server, traveler service, trying to follow ' + personToFollow);
     TravelerModel.findTravelerById(travelerId)
       .then(function (traveler) {
         if (traveler.following.includes(personToFollow)) {

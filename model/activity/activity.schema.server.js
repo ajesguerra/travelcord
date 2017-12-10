@@ -8,7 +8,8 @@ var ActivitySchema = mongoose.Schema ( {
   isDecided: Boolean,
   decidedActivity: {type:mongoose.Schema.Types.ObjectId, ref: 'ActivitySuggestionModel'},
   dateCreated: Date,
-  activitySuggestions: [{type:mongoose.Schema.Types.ObjectId, ref: 'ActivitySuggestionModel'}]
+  activitySuggestions: [{type:mongoose.Schema.Types.ObjectId, ref: 'ActivitySuggestionModel'}],
+  promotions: [{type:mongoose.Schema.Types.ObjectId, ref: 'PromotionModel'}]
 }, {collection: 'activity'});
 
 module.exports = ActivitySchema;
