@@ -14,16 +14,18 @@ import {ActivityNewComponent} from './components/activity/activity-new/activity-
 import {ActivitysuggestionListComponent} from './components/activity/activitysuggestion-list/activitysuggestion-list.component';
 import {ActivitysuggestionNewComponent} from './components/activity/activitysuggestion-new/activitysuggestion-new.component';
 import {ViewFollowingComponent} from './components/travelers/view-following/view-following.component';
+import {MainComponent} from "./components/user/main/main.component";
 
 const APP_ROUTES: Routes = [
   { path : 'places' , component: PlacestestComponent},
   { path : '' , component: LoginComponent},
   { path : 'test', component: TestComponent},
   { path : 'login' , component: LoginComponent},
+  { path : 'main' , component: MainComponent},
   { path : 'register' , component: RegisterComponent},
   { path : 'traveler' , component: ProfileComponent, canActivate: [AuthGuard]},
   { path : 'event-list/:tid' , component: EventListComponent, canActivate: [AuthGuard]},
-  { path : 'event-list' , component: EventListComponent, canActivate: [AuthGuard]},
+  { path : 'event-list' , component: MainComponent, canActivate: [AuthGuard]},
   { path : 'event/new' , component: EventNewComponent, canActivate: [AuthGuard]},
   { path : 'event/:eventId/activity' , component: ActivityListComponent, canActivate: [AuthGuard]},
   { path : 'event/:eventId/activity/new' , component: ActivityNewComponent, canActivate: [AuthGuard]},

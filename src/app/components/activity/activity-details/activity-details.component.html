@@ -1,0 +1,6 @@
+<div *ngIf="activityExists">
+  {{activity['activityName']}}<a [routerLink]="['/activity']">
+  <span class="glyphicon glyphicon-cog"></span></a>
+  <br>{{activity['description']}}
+  <br>
+</div>

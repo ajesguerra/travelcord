@@ -104,7 +104,7 @@ export class TravelerService {
     });
   }
 
-  findTravelerById(travelerId: string) {
+  findTravelerById(travelerId) {
     const url = this.baseUrl + '/api/traveler/' + travelerId;
     return this.http.get(url).map((response: Response) => {
       return response.json();
@@ -112,29 +112,20 @@ export class TravelerService {
   }
 
   findTravelerByEmail(email: string) {
+    console.log('trying to find traveler by email in client service');
     const url = this.baseUrl + '/api/traveler?email=' + email;
     return this.http.get(url).map((response: Response) => {
+      console.log('found traveler...');
+      console.log(response.json());
       return response.json();
     });
   }
 
   follow(travelerId, personToFollow) {
-    console.log('in traveler service client.  trying to follow..' + personToFollow);
     const url = this.baseUrl + '/api/traveler/' + travelerId + '/follow/' + personToFollow;
     return this.http.post(url, personToFollow).map((response: Response) => {
       return response.json();
     });
-  }
-
-  getFollowing(travelerId) {
-    const travelersFollowing = [];
-    for (let i = 0; i < this.sharedService.user['following'].length; i++) {
-      const url = this.baseUrl + '/api/traveler/' + travelerId;
-      return this.http.get(url).subscribe((response: Response) => {
-        travelersFollowing.push(response.json());
-      });
-    }
-    return travelersFollowing;
   }
   updateTraveler(travelerId, traveler) {
     const url = this.baseUrl + '/api/traveler/' + travelerId;

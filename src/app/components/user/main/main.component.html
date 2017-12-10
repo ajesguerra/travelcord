@@ -1,0 +1,70 @@
+<nav class="navbar navbar-fixed-top">
+  <div class="container-fluid header-footer-blue-steel">
+  </div>
+</nav>
+
+
+<div class="container main-content">
+  <!--Left-->
+  <div class="col-sm-3 col-xs-1">
+    <div *ngIf="loggedIn">
+      {{user['firstName']}}
+    </div>
+    <div *ngIf="!loggedIn">
+      <button class="btn btn-primary btn-block" [routerLink]="['/login']"
+              type="submit">Login
+      </button>
+      <button class="btn btn-success btn-block" [routerLink]="['/register']"
+              type="submit">Register
+      </button>
+    </div>
+  </div>
+
+  <!--Middle-->
+  <div class="col-sm-6 col-xs-1">
+    <div *ngIf="loggedIn">
+      Your Events |
+      <a [routerLink]="['/event', 'new']">Add
+        <span class="glyphicon glyphicon-plus"></span>
+      </a>
+      <app-event-list></app-event-list>
+
+      <a [routerLink]="['/event', 'new']">
+        <button class="btn btn-success btn-block" [routerLink]="['/register']"
+                type="submit">Browse Events
+        </button>
+      </a>
+    </div>
+
+    <div *ngIf="!loggedIn">
+      <app-event-browse></app-event-browse>
+    </div>
+  </div>
+
+  <!--Right-->
+  <div class="col-sm-3 col-xs-1">
+    <div *ngIf="loggedIn">
+      Following
+      <app-view-following></app-view-following>
+      <br>
+    </div>
+    <app-search-travelers></app-search-travelers>
+  </div>
+
+
+</div>
+
+
+<!-- Footer -->
+<nav class="navbar navbar-fixed-bottom header-footer-blue-steel">
+  <div class="container-fluid header-footer-blue-steel">
+
+    <!--tick mark-->
+    <p class="navbar-text pull-right">
+      <a [routerLink]="['/traveler']" class="nav-hover">
+        <span class="glyphicon glyphicon-user navbar-link"></span>
+      </a>
+    </p>
+  </div>
+</nav>
+<!-- End Footer-->

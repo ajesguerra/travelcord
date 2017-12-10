@@ -1,12 +1,5 @@
-<li class="list-group-item" *ngFor="let anotherTraveler of following">
-  <div class="row">
-    <div class="col-xs-9 col-sm-11">
-
-
-      FirstName: {{anotherTraveler['firstName']}}||
-    </div>
-    <div class="col-xs-3 col-sm-1 website-list-icon website-page-icons">
-
-    </div>
-  </div>
-</li>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let anotherTraveler of followingUsers">
+    <a [routerLink]="['/event-list', anotherTraveler['_id']]">{{anotherTraveler['firstName']}} {{anotherTraveler['lastName']}}</a>
+  </li>
+</ul>

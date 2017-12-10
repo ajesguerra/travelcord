@@ -6,11 +6,13 @@ module.exports = function (app) {
   var travelerModel = require('../../model/traveler/traveler.model.server');
 
   app.post('/api/activity/:eventId/newActivity', createActivity);
+  app.post('/api/activity/:activityId/markDecision/:suggestionId', markDecision);
   app.get('/api/activity/:eventId/allActivities', findAllActivitiesForEvent);
   app.get('/api/activity/:activityId', findActivityById);
 
   app.post('/api/suggestion/:activityId', addSuggestion);
   app.post('/api/suggestion/upvote/:suggestionId/:travelerId', upVote);
+  app.post('/api/suggestion/unvote/:suggestionId/:travelerId', unVote);
   app.get('/api/suggestion/:suggestionId', findSuggestionById);
 
   /**
@@ -21,7 +23,11 @@ module.exports = function (app) {
   function createActivity(req, res) {
     var eventId = req.params['eventId'];
     var activity = req.body;
-    console.log(activity);
+    suggestionModel.createSuggestion(null)
+      .then(function (suggestion) {
+        activity.decidedActivity = suggestion;
+      });
+    activity.isDecided = false;
     activityModel.createActivity(activity)
       .then(function (dbActivity) {
         eventModel.findEventById(eventId)
@@ -67,24 +73,62 @@ module.exports = function (app) {
   }
 
   function upVote(req, res) {
-    console.log('trying to up upvote for ');
     suggestionModel.findSuggestionById(req.params['suggestionId'])
       .then(function (suggestion) {
-        console.log('found suggestion: ' + suggestion);
         travelerModel.findTravelerById(req.params['travelerId'])
           .then(function (traveler) {
-            if (suggestion.travelerUpVoters.includes(req.params['travelerId']) > 0) {
-            } else {
-              suggestion.travelerUpVoters.push(req.params['travelerId']);
-              suggestion.save();
+            var alreadyVoted = false;
+            for (var i = 0; i < suggestion.travelerUpVoters.length; i++) {
+              if (suggestion.travelerUpVoters[i]._id == req.params['travelerId']) {
+                alreadyVoted = true;
+              }
             }
-            if (traveler.suggestionUpVotes.includes(req.params['suggestionId'])) {
+            if (alreadyVoted) {
             } else {
+              suggestion.travelerUpVoters.push(traveler);
+              suggestion.save();
               traveler.suggestionUpVotes.push(req.params['suggestionId']);
               traveler.save();
+            }
+
+            res.json(suggestion);
+          });
+      });
+  }
+
+  function unVote(req, res) {
+    console.log('unvoting in server');
+    suggestionModel.findSuggestionById(req.params['suggestionId'])
+      .then(function (suggestion) {
+        travelerModel.findTravelerById(req.params['travelerId'])
+          .then(function (traveler) {
+            for (var i = 0; i < suggestion.travelerUpVoters.length; i++) {
+              if (suggestion.travelerUpVoters[i]._id == req.params['travelerId']) {
+                suggestion.travelerUpVoters.splice(i, 1);
+                suggestion.save();
+              }
+            }
+            for (var j = 0; j < traveler.suggestionUpVotes.length; j++) {
+              if (traveler.suggestionUpVotes[j] == req.params['suggestionId']) {
+                traveler.suggestionUpVotes.splice(j, 1);
+                traveler.save();
+              }
             }
             res.json(suggestion);
           });
       });
+  }
+
+  function markDecision(req, res) {
+    activityModel.findActivityById(req.params['activityId'])
+      .then(function (activity) {
+        activity.isDecided = true;
+        suggestionModel.findSuggestionById(req.params['suggestionId'])
+          .then(function (suggestion) {
+            activity.decidedActivity = suggestion;
+            activity.save();
+            res.json(activity);
+          })
+      })
   }
 };

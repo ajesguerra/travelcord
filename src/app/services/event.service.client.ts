@@ -14,6 +14,13 @@ export class EventService {
     });
   }
 
+  findAllEvents() {
+    const url = this.baseUrl + '/api/event/findAllEvents';
+    return this.http.get(url).map((response: Response) => {
+      return response.json();
+    });
+  }
+
   findAllEventsForTraveler(travelerId) {
     const url = this.baseUrl + '/api/traveler/' + travelerId + '/event';
     return this.http.get(url).map((response: Response) => {
@@ -38,6 +45,13 @@ export class EventService {
   deleteEvent(eventId) {
     const url = this.baseUrl + '/api/event/' + eventId;
     return this.http.delete(url, eventId).map((response: Response) => {
+      return response.json();
+    });
+  }
+
+  addTravelerToEvent(travelerId, eventId) {
+    const url = this.baseUrl + '/api/event/addTraveler/' + eventId + '/' + travelerId;
+    return this.http.post(url, event).map((response: Response) => {
       return response.json();
     });
   }

@@ -6,7 +6,7 @@ var ActivitySchema = mongoose.Schema ( {
   startDate: Date,
   endDate: Date,
   isDecided: Boolean,
-  decidedActivity: {type:mongoose.Schema.Types.ObjectId, ref: 'ActivityModel'},
+  decidedActivity: {type:mongoose.Schema.Types.ObjectId, ref: 'ActivitySuggestionModel'},
   dateCreated: Date,
   activitySuggestions: [{type:mongoose.Schema.Types.ObjectId, ref: 'ActivitySuggestionModel'}]
 }, {collection: 'activity'});

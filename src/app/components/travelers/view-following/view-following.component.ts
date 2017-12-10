@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TravelerService} from '../../../services/traveler.service.client';
 import {SharedService} from '../../../services/shared.service.client';
 
@@ -8,20 +8,24 @@ import {SharedService} from '../../../services/shared.service.client';
   styleUrls: ['./view-following.component.css']
 })
 export class ViewFollowingComponent implements OnInit {
-  following: [{}];
+  following: string[];
+  followingUsers = [];
   traveler: {};
+
   constructor(private travelerService: TravelerService,
               private sharedService: SharedService) {
   }
 
   ngOnInit() {
     this.traveler = this.sharedService.user;
-    for (let x = 0; x < this.sharedService.user['following'].length; x++) {
-      this.travelerService.findTravelerById(this.sharedService.user['following'][x])
-        .subscribe((traveler: any) => {
-          this.following.push(traveler);
-        });
+    this.following = this.traveler['following'];
+    if (this.following) {
+      for (let i = 0; i < this.following.length; i++) {
+        this.travelerService.findTravelerById(this.following[i])
+          .subscribe((traveler: any) => {
+            this.followingUsers.push(traveler);
+          });
+      }
     }
   }
-
 }

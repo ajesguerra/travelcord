@@ -1,0 +1,15 @@
+<input placeholder="email"
+       name="email"
+       type="text"
+       class="form-control"
+       required
+       [(ngModel)]="searchTerm"/>
+<a class="btn btn-primary btn-block"
+   (click)="findUser()">Find User</a>
+<div *ngIf="userSearched">
+  {{travelerSearchedFor.firstName}} {{travelerSearchedFor.lastName}}
+  <div *ngIf="canAddToEvent">
+    <a (click)="addUserToEvent()">Add to event</a>
+  </div>
+  <a (click)="follow(travelerSearchedFor._id)">Follow</a>
+</div>

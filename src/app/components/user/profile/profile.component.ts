@@ -51,4 +51,11 @@ export class ProfileComponent implements OnInit {
       this.router.navigate(['/login']);
     });
   }
+
+  logout() {
+    this.travelerService.logout()
+      .subscribe(
+        (data: any) => this.router.navigate(['/login'])
+      );
+  }
 }

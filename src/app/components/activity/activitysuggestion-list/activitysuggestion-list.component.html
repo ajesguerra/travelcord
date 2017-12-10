@@ -24,27 +24,46 @@
 </nav>
 
 
-
 <div class="main-body-content">
-  <ul class="list-group">
-    list of suggestions
-    <li class="list-group-item" *ngFor="let suggestion of suggestions">
-      <div class="row">
-        <div class="col-xs-9 col-sm-11">
-          ID: {{suggestion['_id']}}
-          <br><a (click)="upVote(suggestion['_id'])">Upvote</a>
-          <br>Total upvotes: {{suggestion['travelerUpVoters'].length}}
-          <br>Suggestion Name: {{suggestion['activitySuggestionName']}}
-          <br>Location: {{suggestion['suggestionLocation']}}
+  <div class="col-xs-2">
+    <app-activity-details></app-activity-details>
+  </div>
+
+  <div class="col-xs-6">
+    <ul class="list-group">
+      list of suggestions
+      <li class="list-group-item" *ngFor="let suggestion of suggestions">
+        <div class="row">
+          <div class="col-xs-9 col-sm-11">
+            ID: {{suggestion['_id']}}
+            <br><a (click)="upVote(suggestion['_id'])">Upvote</a>
+            | <a (click)="markAsDecided(suggestion['_id'])">Mark as decided</a>
+
+            <br>
+            <a (click)="unVote(suggestion['_id'])">undo vote</a>
+            <br>
+            People who voted for this suggestion:
+            <div *ngFor="let voter of suggestion['travelerUpVoters']">
+              {{voter['firstName']}}
+            </div>
+
+
+            <br>Total upvotes: {{suggestion['travelerUpVoters'].length}}
+            <br>Suggestion Name: {{suggestion['activitySuggestionName']}}
+            <br>Location: {{suggestion['suggestionLocation']}}
+          </div>
+          <div class="col-xs-3 col-sm-1 website-list-icon website-page-icons">
+            <a [routerLink]="['/event']">
+              <span class="glyphicon glyphicon-cog"></span>
+            </a>
+          </div>
         </div>
-        <div class="col-xs-3 col-sm-1 website-list-icon website-page-icons">
-          <a [routerLink]="['/event']">
-            <span class="glyphicon glyphicon-cog"></span>
-          </a>
-        </div>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </ul>
+
+  </div>
+
+
 </div>
 
 

@@ -10,7 +10,7 @@
 
     <p class="navbar-header pull-left">
       <a class="navbar-brand thick">
-        <b>Activities</b>
+        <b>Activities for {{event['eventName']}}</b>
       </a>
     </p>
 
@@ -24,26 +24,45 @@
 </nav>
 
 
-
 <div class="main-body-content">
-  <ul class="list-group">
-    list of activities
-    <li class="list-group-item" *ngFor="let activity of activities">
-      <div class="row">
-        <div class="col-xs-9 col-sm-11">
-          {{activity['_id']}}
+
+  <div class="col-xs-2">
+    <app-event-details></app-event-details>
+  </div>
+
+  <div class="col-xs-6">
+    <ul class="list-group">
+      list of activities
+      <li class="list-group-item" *ngFor="let activity of activities">
+
+        {{activity['startDate']}}
+        <a [routerLink]="['/event', eventId, activity['_id']]">{{activity.activityName}}</a>
+
+        <div *ngIf="activity['isDecided']">
+          Decided Activity:
+          {{activity['decidedActivity'].activitySuggestionName}}
+          <br>
+          {{activity['decidedActivity'].suggestionLocation}}
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-xs-4">
+    Users in this event:
+    <div *ngFor="let traveler of event['travelers']">
+      {{traveler.firstName}} {{traveler.lastName}}
+    </div>
+    <br><br><br>
+
+    <div *ngIf="userIsOwner">
+      Add Users To This Event:
+      <br>
+      <app-search-travelers></app-search-travelers>
+    </div>
 
 
-          <a [routerLink]="['/event', eventId, activity['_id']]">{{activity.activityName}}</a>
-        </div>
-        <div class="col-xs-3 col-sm-1 website-list-icon website-page-icons">
-          <a [routerLink]="['/event', activity['_id']]">
-            <span class="glyphicon glyphicon-cog"></span>
-          </a>
-        </div>
-      </div>
-    </li>
-  </ul>
+  </div>
 </div>
 
 

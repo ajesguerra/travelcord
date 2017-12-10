@@ -10,7 +10,7 @@ import {SharedService} from '../../../services/shared.service.client';
   styleUrls: ['./activitysuggestion-list.component.css']
 })
 export class ActivitysuggestionListComponent implements OnInit {
-  suggestions: [{}];
+  suggestions: any;
   activityId: string;
   eventId: string;
   constructor(private activitiesService: ActivitiesService,
@@ -34,6 +34,17 @@ export class ActivitysuggestionListComponent implements OnInit {
   upVote(suggestionId) {
     this.activitiesService.upVote(this.sharedService.user['_id'], suggestionId).subscribe((suggestion: any) => {
       this.ngOnInit();
+    });
+  }
+
+  unVote(suggestionId) {
+    this.activitiesService.unVote(this.sharedService.user['_id'], suggestionId).subscribe((suggestion: any) => {
+      this.ngOnInit();
+    });
+  }
+
+  markAsDecided(suggestionId) {
+    this.activitiesService.markAsDecided(this.activityId, suggestionId).subscribe((activity: any) => {
     });
   }
 }

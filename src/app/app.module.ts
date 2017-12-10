@@ -28,6 +28,11 @@ import {AuthGuard} from './services/auth-guard.service';
 import {ActivitiesService} from './services/activities.service.client';
 import {ViewTravelersComponent} from './components/travelers/view-travelers/view-travelers.component';
 import { ViewFollowingComponent } from './components/travelers/view-following/view-following.component';
+import { MainComponent } from './components/user/main/main.component';
+import { SearchTravelersComponent } from './components/travelers/search-travelers/search-travelers.component';
+import { EventBrowseComponent } from './components/event/event-browse/event-browse.component';
+import { EventDetailsComponent } from './components/event/event-details/event-details.component';
+import { ActivityDetailsComponent } from './components/activity/activity-details/activity-details.component';
 
 @NgModule({
   // Declare components here
@@ -46,7 +51,12 @@ import { ViewFollowingComponent } from './components/travelers/view-following/vi
     ActivitysuggestionNewComponent,
     ActivitysuggestionListComponent,
     ViewTravelersComponent,
-    ViewFollowingComponent
+    ViewFollowingComponent,
+    MainComponent,
+    SearchTravelersComponent,
+    EventBrowseComponent,
+    EventDetailsComponent,
+    ActivityDetailsComponent
   ],
   imports: [
     BrowserModule,

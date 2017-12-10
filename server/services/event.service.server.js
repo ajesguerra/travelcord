@@ -3,10 +3,12 @@ module.exports = function (app) {
   var eventModel = require("../../model/event/event.model.server");
   var travelerModel = require("../../model/traveler/traveler.model.server");
 
+  app.get("/api/event/findAllEvents", findAllEvents);
   app.post("/api/event/:travelerId/newevent", createEvent);
   app.get("/api/event/:eventId", findEventById);
   app.get("/api/traveler/:travelerId/event", findAllEventsForTraveler);
   app.put("/api/traveler/:eventId", updateEvent);
+  app.post("/api/event/addTraveler/:eventId/:travelerId", addTravelerToEvent);
   app.delete("/api/traveler/:eventId", deleteEvent);
 
   function createEvent(req, res) {
@@ -54,6 +56,27 @@ module.exports = function (app) {
     eventModel.deleteWebsite(req.params['websiteId'])
       .then(function (websites) {
         res.json(websites);
+      });
+  }
+
+  function addTravelerToEvent(req, res) {
+    eventModel.findEventById(req.params['eventId'])
+      .then(function (event) {
+        travelerModel.findTravelerById(req.params['travelerId'])
+          .then(function (traveler) {
+            event.travelers.push(traveler);
+            event.save();
+            traveler.events.push(event);
+            traveler.save();
+            res.json(event);
+          });
+      })
+  }
+
+  function findAllEvents(req, res) {
+    eventModel.findAllEvents()
+      .then(function (events) {
+        res.json(events);
       });
   }
 };

@@ -11,9 +11,6 @@ ActivityModel.deleteActivity = deleteActivity;
 module.exports = ActivityModel;
 
 function createActivity(activity) {
-  console.log("activitymodel is creating the activity");
-  console.log(activity);
-  console.log(activity.activityName);
   return ActivityModel.create(activity)
     .then(function (dbActivity) {
       return dbActivity;
@@ -21,7 +18,9 @@ function createActivity(activity) {
 }
 
 function findActivityById(activityId) {
-  return ActivityModel.findOne({_id: activityId});
+  return ActivityModel.findOne({_id: activityId})
+    .populate('decidedActivity')
+    .exec();
 }
 
 function updateActivity(eventId, event) {

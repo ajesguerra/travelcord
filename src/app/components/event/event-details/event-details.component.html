@@ -1,0 +1,8 @@
+<div *ngIf="eventExists">
+  {{event['eventName']}}<a [routerLink]="['/event', event['_id']]">
+  <span class="glyphicon glyphicon-cog"></span></a>
+  <br>{{event['description']}}
+  <br>
+  Owner: {{event['owner']['email']}}
+
+</div>

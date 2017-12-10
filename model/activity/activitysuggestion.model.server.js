@@ -12,5 +12,7 @@ function createSuggestion(suggestion) {
 }
 
 function findSuggestionById(suggestionId) {
-  return ActivitySuggestionModel.findOne({_id: suggestionId});
+  return ActivitySuggestionModel.findOne({_id: suggestionId})
+    .populate('travelerUpVoters')
+    .exec();
 }

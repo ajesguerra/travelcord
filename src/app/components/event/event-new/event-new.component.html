@@ -45,20 +45,7 @@
     <div class="row aj-content-full-height">
 
       <div class="col-sm-3 hidden-xs aj-split-content-left">
-        <ul class="list-group">
-          <li class="list-group-item" *ngFor="let anEvent of events">
-            <div class="row">
-              <div class="col-sm-9 nav-padding-zero">
-                <a [routerLink]="['/event', anEvent['_id'], 'page']">{{anEvent['eventName']}}</a>
-              </div>
-              <div class="col-sm-3 nav-padding-zero">
-                <a [routerLink]="['/event', anEvent['_id']]">
-                  <span class="glyphicon glyphicon-cog pull-right"></span>
-                </a>
-              </div>
-            </div>
-          </li>
-        </ul>
+        <app-event-list></app-event-list>
       </div>
 
       <div class="col-sm-9 col-sm-12 aj-split-content-right">

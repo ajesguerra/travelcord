@@ -48,7 +48,7 @@ export class ActivitiesService {
     return this.http.get(url).map((response: Response) => {
       for (let i = 0; i < response.json().activitySuggestions.length; i++) {
         const url2 = this.baseUrl + '/api/suggestion/' + response.json().activitySuggestions[i];
-        return this.http.get(url2).subscribe((response2: Response) => {
+        this.http.get(url2).subscribe((response2: Response) => {
           suggestions.push(response2.json());
         });
       }
@@ -58,6 +58,20 @@ export class ActivitiesService {
 
   upVote(travelerId, suggestionId) {
     const url = this.baseUrl + '/api/suggestion/upvote/' + suggestionId + '/' + travelerId;
+    return this.http.post(url, suggestionId).map((response: Response) => {
+      return response.json();
+    });
+  }
+
+  unVote(travelerId, suggestionId) {
+    const url = this.baseUrl + '/api/suggestion/unvote/' + suggestionId + '/' + travelerId;
+    return this.http.post(url, suggestionId).map((response: Response) => {
+      return response.json();
+    });
+  }
+
+  markAsDecided(activityId, suggestionId) {
+    const url = this.baseUrl + '/api/activity/' + activityId + '/markDecision/' + suggestionId;
     return this.http.post(url, suggestionId).map((response: Response) => {
       return response.json();
     });

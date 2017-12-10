@@ -4,6 +4,7 @@ var EventModel = mongoose.model("EventModel", EventSchema);
 var TravelerModel = require('../traveler/traveler.model.server');
 
 EventModel.createEvent = createEvent;
+EventModel.findAllEvents = findAllEvents;
 EventModel.findAllEventsForTraveler = findAllEventsForTraveler;
 EventModel.findEventById = findEventById;
 EventModel.updateEvent = updateEvent;
@@ -13,6 +14,7 @@ module.exports = EventModel;
 
 function createEvent(travelerId, event) {
   var newEvent = null;
+  event.dateCreated = new Date(Date.now());
   return EventModel.create(event)
     .then(function (event) {
       newEvent = event;
@@ -26,12 +28,18 @@ function createEvent(travelerId, event) {
     });
 }
 
+function findAllEvents() {
+  return EventModel.find();
+}
 function findAllEventsForTraveler(travelerId) {
   return EventModel.find({_id: travelerId});
 }
 
 function findEventById(eventId) {
-  return EventModel.findOne({_id: eventId});
+  return EventModel.findOne({_id: eventId})
+    .populate('travelers')
+    .populate('owner')
+    .exec();
 }
 
 function updateEvent(eventId, event) {
