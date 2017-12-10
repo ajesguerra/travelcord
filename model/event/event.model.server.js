@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var EventSchema = require("./event.schema.server");
 var EventModel = mongoose.model("EventModel", EventSchema);
+var ActivitiesModel = require('../activity/activity.model.sever');
+var ActivitiesSuggestionModel = require('../activity/activitysuggestion.model.server');
 var TravelerModel = require('../traveler/traveler.model.server');
 
 EventModel.createEvent = createEvent;
@@ -31,15 +33,24 @@ function createEvent(travelerId, event) {
 function findAllEvents() {
   return EventModel.find();
 }
+
 function findAllEventsForTraveler(travelerId) {
   return EventModel.find({_id: travelerId});
 }
 
+// https://stackoverflow.com/questions/28179720/mongoose-populate-nested-array
 function findEventById(eventId) {
   return EventModel.findOne({_id: eventId})
     .populate('travelers')
     .populate('owner')
-    .populate('activities')
+    .populate({
+      path: 'activities',
+      model: ActivitiesModel,
+      populate: {
+        path: 'decidedActivity',
+        model: ActivitiesSuggestionModel
+      }
+    })
     .exec();
 }
 
