@@ -43,7 +43,6 @@ export class EventService {
   }
 
   deleteEvent(eventId) {
-    console.log(eventId);
     const url = this.baseUrl + '/api/event/' + eventId;
     return this.http.delete(url, eventId).map((response: Response) => {
       return response.json();
