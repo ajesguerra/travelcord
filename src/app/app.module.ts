@@ -46,6 +46,7 @@ import {ProfileMarketerComponent} from './components/marketer/profile/profile.co
 import {AdminServiceClient} from './services/admin.service.client';
 import {MarketerServiceClient} from './services/marketer.service.client';
 import {AllUsersGuardService} from './services/all-users-guard.service';
+import { AdminMainComponent } from './components/admin/admin-main/admin-main.component';
 
 
 @NgModule({
@@ -78,7 +79,8 @@ import {AllUsersGuardService} from './services/all-users-guard.service';
     PromotionEditComponent,
     PromotionNewComponent,
     PromotionListComponent,
-    ProfileMarketerComponent
+    ProfileMarketerComponent,
+    AdminMainComponent
   ],
   imports: [
     BrowserModule,

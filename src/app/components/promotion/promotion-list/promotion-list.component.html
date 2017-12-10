@@ -5,6 +5,9 @@
       <div class="row">
         <a [routerLink]="['/promotion', aPromotion['_id']]">{{aPromotion['suggestionName']}}</a>
       </div>
+      Analytics
+      <br>Number of Activities Suggested to: {{aPromotion['addedToActivitiesTotal']}}
+      <br>Views: {{aPromotion['views']}}
     </li>
 
   </ul>

@@ -10,15 +10,6 @@ module.exports = function (app) {
   app.delete('/api/promotion/delete/:promotionId/:travelerId', deletePromotion);
   app.delete('/api/promotion/deleteOne/:promotionId/:activityId', removePromotionForMe);
   app.put('/api/promotion/deploy/:promotionId', deployPromotion);
-  //everything above this line has been completed.
-
-  app.post('/api/promotion/:promotionId/markDecision/:suggestionId', markDecision);
-  app.get('/api/promotion/:eventId/allActivities', findAllActivitiesForEvent);
-
-  app.post('/api/suggestion/:promotionId', addSuggestion);
-  app.post('/api/suggestion/upvote/:suggestionId/:travelerId', upVote);
-  app.post('/api/suggestion/unvote/:suggestionId/:travelerId', unVote);
-  app.get('/api/suggestion/:suggestionId', findSuggestionById);
 
   function createPromotion(req, res) {
     PromotionModel.createPromotion(req.params['travelerId'], req.body)
@@ -74,13 +65,18 @@ module.exports = function (app) {
   }
 
   function deployPromotion(req, res) {
-    ActivityModel.findAllActivities()
-      .then(function (allActivities) {
-        for (var x = 0; x < allActivities.length; x++) {
-          allActivities[x]['promotions'].push(req.body);
-          allActivities[x].save();
-          res.json(req.body);
-        }
+    PromotionModel.findPromotionById(req.params['promotionId'])
+      .then(function (promotion) {
+        ActivityModel.findAllActivities()
+          .then(function (allActivities) {
+            for (var x = 0; x < allActivities.length; x++) {
+              allActivities[x]['promotions'].push(req.body);
+              allActivities[x].save();
+              promotion.addedToActivitiesTotal += 1;
+              promotion.save();
+            }
+            res.json(req.body);
+          });
       });
   }
 
@@ -89,7 +85,6 @@ module.exports = function (app) {
       .then(function (activity) {
         for (var i = 0; i < activity['promotions'].length; i++) {
           if (activity['promotions'][i]['_id'] == req.params['promotionId']) {
-            console.log('trying to splice');
             activity.promotions.splice(i, 1);
             activity.save();
             res.send(activity);
@@ -97,23 +92,4 @@ module.exports = function (app) {
         }
       });
   }
-
-  function addSuggestion(req, res) {
-  }
-
-  function findAllActivitiesForEvent(req, res) {
-  }
-
-  function findSuggestionById(req, res) {
-  }
-
-  function upVote(req, res) {
-  }
-
-  function unVote(req, res) {
-  }
-
-  function markDecision(req, res) {
-  }
-
 };

@@ -52,6 +52,11 @@ export class ActivitysuggestionListComponent implements OnInit {
     this.activitiesService.findActivityById(this.activityId).subscribe((activity: any) => {
       this.activity = activity;
       this.promotions = this.activity['promotions'];
+
+      for (let v = 0; v < this.promotions.length; v++) {
+        this.promotions[v]['views'] += 1;
+        this.promotionService.updatePromotion(this.promotions[v]).subscribe((promotion: any) => {});
+      }
     });
 
     if (this.sharedService.user['_id']) {
