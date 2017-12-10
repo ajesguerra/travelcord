@@ -1,8 +1,10 @@
 <div *ngIf="eventExists">
-  {{event['eventName']}}<a [routerLink]="['/event', event['_id']]">
-  <span class="glyphicon glyphicon-cog"></span></a>
-  <br>{{event['description']}}
+  {{event['eventName']}}
   <br>
-  Owner: {{event['owner']['email']}}
-
+  {{event['description']}}
+  <br>Owner: {{event['owner']['email']}}
+</div>
+<div *ngIf="isEventOwner"><a (click)="showEdit=!showEdit">Edit event</a></div>
+<div *ngIf="showEdit">
+  <app-event-edit></app-event-edit>
 </div>

@@ -33,6 +33,8 @@ import { SearchTravelersComponent } from './components/travelers/search-traveler
 import { EventBrowseComponent } from './components/event/event-browse/event-browse.component';
 import { EventDetailsComponent } from './components/event/event-details/event-details.component';
 import { ActivityDetailsComponent } from './components/activity/activity-details/activity-details.component';
+import { EventEditComponent } from './components/event/event-edit/event-edit.component';
+import { ActivityEditComponent } from './components/activity/activity-edit/activity-edit.component';
 
 @NgModule({
   // Declare components here
@@ -56,7 +58,9 @@ import { ActivityDetailsComponent } from './components/activity/activity-details
     SearchTravelersComponent,
     EventBrowseComponent,
     EventDetailsComponent,
-    ActivityDetailsComponent
+    ActivityDetailsComponent,
+    EventEditComponent,
+    ActivityEditComponent
   ],
   imports: [
     BrowserModule,

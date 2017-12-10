@@ -39,6 +39,7 @@ function findEventById(eventId) {
   return EventModel.findOne({_id: eventId})
     .populate('travelers')
     .populate('owner')
+    .populate('activities')
     .exec();
 }
 

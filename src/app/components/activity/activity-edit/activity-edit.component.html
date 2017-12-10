@@ -1,0 +1,48 @@
+<div *ngIf="isEventOwner">
+  <div *ngIf="errorFlag"
+       class="alert alert-danger">
+    {{errorMsg}}
+  </div>
+  <form>
+    <div class="form-group">
+      <label for="activityName">Activity Name</label>
+      <input placeholder="Dinner"
+             id="activityName"
+             name="activityName"
+             type="text"
+             class="form-control"
+             required
+             [(ngModel)]="activityName"/>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input placeholder="2017 trip with Alice and Bob"
+             id="description"
+             name="description"
+             type="text"
+             class="form-control"
+             required
+             [(ngModel)]="description"/>
+    </div>
+
+    <div class="form-group">
+      <label for="startDate">Start Date</label>
+      <br>
+      Current: {{startDate | date: 'yyyy-MM-dd' }}
+      <input   id="startDate"
+               name="startDate"
+               type="Date"
+               class="form-control"
+               required
+               [(ngModel)]="newStartDate"/>
+    </div>
+
+    <a class="btn btn-primary btn-block"
+       (click)="updateActivity()">Update</a>
+
+    <a class="btn btn-danger btn-block"
+       (click)="deleteActivity()">Delete</a>
+
+  </form>
+</div>

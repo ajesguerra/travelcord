@@ -76,4 +76,18 @@ export class ActivitiesService {
       return response.json();
     });
   }
+
+  updateActivity(activityId, activity)  {
+    const url = this.baseUrl + '/api/activity/' + activityId;
+    return this.http.put(url, activity).map((response: Response) => {
+      return response.json();
+    });
+  }
+
+  deleteActivity(activityId) {
+    const url = this.baseUrl + '/api/activity/' + activityId;
+    return this.http.delete(url, activityId).map((response: Response) => {
+      return response.json();
+    });
+  }
 }

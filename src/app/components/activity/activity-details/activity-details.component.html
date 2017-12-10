@@ -1,6 +1,11 @@
 <div *ngIf="activityExists">
-  {{activity['activityName']}}<a [routerLink]="['/activity']">
-  <span class="glyphicon glyphicon-cog"></span></a>
+  {{activity['activityName']}}
   <br>{{activity['description']}}
   <br>
+  <div *ngIf="isEventOwner">
+    <a (click)="showEdit=!showEdit">Edit Activity</a>
+    <div *ngIf="showEdit">
+      <app-activity-edit></app-activity-edit>
+    </div>
+  </div>
 </div>

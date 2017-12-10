@@ -26,16 +26,16 @@
 
 <div class="main-body-content">
 
-  <div class="col-xs-2">
+  <div class="col-xs-3">
     <app-event-details></app-event-details>
   </div>
 
-  <div class="col-xs-6">
+  <div class="col-xs-5">
     <ul class="list-group">
       list of activities
       <li class="list-group-item" *ngFor="let activity of activities">
 
-        {{activity['startDate']}}
+        {{activity['startDate'] | date:'MM-dd-yyyy'}}
         <a [routerLink]="['/event', eventId, activity['_id']]">{{activity.activityName}}</a>
 
         <div *ngIf="activity['isDecided']">
@@ -51,6 +51,7 @@
   <div class="col-xs-4">
     Users in this event:
     <div *ngFor="let traveler of event['travelers']">
+
       {{traveler.firstName}} {{traveler.lastName}}
     </div>
     <br><br><br>

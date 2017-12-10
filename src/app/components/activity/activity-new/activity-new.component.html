@@ -61,10 +61,7 @@
                      required
                      [(ngModel)]="activityname"/>
           </div>
-          {{activityname}}
-        </form>
 
-        <form>
           <div class="form-group">
             <label for="description">Description</label>
             <input   placeholder="description"
@@ -75,6 +72,18 @@
                      required
                      [(ngModel)]="description"/>
           </div>
+
+          <div class="form-group">
+            <label for="startDate">Start Date</label>
+            <input   placeholder="Date"
+                     id="startDate"
+                     name="startDate"
+                     type="Date"
+                     class="form-control"
+                     required
+                     [(ngModel)]="startDate"/>
+          </div>
+
         </form>
 
 

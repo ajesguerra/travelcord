@@ -9,6 +9,8 @@ module.exports = function (app) {
   app.post('/api/activity/:activityId/markDecision/:suggestionId', markDecision);
   app.get('/api/activity/:eventId/allActivities', findAllActivitiesForEvent);
   app.get('/api/activity/:activityId', findActivityById);
+  app.put('/api/activity/:activityId', updateActivity);
+  app.delete('/api/activity/:activityId', deleteActivity);
 
   app.post('/api/suggestion/:activityId', addSuggestion);
   app.post('/api/suggestion/upvote/:suggestionId/:travelerId', upVote);
@@ -17,8 +19,8 @@ module.exports = function (app) {
 
   /**
    app.get('/api/event/:eventId', findEventById);
-   app.put('/api/traveler/:eventId', updateEvent);
-   app.delete('/api/traveler/:eventId', deleteEvent);
+
+
    **/
   function createActivity(req, res) {
     var eventId = req.params['eventId'];
@@ -130,5 +132,19 @@ module.exports = function (app) {
             res.json(activity);
           })
       })
+  }
+
+  function updateActivity(req, res) {
+    activityModel.updateActivity(req.params['activityId'], req.body)
+      .then(function (activity) {
+        res.json(activity);
+      });
+  }
+
+  function deleteActivity(req, res) {
+    activityModel.deleteActivity(req.params['activityId'])
+      .then(function (activity) {
+        res.json(activity);
+      });
   }
 };

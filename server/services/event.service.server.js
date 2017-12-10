@@ -7,14 +7,13 @@ module.exports = function (app) {
   app.post("/api/event/:travelerId/newevent", createEvent);
   app.get("/api/event/:eventId", findEventById);
   app.get("/api/traveler/:travelerId/event", findAllEventsForTraveler);
-  app.put("/api/traveler/:eventId", updateEvent);
+  app.put("/api/event/:eventId", updateEvent);
   app.post("/api/event/addTraveler/:eventId/:travelerId", addTravelerToEvent);
-  app.delete("/api/traveler/:eventId", deleteEvent);
+  app.delete("/api/event/:eventId", deleteEvent);
 
   function createEvent(req, res) {
     var travelerId = req.body.owner;
     var event = req.body;
-    var newEvent = null;
     console.log(event);
     eventModel.createEvent(travelerId, event)
       .then(function (event) {
@@ -46,16 +45,16 @@ module.exports = function (app) {
   }
 
   function updateEvent(req, res) {
-    eventModel.updateWebsite(req.params['websiteId'], req.body)
-      .then(function (websites) {
-        res.json(websites);
+    eventModel.updateEvent(req.params['eventId'], req.body)
+      .then(function (event) {
+        res.json(event);
       });
   }
 
   function deleteEvent(req, res) {
-    eventModel.deleteWebsite(req.params['websiteId'])
-      .then(function (websites) {
-        res.json(websites);
+    eventModel.deleteEvent(req.params['eventId'])
+      .then(function (event) {
+        res.json(event);
       });
   }
 

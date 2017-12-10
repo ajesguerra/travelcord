@@ -15,6 +15,8 @@ export class SearchTravelersComponent implements OnInit {
   travelerSearchedFor: any;
   event: {};
   canAddToEvent: boolean;
+  firstNameExists: boolean;
+  lastNameExists: boolean;
 
   constructor(private travelerService: TravelerService,
               private eventService: EventService,
@@ -26,6 +28,8 @@ export class SearchTravelersComponent implements OnInit {
   ngOnInit() {
     this.userSearched = false;
     this.canAddToEvent = false;
+    this.firstNameExists = false;
+    this.lastNameExists = false;
     this.activatedRoute.params
       .subscribe(
         (params: any) => {
@@ -41,6 +45,12 @@ export class SearchTravelersComponent implements OnInit {
   findUser() {
     this.travelerService.findTravelerByEmail(this.searchTerm).subscribe((traveler: any) => {
       this.travelerSearchedFor = traveler;
+      if (this.travelerSearchedFor['firstName']) {
+        this.firstNameExists = true;
+      }
+      if (this.travelerSearchedFor['lastName']) {
+        this.lastNameExists = true;
+      }
       this.userSearched = true;
       if (this.event) {
         this.canAddToEvent = true;

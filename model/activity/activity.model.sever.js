@@ -11,8 +11,10 @@ ActivityModel.deleteActivity = deleteActivity;
 module.exports = ActivityModel;
 
 function createActivity(activity) {
+  console.log(activity);
   return ActivityModel.create(activity)
     .then(function (dbActivity) {
+      console.log(dbActivity);
       return dbActivity;
     });
 }
@@ -23,10 +25,10 @@ function findActivityById(activityId) {
     .exec();
 }
 
-function updateActivity(eventId, event) {
-  return EventModel.update({_id: eventId}, event);
+function updateActivity(activityId, activity) {
+  return ActivityModel.update({_id: activityId}, activity);
 }
 
-function deleteActivity(eventId) {
-  return EventModel.deleteOne({_id: eventId});
+function deleteActivity(activityId) {
+  return ActivityModel.deleteOne({_id: activityId});
 }

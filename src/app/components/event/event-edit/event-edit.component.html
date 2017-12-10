@@ -1,0 +1,36 @@
+<div *ngIf="isEventOwner">
+  <div *ngIf="errorFlag"
+       class="alert alert-danger">
+    {{errorMsg}}
+  </div>
+  <form>
+    <div class="form-group">
+      <label for="eventname">Event Name</label>
+      <input placeholder="Trip to Japan"
+             id="eventname"
+             name="eventname"
+             type="text"
+             class="form-control"
+             required
+             [(ngModel)]="eventname"/>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input placeholder="2017 trip with Alice and Bob"
+             id="description"
+             name="description"
+             type="text"
+             class="form-control"
+             required
+             [(ngModel)]="description"/>
+    </div>
+
+    <a class="btn btn-primary btn-block"
+       (click)="updateEvent()">Update</a>
+
+    <a class="btn btn-danger btn-block"
+       (click)="deleteEvent()">Delete</a>
+
+  </form>
+</div>

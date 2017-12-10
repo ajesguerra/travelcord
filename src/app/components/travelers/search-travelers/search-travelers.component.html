@@ -7,7 +7,13 @@
 <a class="btn btn-primary btn-block"
    (click)="findUser()">Find User</a>
 <div *ngIf="userSearched">
-  {{travelerSearchedFor.firstName}} {{travelerSearchedFor.lastName}}
+  <div *ngIf="firstNameExists">
+    {{travelerSearchedFor.firstName}}
+  </div>
+  <div *ngIf="lastNameExists">
+    {{travelerSearchedFor.lastName}}
+  </div>
+  {{travelerSearchedFor.email}}
   <div *ngIf="canAddToEvent">
     <a (click)="addUserToEvent()">Add to event</a>
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TravelerService} from '../../../services/traveler.service.client';
 import {ActivatedRoute} from '@angular/router';
 import {EventService} from '../../../services/event.service.client';
@@ -16,27 +16,24 @@ export class ActivityListComponent implements OnInit {
   eventId: string;
   event = {};
   userIsOwner: boolean;
-  constructor(private activitiesService: ActivitiesService,
-              private eventService: EventService,
+
+  constructor(private eventService: EventService,
               private activatedRoute: ActivatedRoute,
-              private sharedService: SharedService) { }
+              private sharedService: SharedService) {
+  }
 
   ngOnInit() {
     this.activatedRoute.params
       .subscribe((params: any) => {
         this.eventId = params['eventId'];
       });
-    this.activitiesService.findAllActivitiesForEvent(this.eventId).subscribe((allActivities: any) => {
-      if (allActivities) {
-        this.activities = allActivities;
-      }
-    });
     this.event = this.eventService.findEventById(this.eventId).subscribe((event: any) => {
       if (event) {
         this.event = event;
         if (this.event['owner']['_id'] === this.sharedService.user['_id']) {
           this.userIsOwner = true;
         }
+        this.activities = this.event['activities'];
       }
     });
 
