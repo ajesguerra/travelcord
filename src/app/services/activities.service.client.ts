@@ -35,6 +35,13 @@ export class ActivitiesService {
     });
   }
 
+  findAllActivities() {
+    const url = this.baseUrl + '/api/activity/findAllActivities';
+    return this.http.get(url).map((response: Response) => {
+      return response.json();
+    });
+  }
+
   addSuggestion(activityId, suggestion) {
     const url = this.baseUrl + '/api/suggestion/' + activityId;
     return this.http.post(url, suggestion).map((response: Response) => {

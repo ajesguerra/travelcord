@@ -2,6 +2,7 @@ module.exports = function (app) {
 
   var PromotionModel = require("../../model/promotion/promotion.model.server");
   var travelerModel = require("../../model/traveler/traveler.model.server");
+  var ActivityModel = require("../../model/activity/activity.model.sever");
 
   app.post('/api/promotion/:travelerId/newPromotion', createPromotion);
   app.get('/api/promotion/:promotionId', findPromotionById);
@@ -42,12 +43,26 @@ module.exports = function (app) {
     travelerModel.findTravelerById(req.params['travelerId'])
       .then(function (traveler) {
         for (var i = 0; i < traveler['myPromotions'].length; i++) {
-          console.log(traveler['myPromotions'][i]);
           if (traveler['myPromotions'][i]['_id'] == req.params['promotionId']) {
             traveler.myPromotions.splice(i, 1);
             traveler.save();
           }
         }
+
+        ActivityModel.findAllActivities()
+          .then(function (allActivities) {
+            for (var x = 0; x < allActivities.length; x++) {
+              for (var a = 0; a < allActivities[x]['activitySuggestions'].length; a++) {
+                console.log(allActivities[x]['activitySuggestions'][a]);
+                if (allActivities[x]['activitySuggestions'][a]['_id'] == req.params['promotionId']) {
+                  allActivities[x]['activitySuggestions'].splice(a, 1);
+                  allActivities[x]['activitySuggestions'].save();
+                  allActivities[x].save();
+                  allActivities.save();
+                }
+              }
+            }
+          });
 
         PromotionModel.deletePromotion(req.params['promotionId'])
           .then(function (promotion) {

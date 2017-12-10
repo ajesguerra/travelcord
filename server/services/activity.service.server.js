@@ -11,6 +11,7 @@ module.exports = function (app) {
   app.get('/api/activity/:activityId', findActivityById);
   app.put('/api/activity/:activityId', updateActivity);
   app.delete('/api/activity/:activityId', deleteActivity);
+  app.get('/api/activity/findAllActivities', findAllActivities);
 
   app.post('/api/suggestion/:activityId', addSuggestion);
   app.post('/api/suggestion/upvote/:suggestionId/:travelerId', upVote);
@@ -140,5 +141,12 @@ module.exports = function (app) {
       .then(function (activity) {
         res.json(activity);
       });
+  }
+
+  function findAllActivities(req, res) {
+    activityModel.findAllActivities()
+      .then(function (allActivities) {
+        res.json(allActivities);
+      })
   }
 };

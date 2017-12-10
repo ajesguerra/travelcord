@@ -9,6 +9,7 @@ ActivityModel.createActivity = createActivity;
 ActivityModel.findActivityById = findActivityById;
 ActivityModel.updateActivity = updateActivity;
 ActivityModel.deleteActivity = deleteActivity;
+ActivityModel.findAllActivities = findAllActivities;
 
 module.exports = ActivityModel;
 
@@ -32,6 +33,7 @@ function findActivityById(activityId) {
       }
     })
     .populate('decidedActivity')
+    .populate('promotions')
     .exec();
 }
 
@@ -41,4 +43,19 @@ function updateActivity(activityId, activity) {
 
 function deleteActivity(activityId) {
   return ActivityModel.deleteOne({_id: activityId});
+}
+
+function findAllActivities() {
+  return ActivityModel.find()
+    .populate({
+      path: 'activitySuggestions',
+      model: ActivitiesSuggestionModel,
+      populate: {
+        path: 'travelerUpVoters',
+        model: TravelerModel
+      }
+    })
+    .populate('promotions')
+    .populate('decidedActivity')
+    .exec();
 }
