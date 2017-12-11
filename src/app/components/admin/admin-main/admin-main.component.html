@@ -27,7 +27,7 @@
 
       <div *ngFor="let user of travelers">
         <div class="panel-body aj-panel-border">
-          {{user['email']}} <a (click)="deleteTraveler(user)">Delete Account</a>
+          {{user['email']}} <a (click)="deleteTraveler(user)">Delete Account</a>  <a [routerLink]="['/admin', user['_id']]">Edit Account</a>
         </div>
       </div>
     </div>

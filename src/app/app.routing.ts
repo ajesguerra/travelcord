@@ -26,6 +26,7 @@ import {PromotionEditComponent} from './components/promotion/promotion-edit/prom
 import {AdminMainComponent} from './components/admin/admin-main/admin-main.component';
 import {HomeComponent} from './components/home/home.component';
 import {HomepageComponent} from './components/homepage/homepage.component';
+import {UserEditComponent} from "./components/admin/user-edit/user-edit.component";
 
 const APP_ROUTES: Routes = [
   { path : 'places' , component: PlacestestComponent},
@@ -37,6 +38,7 @@ const APP_ROUTES: Routes = [
   { path : 'travelcord' , component: HomeComponent},
   { path : 'traveler' , component: ProfileComponent, canActivate: [AllUsersGuardService]},
   { path : 'admin' , component: AdminMainComponent, canActivate: [AdminServiceClient]},
+  { path : 'admin/:travelerId' , component: UserEditComponent, canActivate: [AdminServiceClient]},
   { path : 'event-list/:tid' , component: EventListComponent, canActivate: [AuthGuard]},
   { path : 'event-list' , component: MainComponent, canActivate: [AuthGuard]},
   { path : 'marketer' , component: ProfileMarketerComponent, canActivate: [MarketerServiceClient]},

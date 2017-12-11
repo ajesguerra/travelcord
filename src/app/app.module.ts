@@ -49,6 +49,7 @@ import {AllUsersGuardService} from './services/all-users-guard.service';
 import { AdminMainComponent } from './components/admin/admin-main/admin-main.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { UserEditComponent } from './components/admin/user-edit/user-edit.component';
 
 
 @NgModule({
@@ -84,7 +85,8 @@ import { FooterComponent } from './components/footer/footer.component';
     ProfileMarketerComponent,
     AdminMainComponent,
     HomepageComponent,
-    FooterComponent
+    FooterComponent,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,
