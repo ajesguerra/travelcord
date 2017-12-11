@@ -47,6 +47,7 @@ import {AdminServiceClient} from './services/admin.service.client';
 import {MarketerServiceClient} from './services/marketer.service.client';
 import {AllUsersGuardService} from './services/all-users-guard.service';
 import { AdminMainComponent } from './components/admin/admin-main/admin-main.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { AdminMainComponent } from './components/admin/admin-main/admin-main.com
     PromotionNewComponent,
     PromotionListComponent,
     ProfileMarketerComponent,
-    AdminMainComponent
+    AdminMainComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,

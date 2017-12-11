@@ -23,15 +23,18 @@ import {MarketerServiceClient} from './services/marketer.service.client';
 import {AllUsersGuardService} from './services/all-users-guard.service';
 import {PromotionNewComponent} from './components/promotion/promotion-new/promotion-new.component';
 import {PromotionEditComponent} from './components/promotion/promotion-edit/promotion-edit.component';
-import {AdminMainComponent} from "./components/admin/admin-main/admin-main.component";
+import {AdminMainComponent} from './components/admin/admin-main/admin-main.component';
+import {HomeComponent} from './components/home/home.component';
+import {HomepageComponent} from './components/homepage/homepage.component';
 
 const APP_ROUTES: Routes = [
   { path : 'places' , component: PlacestestComponent},
-  { path : '' , component: LoginComponent},
+  { path : '' , component: HomepageComponent},
   { path : 'test', component: TestComponent},
   { path : 'login' , component: LoginComponent},
   { path : 'main' , component: MainComponent},
   { path : 'register' , component: RegisterComponent},
+  { path : 'travelcord' , component: HomeComponent},
   { path : 'traveler' , component: ProfileComponent, canActivate: [AllUsersGuardService]},
   { path : 'admin' , component: AdminMainComponent, canActivate: [AdminServiceClient]},
   { path : 'event-list/:tid' , component: EventListComponent, canActivate: [AuthGuard]},
