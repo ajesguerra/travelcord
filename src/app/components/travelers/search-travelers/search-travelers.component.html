@@ -16,7 +16,9 @@
     Last Name: {{travelerSearchedFor.lastName}}
   </div>
   Email: {{travelerSearchedFor.email}}
+  <br>
   <div *ngIf="canAddToEvent">
-    <a (click)="addUserToEvent()">Add to event</a>
+    <a class="btn btn-primary aj-button-margin" (click)="addUserToEvent()">Add to event</a>
   </div>
+  <a class="btn btn-primary aj-button-margin" (click)="follow(travelerSearchedFor['_id'])">Follow</a>
 </div>
