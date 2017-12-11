@@ -1,8 +1,7 @@
 <div *ngIf="eventExists">
-  {{event['eventName']}}
-  <br>
-  {{event['description']}}
-  <br>Owner: {{event['owner']['email']}}
+  <h3>{{event['eventName']}}</h3>
+  <h4>{{event['description']}}</h4>
+  <h5>Owner: {{event['owner']['email']}}</h5>
 
 </div>
 <div *ngIf="isEventOwner"><a (click)="showEdit=!showEdit">Edit event</a></div>

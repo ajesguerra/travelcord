@@ -184,3 +184,10 @@ https://stackoverflow.com/questions/19055811/twitter-bootstrap-responsive-backgr
 .aj-bump-for-nav {
   padding-top: 60px;
 }
+.aj-users-event {
+  padding: 3px;
+}
+.aj-fixed-thumbnail {
+  width: 100px;
+  height: 100px;
+}

@@ -59,7 +59,7 @@ export class ActivityNewComponent implements OnInit {
           .getMinutes() + this.aNewActivity['startDate']
           .getTimezoneOffset());
       this.activityService.createActivity(this.eventId, this.aNewActivity).subscribe((theActivities: any) => {
-        this.router.navigate(['/event-list']);
+        this.router.navigate(['/event', this.eventId, 'activity']);
       });
     }
   }

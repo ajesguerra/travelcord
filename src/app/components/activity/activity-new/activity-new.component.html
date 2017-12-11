@@ -1,47 +1,24 @@
 <nav class="navbar-fixed-top header-footer-blue-steel">
-
   <div class="nav-header-content">
-
-
     <div class="col-sm-3 col-xs-1 nav-padding-zero">
-
       <a [routerLink]="['/event', eventId, 'activity']" class="navbar-text-main-theme">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
-
       <div class="nav-padding-zero hidden-xs nav-padding-zero navbar-text-main-theme">
-        <b>Events</b>
+        <b>New Activity</b>
       </div>
-
-      <div class="navbar-split-padding hidden-xs nav-padding-zero pull-right">
-        <a (click)="createActivity()" class="navbar-text-main-theme nav-padding-zero">
-          <span class="glyphicon glyphicon-plus"></span>
-        </a>
-      </div>
-
-
     </div>
-
-    <div class="col-sm-8 col-xs-10 nav-padding-zero navbar-text-main-theme">
-      <b>New Activity</b>
-    </div>
-
-    <div class="col-xs-1 nav-padding-zero">
+    <div class="col-xs-1 nav-padding-zero pull-right">
       <a (click)="createActivity()" class="navbar-text-main-theme">
         <span class="glyphicon glyphicon-ok pull-right"></span>
       </a>
     </div>
-
   </div>
-
 </nav>
 
 
-<div class="container-fluid aj-content-full-height">
-
+<div class="container-fluid aj-content-full-height  aj-bump-for-nav">
   <div class="row aj-content-full-height">
-
-
     <div class="col-sm-9 col-sm-12 aj-split-content-right">
       <div *ngIf="errorFlag"
            class="alert alert-danger">
@@ -81,15 +58,11 @@
                  [(ngModel)]="startDate"/>
         </div>
 
+        <button class="btn btn-danger btn-block" (click)="createActivity()" type="submit">Create Activity
+        </button>
       </form>
-
-
     </div>
-
-
   </div>
-
-
 </div>
 
 <app-footer></app-footer>

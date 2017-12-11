@@ -1,20 +1,15 @@
 <nav class="navbar navbar-fixed-top">
   <div class="container-fluid header-footer-blue-steel">
-
     <p class="navbar-text pull-left">
       <a [routerLink]="['/event-list']">
         <span class="glyphicon glyphicon-chevron-left glyphicon-nav header-main-text-color"></span>
       </a>
     </p>
-
-
-    <p class="navbar-header pull-left">
+    <p class="navbar-header pull-left hidden-xs">
       <a class="navbar-brand thick">
-        <b>Activities for: {{event['eventName']}}</b>
+        <b>Activities: {{event['eventName']}}</b>
       </a>
     </p>
-
-    <!--tick mark-->
     <p class="navbar-text pull-right">
       <a [routerLink]="['/event', eventId, 'activity', 'new']">
         <span class="glyphicon glyphicon-plus navbar-link"></span>
@@ -26,40 +21,53 @@
 
 <div class="main-body-content">
 
-  <div class="col-xs-3">
-    <app-event-details></app-event-details>
-  </div>
-
-  <div class="col-xs-5">
-    <ul class="list-group">
-      list of activities
-      <li class="list-group-item" *ngFor="let activity of activities">
-        {{activity['startDate'] | date:'MM-dd-yyyy'}}
-        <a [routerLink]="['/event', eventId, activity['_id']]">{{activity.activityName}}</a>
-
-        <div *ngIf="activity['isDecided']">
-          Decided Activity:
-          {{activity['decidedActivity'].activitySuggestionName}}
-          <br>
-          {{activity['decidedActivity'].suggestionLocation}}
-        </div>
-      </li>
-    </ul>
-  </div>
-
-  <div class="col-xs-4">
-    Users in this event:
-      <div *ngFor="let traveler of event['travelers']">
-        {{traveler.firstName}} {{traveler.lastName}}
-      </div>
-    <div *ngIf="userIsOwner">
-      Add Users To This Event:
+  <div>
+    <div class="col-sm-4">
+      <app-event-details></app-event-details>
       <br>
-      <app-search-travelers></app-search-travelers>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Users in this event:</h3>
+        </div>
+        <div *ngFor="let traveler of event['travelers']" class="aj-users-event">
+          <a>{{traveler.firstName}} {{traveler.lastName}}</a>
+        </div>
+      </div>
+
+      <div *ngIf="userIsOwner">
+        Add Users To This Event:
+        <br>
+        <app-search-travelers></app-search-travelers>
+      </div>
     </div>
 
+    <div class="col-sm-8">
 
+      <ul class="list-group">
+        <h1>Activities</h1>
+        <li class="list-group-item" *ngFor="let activity of activities">
+          <h4>
+            <a [routerLink]="['/event', eventId, activity['_id']]">{{activity.activityName}}</a>
+            on {{activity['startDate'] | date:'MM-dd-yyyy'}}
+          </h4>
+          <div *ngIf="activity['isDecided']">
+            Decided Activity:
+            {{activity['decidedActivity'].activitySuggestionName}}
+            <br>
+            {{activity['decidedActivity'].suggestionLocation}}
+          </div>
+          <div *ngIf="!activity['isDecided']">
+            <a [routerLink]="['/event', eventId, activity['_id']]">Undecided.  Suggest & Vote.</a>
+          </div>
+        </li>
+      </ul>
+
+
+
+    </div>
   </div>
+
+
 </div>
 
 
