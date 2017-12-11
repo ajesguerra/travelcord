@@ -45,7 +45,7 @@
 
       <div class="panel panel-primary" *ngFor="let suggestion of suggestions">
         <div class="panel-heading">
-          <span class="panel-title">Suggestion</span>
+          <span class="panel-title" *ngIf="isLoggedIn">Suggestion</span>
           <a class="btn btn-success aj-btn-margin" (click)="markAsDecided(suggestion['_id'])">Mark as decided</a>
         </div>
         <li class="list-group-item">
