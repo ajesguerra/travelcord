@@ -1,0 +1,81 @@
+<nav class="navbar navbar-fixed-top">
+  <div class="container-fluid header-footer-blue-steel">
+
+    <!--heading on the nav bar-->
+    <p class="navbar-header pull-left">
+      <a class="navbar-brand thick">
+        <b>Create New Account</b>
+      </a>
+    </p>
+
+    <!--tick mark-->
+    <p class="navbar-text pull-right">
+      <a (click)="createTraveler()" class="">
+        <span class="glyphicon glyphicon-ok navbar-link"></span>
+      </a>
+    </p>
+  </div>
+</nav>
+<div class="container main-content">
+  <div *ngIf="errorFlag"
+       class="alert alert-danger">
+    {{errorMsg}}
+  </div>
+  <form>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input [(ngModel)]="email"
+             type="text"
+             class="form-control"
+             id="email"
+             name="email"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input [(ngModel)]="firstName"
+             type="text"
+             class="form-control"
+             id="firstName"
+             name="firstName"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input [(ngModel)]="lastName"
+             type="text"
+             class="form-control"
+             id="lastName"
+             name="lastName"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input [(ngModel)]="phone"
+             type="text"
+             class="form-control"
+             id="phone"
+             name="phone"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="role">Role</label>
+      <input [(ngModel)]="role"
+             type="text"
+             class="form-control"
+             id="role"
+             name="role"
+      />
+    </div>
+  </form>
+  <a class="btn btn-primary btn-block"
+     [routerLink]="['/admin']">Back to admin page</a>
+  <a class="btn btn-primary btn-block"
+     (click)="createTraveler()">Create Account</a>
+</div>
+test
+<app-footer></app-footer>

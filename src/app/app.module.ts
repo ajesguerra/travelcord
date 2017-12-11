@@ -50,6 +50,7 @@ import { AdminMainComponent } from './components/admin/admin-main/admin-main.com
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { UserEditComponent } from './components/admin/user-edit/user-edit.component';
+import {UserCreateComponent} from './components/admin/user-create/user-create.component';
 
 
 @NgModule({
@@ -86,7 +87,8 @@ import { UserEditComponent } from './components/admin/user-edit/user-edit.compon
     AdminMainComponent,
     HomepageComponent,
     FooterComponent,
-    UserEditComponent
+    UserEditComponent,
+    UserCreateComponent
   ],
   imports: [
     BrowserModule,
