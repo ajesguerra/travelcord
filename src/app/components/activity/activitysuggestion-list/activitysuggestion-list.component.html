@@ -10,7 +10,7 @@
         <b>Suggestions</b>
       </a>
     </p>
-    <p class="navbar-text pull-right">
+    <p class="navbar-text pull-right" *ngIf="isLoggedIn">
       <a [routerLink]="['/event', eventId, activityId, 'newSuggestion']">
         <span class="glyphicon glyphicon-plus navbar-link"></span>
       </a>
@@ -45,8 +45,8 @@
 
       <div class="panel panel-primary" *ngFor="let suggestion of suggestions">
         <div class="panel-heading">
-          <span class="panel-title" *ngIf="isLoggedIn">Suggestion</span>
-          <a class="btn btn-success aj-btn-margin" (click)="markAsDecided(suggestion['_id'])">Mark as decided</a>
+          <span class="panel-title">Suggestion</span>
+          <a class="btn btn-success aj-btn-margin" (click)="markAsDecided(suggestion['_id'])" *ngIf="isLoggedIn">Mark as decided</a>
         </div>
         <li class="list-group-item">
           <strong>{{suggestion['activitySuggestionName']}}</strong>
