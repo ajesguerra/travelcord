@@ -1,1 +1,41 @@
+<nav class="navbar navbar-fixed-top">
+  <div class="container-fluid header-footer-blue-steel">
+    <p class="navbar-header pull-left">
+      <a class="navbar-brand thick">
+        <b>Welcome {{user['firstName']}}!</b>
+      </a>
+    </p>
+  </div>
+</nav>
+
+
+<div class="container main-content">
+  <span *ngIf="!loggedIn">
+    <button class="btn btn-primary btn-block" [routerLink]="['/login']"
+            type="submit">Login
+    </button>
+    <button class="btn btn-success btn-block" [routerLink]="['/register']"
+            type="submit">Register
+    </button>
+  </span>
+
+  <span *ngIf="loggedIn">
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title">Users</h3>
+      </div>
+
+      <div *ngFor="let user of travelers">
+        <div class="panel-body aj-panel-border">
+          {{user['email']}} <a (click)="deleteTraveler(user)">Delete Account</a>
+        </div>
+      </div>
+    </div>
+  </span>
+
+  <span *ngIf="!loggedIn">
+    <app-event-browse></app-event-browse>
+  </span>
+</div>
+
 <app-footer></app-footer>

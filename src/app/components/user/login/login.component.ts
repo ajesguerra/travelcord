@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
           if (this.sharedService.user['role'] === 'MARKETER') {
             this.router.navigate(['/marketer']);
           } else if (this.sharedService.user['role'] === 'ADMIN') {
-            this.router.navigate(['/event-list']);
+            this.router.navigate(['/admin']);
           } else {
             this.router.navigate(['/event-list']);
           }
