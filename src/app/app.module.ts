@@ -48,6 +48,7 @@ import {MarketerServiceClient} from './services/marketer.service.client';
 import {AllUsersGuardService} from './services/all-users-guard.service';
 import { AdminMainComponent } from './components/admin/admin-main/admin-main.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -82,7 +83,8 @@ import { HomepageComponent } from './components/homepage/homepage.component';
     PromotionListComponent,
     ProfileMarketerComponent,
     AdminMainComponent,
-    HomepageComponent
+    HomepageComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

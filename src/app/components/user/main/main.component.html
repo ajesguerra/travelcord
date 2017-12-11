@@ -1,70 +1,45 @@
 <nav class="navbar navbar-fixed-top">
   <div class="container-fluid header-footer-blue-steel">
+
+    <p class="navbar-header pull-left">
+      <a class="navbar-brand thick">
+        <b>Welcome {{user['firstName']}}!</b>
+      </a>
+    </p>
   </div>
 </nav>
 
 
 <div class="container main-content">
-  <!--Left-->
-  <div class="col-sm-3 col-xs-1">
-    <div *ngIf="loggedIn">
-      Welcome {{user['firstName']}}!
-    </div>
-    <div *ngIf="!loggedIn">
-      <button class="btn btn-primary btn-block" [routerLink]="['/login']"
-              type="submit">Login
-      </button>
-      <button class="btn btn-success btn-block" [routerLink]="['/register']"
-              type="submit">Register
-      </button>
-    </div>
+  <div *ngIf="loggedIn">
+
+  </div>
+  <div *ngIf="!loggedIn">
+    <button class="btn btn-primary btn-block" [routerLink]="['/login']"
+            type="submit">Login
+    </button>
+    <button class="btn btn-success btn-block" [routerLink]="['/register']"
+            type="submit">Register
+    </button>
   </div>
 
-  <!--Middle-->
-  <div class="col-sm-6 col-xs-1">
-    <div *ngIf="loggedIn">
-      Your Events |
-      <a [routerLink]="['/event', 'new']">Add
-        <span class="glyphicon glyphicon-plus"></span>
-      </a>
-      <app-event-list></app-event-list>
-
-      <a [routerLink]="['/browseEvents']">
-        <button class="btn btn-success btn-block" [routerLink]="['/register']"
-                type="submit">Browse Events
-        </button>
-      </a>
-    </div>
-
-    <div *ngIf="!loggedIn">
-      <app-event-browse></app-event-browse>
-    </div>
-  </div>
-
-  <!--Right-->
-  <div class="col-sm-3 col-xs-1">
-    <div *ngIf="loggedIn">
-      Following
-      <app-view-following></app-view-following>
-      <br>
-    </div>
+  <div *ngIf="loggedIn">
+    <h3>Your Events</h3>
+    <app-event-list></app-event-list>
+    <button class="btn btn-success btn-block" [routerLink]="['/event', 'new']" type="submit">New Event
+    </button>
+    <br>
+    <a [routerLink]="['/browseEvents']">
+      <button class="btn btn-success btn-block" [routerLink]="['/register']" type="submit">Browse Events
+      </button>
+    </a>
+    <app-view-following></app-view-following>
+    <br><br>
     <app-search-travelers></app-search-travelers>
   </div>
-
-
+  <div *ngIf="!loggedIn">
+    <app-event-browse></app-event-browse>
+  </div>
 </div>
 
-
-<!-- Footer -->
-<nav class="navbar navbar-fixed-bottom header-footer-blue-steel">
-  <div class="container-fluid header-footer-blue-steel">
-
-    <!--tick mark-->
-    <p class="navbar-text pull-right">
-      <a [routerLink]="['/traveler']" class="nav-hover">
-        <span class="glyphicon glyphicon-user navbar-link"></span>
-      </a>
-    </p>
-  </div>
-</nav>
-<!-- End Footer-->
+<app-footer></app-footer>

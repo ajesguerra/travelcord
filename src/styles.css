@@ -159,3 +159,6 @@ html, body, .aj-content-full-height, .aj-split-content-left {
 a:hover {
   text-decoration: none !important;
 }
+.eventList {
+ color: #d9534f;
+}

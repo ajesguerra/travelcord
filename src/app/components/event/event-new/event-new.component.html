@@ -1,4 +1,3 @@
-
 <nav class="navbar-fixed-top header-footer-blue-steel">
 
   <div class="nav-header-content">
@@ -38,49 +37,44 @@
 </nav>
 
 
-<div class="main-body-content aj-content-full-height">
+<div class="container-fluid aj-content-full-height">
 
-  <div class="container-fluid aj-content-full-height">
+  <div class="row aj-content-full-height">
 
-    <div class="row aj-content-full-height">
+    <div class="col-sm-3 hidden-xs aj-split-content-left">
+      <app-event-list></app-event-list>
+    </div>
 
-      <div class="col-sm-3 hidden-xs aj-split-content-left">
-        <app-event-list></app-event-list>
+    <div class="col-sm-9 col-sm-12 aj-split-content-right">
+      <div *ngIf="errorFlag"
+           class="alert alert-danger">
+        {{errorMsg}}
       </div>
-
-      <div class="col-sm-9 col-sm-12 aj-split-content-right">
-        <div *ngIf="errorFlag"
-             class="alert alert-danger">
-          {{errorMsg}}
+      <form>
+        <div class="form-group">
+          <label for="eventname">Event Name</label>
+          <input placeholder="Trip to Japan"
+                 id="eventname"
+                 name="eventname"
+                 type="text"
+                 class="form-control"
+                 required
+                 [(ngModel)]="eventname"/>
         </div>
-        <form>
-          <div class="form-group">
-            <label for="eventname">Event Name</label>
-            <input   placeholder="Trip to Japan"
-                     id="eventname"
-                     name="eventname"
-                     type="text"
-                     class="form-control"
-                     required
-                     [(ngModel)]="eventname"/>
-          </div>
-        </form>
+      </form>
 
-        <form>
-          <div class="form-group">
-            <label for="description">Description</label>
-            <input   placeholder="2017 trip with Alice and Bob"
-                     id="description"
-                     name="description"
-                     type="text"
-                     class="form-control"
-                     required
-                     [(ngModel)]="description"/>
-          </div>
-        </form>
-
-
-      </div>
+      <form>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input placeholder="2017 trip with Alice and Bob"
+                 id="description"
+                 name="description"
+                 type="text"
+                 class="form-control"
+                 required
+                 [(ngModel)]="description"/>
+        </div>
+      </form>
 
 
     </div>
@@ -89,16 +83,6 @@
   </div>
 
 
-  <!-- Footer -->
-  <nav class="navbar navbar-fixed-bottom header-footer-blue-steel">
-    <div class="container-fluid header-footer-blue-steel">
+</div>
 
-      <!--tick mark-->
-      <p class="navbar-text pull-right">
-        <a [routerLink]="['/traveler', travelerId]" class="nav-hover">
-          <span class="glyphicon glyphicon-user navbar-link"></span>
-        </a>
-      </p>
-    </div>
-  </nav>
-  <!-- End Footer-->
+<app-footer></app-footer>

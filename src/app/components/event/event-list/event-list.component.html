@@ -1,11 +1,9 @@
 <div *ngIf="eventExists">
   <ul class="list-group">
-
-    <li class="list-group-item" *ngFor="let anEvent of events">
-      <div class="row">
-        <a [routerLink]="['/event', anEvent['_id'], 'activity']">{{anEvent['eventName']}}</a>
-      </div>
-    </li>
-
+    <div *ngFor="let anEvent of events">
+      <li class="list-group-item">
+        - <a [routerLink]="['/event', anEvent['_id'], 'activity']" class="eventList">{{anEvent['eventName']}}</a>
+      </li>
+    </div>
   </ul>
 </div>

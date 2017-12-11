@@ -65,27 +65,12 @@
   </form>
   <a class="btn btn-primary btn-block"
      [routerLink]="['/event-list']">View Your Events</a>
-  <a class="btn btn-primary btn-block"
-     [routerLink]="['/allTravelers']">View Users</a>
-  <a class="btn btn-danger btn-block"
-     [routerLink]="['/following']">Following</a>
   <a class="btn btn-danger btn-block"
      (click)="logout()">Logout</a>
   <a class="btn btn-danger btn-block"
      (click)="deleteTraveler()">Delete Account</a>
 <br>
-  Member since {{monthJoined}} / {{yearJoined}}
+  <p class="pull-right">Member since {{monthJoined}} / {{yearJoined}}</p>
 </div>
-<!-- Footer -->
-<nav class="navbar navbar-fixed-bottom header-footer-blue-steel">
-  <div class="container-fluid header-footer-blue-steel">
 
-    <!--tick mark-->
-    <p class="navbar-text pull-right">
-      <a [routerLink]="['/traveler']" class="nav-hover">
-        <span class="glyphicon glyphicon-user navbar-link"></span>
-      </a>
-    </p>
-  </div>
-</nav>
-<!-- End Footer-->
+<app-footer></app-footer>

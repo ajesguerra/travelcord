@@ -1,19 +1,21 @@
-<input placeholder="email"
-       name="email"
-       type="text"
-       class="form-control"
-       required
-       [(ngModel)]="searchTerm"/>
-<a class="btn btn-primary btn-block"
-   (click)="findUser()">Find User</a>
+<form>
+  <input placeholder="email"
+         name="email"
+         type="text"
+         class="form-control"
+         required
+         [(ngModel)]="searchTerm"/>
+  <a class="btn btn-primary btn-block"
+     (click)="findUser()" type="submit">Find User</a>
+</form>
 <div *ngIf="userSearched">
   <div *ngIf="firstNameExists">
-    {{travelerSearchedFor.firstName}}
+    First Name: {{travelerSearchedFor.firstName}}
   </div>
   <div *ngIf="lastNameExists">
-    {{travelerSearchedFor.lastName}}
+    Last Name: {{travelerSearchedFor.lastName}}
   </div>
-  {{travelerSearchedFor.email}}
+  Email: {{travelerSearchedFor.email}}
   <div *ngIf="canAddToEvent">
     <a (click)="addUserToEvent()">Add to event</a>
   </div>
