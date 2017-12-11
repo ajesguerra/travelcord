@@ -5,7 +5,7 @@
   </div>
 
   <div class="list-group-item" *ngFor="let anotherTraveler of followingUsers">
-    <a [routerLink]="['/event-list', anotherTraveler['_id']]">{{anotherTraveler['firstName']}}{{anotherTraveler['lastName']}}</a>
+    {{anotherTraveler['firstName']}}{{anotherTraveler['lastName']}}
   </div>
 
 </div>

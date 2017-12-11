@@ -9,7 +9,11 @@
   </div>
 </nav>
 
-
-<div *ngFor="let event of events">
-  <a [routerLink]="['/event', event['_id'], 'activity']">{{event['eventName']}}</a>
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    <h3 class="panel-title">All Events</h3>
+  </div>
+  <div *ngFor="let event of events" class="aj-users-event">
+    <a [routerLink]="['/event', event['_id'], 'activity']">{{event['eventName']}}</a>
+  </div>
 </div>

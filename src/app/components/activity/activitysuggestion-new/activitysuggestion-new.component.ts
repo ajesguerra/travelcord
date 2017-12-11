@@ -48,7 +48,6 @@ export class ActivitysuggestionNewComponent implements OnInit {
 
   moreDetails(placeid) {
     this.placeService.moreDetails(placeid).subscribe((details: any) => {
-      console.log(details);
       this.detailsFlag = true;
       this.details = details;
       this.reviews = details.reviews;
