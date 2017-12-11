@@ -162,3 +162,25 @@ a:hover {
 .eventList {
  color: #d9534f;
 }
+/**
+https://stackoverflow.com/questions/19055811/twitter-bootstrap-responsive-background-image-inside-div
+ */
+.login-image {
+  background: transparent url("https://i.pinimg.com/736x/de/be/a0/debea01fd69120a7578d03b20ccd3eab--the-maldives-maldives-beach.jpg") no-repeat top center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: 100%;
+  height: 500px;
+}
+.aj-full-page {
+  width: 100%;
+  height: 100%;
+}
+.aj-panel-border {
+  border-color: #dddddd !important;
+  padding: 5px;
+}
+.aj-bump-for-nav {
+  padding-top: 60px;
+}

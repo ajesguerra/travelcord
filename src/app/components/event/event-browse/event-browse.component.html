@@ -1,3 +1,15 @@
+<nav class="navbar navbar-fixed-top">
+  <div class="container-fluid header-footer-blue-steel">
+
+    <p class="navbar-header pull-left">
+      <a [routerLink]="['/login']" class="navbar-brand thick">
+        Login/Register to start planning a trip!
+      </a>
+    </p>
+  </div>
+</nav>
+
+
 <div *ngFor="let event of events">
   <a [routerLink]="['/event', event['_id'], 'activity']">{{event['eventName']}}</a>
 </div>
