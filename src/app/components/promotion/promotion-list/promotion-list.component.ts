@@ -15,6 +15,7 @@ export class PromotionListComponent implements OnInit {
   traveler: {};
   promotions: [{}];
   promotionExists: boolean;
+  isLoggedIn: boolean;
 
   constructor(private travelerService: TravelerService,
               private eventService: EventService,
@@ -24,12 +25,13 @@ export class PromotionListComponent implements OnInit {
 
   ngOnInit() {
     this.promotionExists = false;
-
+    this.isLoggedIn = false;
     if (this.sharedService.user['_id']) {
       if (this.sharedService.user['myPromotions'].length > 0) {
         this.promotions = this.sharedService.user['myPromotions'];
         this.promotionExists = true;
       }
+      this.isLoggedIn = true;
     }
   }
 }

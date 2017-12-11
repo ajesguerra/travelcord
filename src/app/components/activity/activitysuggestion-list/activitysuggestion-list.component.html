@@ -38,7 +38,7 @@
           <strong>{{promotion['suggestionName']}}</strong>
           <br>{{promotion['suggestionLocation']}}
           <br><a href="http://{{promotion['businessURL']}}" target="new">{{promotion['businessName']}}</a>
-          <br><a (click)="removePromotionForMe(promotion['_id'])">Remove Promotion</a>
+          <br><a (click)="removePromotionForMe(promotion['_id'])" *ngIf="isLoggedIn">Remove Promotion</a>
         </li>
       </div>
 
