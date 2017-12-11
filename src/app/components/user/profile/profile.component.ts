@@ -21,6 +21,8 @@ export class ProfileComponent implements OnInit {
   dateCreated: Date;
   monthJoined: any;
   yearJoined: any;
+  isMarketer: boolean;
+  isTraveler: boolean;
   errorFlag: boolean;
   errorMsg = 'Someone else is already registered with that email.';
 
@@ -31,6 +33,8 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isMarketer = false;
+    this.isTraveler = false;
     this.traveler = this.sharedService.user;
     this.travelerId = this.traveler['_id'];
     this.email = this.traveler['email'];
@@ -40,6 +44,12 @@ export class ProfileComponent implements OnInit {
     this.dateCreated = new Date(this.traveler['dateCreated']);
     this.monthJoined = this.dateCreated.getMonth();
     this.yearJoined = this.dateCreated.getFullYear();
+    if (this.sharedService.user['role'] == 'MARKETER') {
+      this.isMarketer = true;
+    }
+    if (this.sharedService.user['role'] == 'TRAVELER') {
+      this.isTraveler = true;
+    }
   }
 
   updateTraveler() {

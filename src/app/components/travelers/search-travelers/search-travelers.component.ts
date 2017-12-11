@@ -45,15 +45,17 @@ export class SearchTravelersComponent implements OnInit {
   findUser() {
     this.travelerService.findTravelerByEmail(this.searchTerm).subscribe((traveler: any) => {
       this.travelerSearchedFor = traveler;
-      if (this.travelerSearchedFor['firstName']) {
-        this.firstNameExists = true;
-      }
-      if (this.travelerSearchedFor['lastName']) {
-        this.lastNameExists = true;
-      }
-      this.userSearched = true;
-      if (this.event) {
-        this.canAddToEvent = true;
+      if (traveler) {
+        if (this.travelerSearchedFor['firstName']) {
+          this.firstNameExists = true;
+        }
+        if (this.travelerSearchedFor['lastName']) {
+          this.lastNameExists = true;
+        }
+        this.userSearched = true;
+        if (this.event) {
+          this.canAddToEvent = true;
+        }
       }
     });
   }

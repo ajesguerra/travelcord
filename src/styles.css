@@ -207,3 +207,7 @@ https://stackoverflow.com/questions/19055811/twitter-bootstrap-responsive-backgr
 .aj-button-margin {
   margin: 5px;
 }
+table, th, td {
+  padding: 5px;
+  border: 1px solid #9a9a9a;
+}

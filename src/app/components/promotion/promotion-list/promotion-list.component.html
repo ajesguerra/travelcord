@@ -1,14 +1,24 @@
-<div *ngIf="promotionExists">
-  <ul class="list-group">
+<div class="panel panel-warning" *ngFor="let aPromotion of promotions">
+  <div class="panel-heading">
+    <h3 class="panel-title"><strong><a [routerLink]="['/promotion', aPromotion['_id']]">{{aPromotion['suggestionName']}}</a></strong></h3>
+  </div>
+  <li class="list-group-item">
 
-    <li class="list-group-item" *ngFor="let aPromotion of promotions">
-      <div class="row">
-        <a [routerLink]="['/promotion', aPromotion['_id']]">{{aPromotion['suggestionName']}}</a>
-      </div>
-      Analytics
-      <br>Number of Activities Suggested to: {{aPromotion['addedToActivitiesTotal']}}
-      <br>Views: {{aPromotion['views']}}
-    </li>
-
-  </ul>
+    <strong>Analytics:</strong>
+    <br>
+    <table class="aj-tablepadding">
+      <tr>
+        <td>Views</td>
+        <td>{{aPromotion['views']}}</td>
+      </tr>
+      <tr>
+        <td>
+          Number of Activities Suggested to:
+        </td>
+        <td>
+          {{aPromotion['addedToActivitiesTotal']}}
+        </td>
+      </tr>
+    </table>
+  </li>
 </div>

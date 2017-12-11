@@ -84,6 +84,7 @@ export class ActivitysuggestionListComponent implements OnInit {
   removePromotionForMe(promotionId) {
     this.promotionService.removePromotionForMe(this.activityId, promotionId)
       .subscribe((removed: any) => {
+        this.ngOnInit();
       });
   }
 }

@@ -1,6 +1,5 @@
 <nav class="navbar navbar-fixed-top">
   <div class="container-fluid header-footer-blue-steel">
-
     <p class="navbar-header pull-left">
       <a class="navbar-brand thick">
         <b>Welcome {{user['firstName']}}!</b>
@@ -11,26 +10,23 @@
 
 
 <div class="container main-content">
-  <div *ngIf="loggedIn">
-
-  </div>
-  <div *ngIf="!loggedIn">
+  <span *ngIf="!loggedIn">
     <button class="btn btn-primary btn-block" [routerLink]="['/login']"
             type="submit">Login
     </button>
     <button class="btn btn-success btn-block" [routerLink]="['/register']"
             type="submit">Register
     </button>
-  </div>
+  </span>
 
-  <div *ngIf="loggedIn">
+  <span *ngIf="loggedIn">
     <app-event-list></app-event-list>
     <app-view-following></app-view-following>
     <app-search-travelers></app-search-travelers>
-  </div>
-  <div *ngIf="!loggedIn">
+  </span>
+  <span *ngIf="!loggedIn">
     <app-event-browse></app-event-browse>
-  </div>
+  </span>
 </div>
 
 <app-footer></app-footer>

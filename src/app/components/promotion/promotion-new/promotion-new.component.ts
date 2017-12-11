@@ -34,6 +34,10 @@ export class PromotionNewComponent implements OnInit {
         (params: any) => {
         }
       );
+    this.suggestionName = '';
+    this.suggestionLocation = '';
+    this.businessName = '';
+    this.businessURL = '';
   }
   createPromotion() {
     if (this.suggestionName === ''

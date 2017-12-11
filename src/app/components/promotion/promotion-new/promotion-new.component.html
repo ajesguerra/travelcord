@@ -6,27 +6,17 @@
     <div class="col-sm-3 col-xs-1 nav-padding-zero">
 
       <a [routerLink]="['/event-list']" class="navbar-text-main-theme">
-        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="glyphicon glyphicon-chevron-left pull"></span>
       </a>
 
       <div class="nav-padding-zero hidden-xs nav-padding-zero navbar-text-main-theme">
-        <b>Events</b>
-      </div>
-
-      <div class="navbar-split-padding hidden-xs nav-padding-zero pull-right">
-        <a [routerLink]="['/event', 'new']" class="navbar-text-main-theme nav-padding-zero">
-          <span class="glyphicon glyphicon-plus"></span>
-        </a>
+        <b>New Promotion</b>
       </div>
 
 
     </div>
 
-    <div class="col-sm-8 col-xs-10 nav-padding-zero navbar-text-main-theme">
-      <b>New Event</b>
-    </div>
-
-    <div class="col-xs-1 nav-padding-zero">
+    <div class="col-xs-1 nav-padding-zero pull-right">
       <a (click)="createPromotion()" class="navbar-text-main-theme">
         <span class="glyphicon glyphicon-ok pull-right"></span>
       </a>
@@ -89,6 +79,9 @@
                    required
                    [(ngModel)]="businessURL"/>
           </div>
+
+          <a class="btn btn-success btn-block"
+             (click)="createPromotion()">Create Promotion</a>
         </form>
 
 

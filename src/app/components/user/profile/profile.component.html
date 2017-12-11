@@ -63,8 +63,18 @@
       />
     </div>
   </form>
-  <a class="btn btn-primary btn-block"
-     [routerLink]="['/event-list']">View Your Events</a>
+  <div *ngIf="isTraveler">
+    <a class="btn btn-primary btn-block"
+       [routerLink]="['/event-list']">View Your Events</a>
+  </div>
+
+  <div *ngIf="isMarketer">
+    <a class="btn btn-primary btn-block"
+       [routerLink]="['/marketer']">View Your Promotions</a>
+  </div>
+  <p>
+    <strong>Manage Account:</strong>
+  </p>
   <a class="btn btn-danger btn-block"
      (click)="logout()">Logout</a>
   <a class="btn btn-danger btn-block"
