@@ -1,20 +1,15 @@
 <nav class="navbar navbar-fixed-top">
   <div class="container-fluid header-footer-blue-steel">
-
     <p class="navbar-text pull-left">
       <a [routerLink]="['/event', eventId, 'activity']">
         <span class="glyphicon glyphicon-chevron-left glyphicon-nav header-main-text-color"></span>
       </a>
     </p>
-
-
     <p class="navbar-header pull-left">
       <a class="navbar-brand thick">
         <b>Suggestions</b>
       </a>
     </p>
-
-    <!--tick mark-->
     <p class="navbar-text pull-right">
       <a [routerLink]="['/event', eventId, activityId, 'newSuggestion']">
         <span class="glyphicon glyphicon-plus navbar-link"></span>
@@ -25,58 +20,63 @@
 
 
 <div class="main-body-content">
-  <div class="col-xs-2">
-    <app-activity-details></app-activity-details>
-  </div>
+  <div class="aj-pad-for-footer">
 
-  <div class="col-xs-6">
-    <ul class="list-group">
-      list of suggestions
-      <li class="list-group-item" *ngFor="let promotion of promotions">
-        Promotion:
-        <br>{{promotion['suggestionName']}}
-        <br>{{promotion['suggestionLocation']}}
-        <br><a href="http://{{promotion['businessURL']}}" target="new">{{promotion['businessName']}}</a>
-        <br><a (click)="removePromotionForMe(promotion['_id'])">Remove Promotion</a>
-      </li>
+    <div class="col-md-2 aj-pad-for-footer">
+      <app-activity-details></app-activity-details>
+    </div>
 
-      <li class="list-group-item" *ngFor="let suggestion of suggestions">
-        <div class="row">
-          <div class="col-xs-9 col-sm-11">
+    <div class="col-md-6 aj-pad-for-footer">
 
-            <div *ngIf="isLoggedIn">
-              <a (click)="upVote(suggestion['_id'])">Upvote</a>
-              | <a (click)="markAsDecided(suggestion['_id'])">Mark as decided</a>
-              <br>
-              <a (click)="unVote(suggestion['_id'])">undo vote</a>
-            </div>
-            <div *ngIf="!isLoggedIn">
-              <app-prompt-to-login-or-register></app-prompt-to-login-or-register>
-            </div>
-            <br>
-            People who voted for this suggestion:
-            <div *ngFor="let voter of suggestion['travelerUpVoters']">
-              {{voter['firstName']}}
-            </div>
+      <h1>Suggestions</h1>
 
-
-            <br>Total upvotes: {{suggestion['travelerUpVoters'].length}}
-            <br>Suggestion Name: {{suggestion['activitySuggestionName']}}
-            <br>Location: {{suggestion['suggestionLocation']}}
-
-            <div *ngIf="isEventOwner">
-              <br><a [routerLink]="['/event', eventId, activityId, suggestion['_id']]">
-              Edit Suggestion
-            </a>
-            </div>
-          </div>
+      <div class="panel panel-warning" *ngFor="let promotion of promotions">
+        <div class="panel-heading">
+          <h3 class="panel-title">Promoted Content</h3>
         </div>
-      </li>
-    </ul>
+        <li class="list-group-item">
+          <strong>{{promotion['suggestionName']}}</strong>
+          <br>{{promotion['suggestionLocation']}}
+          <br><a href="http://{{promotion['businessURL']}}" target="new">{{promotion['businessName']}}</a>
+          <br><a (click)="removePromotionForMe(promotion['_id'])">Remove Promotion</a>
+        </li>
+      </div>
+
+
+      <div class="panel panel-primary" *ngFor="let suggestion of suggestions">
+        <div class="panel-heading">
+          <span class="panel-title">Suggestion</span>
+          <a class="btn btn-success aj-btn-margin" (click)="markAsDecided(suggestion['_id'])">Mark as decided</a>
+        </div>
+        <li class="list-group-item">
+          <strong>{{suggestion['activitySuggestionName']}}</strong>
+          <a [routerLink]="['/event', eventId, activityId, suggestion['_id']]"><span class="glyphicon glyphicon-cog"></span></a>
+
+          <br>Location: {{suggestion['suggestionLocation']}}
+          <br>Votes: {{suggestion['travelerUpVoters'].length}}
+          <br>People who voted for this suggestion:
+          <div *ngFor="let voter of suggestion['travelerUpVoters']">
+            {{voter['firstName']}}
+          </div>
+
+
+
+          <div *ngIf="isLoggedIn" class="aj-btn-margin">
+            <span>
+              <a class="btn btn-primary" (click)="upVote(suggestion['_id'])">Upvote</a>
+              <a (click)="unVote(suggestion['_id'])">Undo Vote</a>
+            </span>
+          </div>
+
+          <div *ngIf="!isLoggedIn">
+            <app-prompt-to-login-or-register></app-prompt-to-login-or-register>
+          </div>
+        </li>
+      </div>
+
+    </div>
 
   </div>
-
-
 </div>
 
 

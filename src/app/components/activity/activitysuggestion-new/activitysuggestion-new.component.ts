@@ -32,7 +32,6 @@ export class ActivitysuggestionNewComponent implements OnInit {
 
   placesAutoComplete() {
     this.placeService.placesAutoComplete(this.searchTerm).subscribe((results: any) => {
-      console.log(results);
       this.result = results;
     });
   }
@@ -42,7 +41,7 @@ export class ActivitysuggestionNewComponent implements OnInit {
       this.aNewSuggestion = {activitySuggestionName: details.name, suggestionLocation: details.formatted_address};
       this.activitiesService.addSuggestion(this.activityId, this.aNewSuggestion)
         .subscribe((suggestion: any) => {
-          this.router.navigate(['/event-list']);
+          this.router.navigate(['/event', this.eventId, this.activityId]);
       });
     });
   }

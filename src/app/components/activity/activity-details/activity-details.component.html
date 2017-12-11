@@ -1,9 +1,14 @@
 <div *ngIf="activityExists">
-  {{activity['activityName']}}
-  <br>{{activity['description']}}
-  <br>
+  <h2>
+    {{activity['activityName']}}
+  </h2>
+  <h4>
+    {{activity['description']}}
+  </h4>
   <div *ngIf="isEventOwner">
-    <a (click)="showEdit=!showEdit">Edit Activity</a>
+    <div>
+      <a (click)="showEdit=!showEdit">Edit Activity</a>
+    </div>
     <div *ngIf="showEdit">
       <app-activity-edit></app-activity-edit>
     </div>

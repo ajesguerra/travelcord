@@ -18,9 +18,7 @@
   </div>
 </nav>
 
-
 <div class="main-body-content">
-
   <div>
     <div class="col-sm-4">
       <app-event-details></app-event-details>
@@ -33,16 +31,13 @@
           <a>{{traveler.firstName}} {{traveler.lastName}}</a>
         </div>
       </div>
-
       <div *ngIf="userIsOwner">
         Add Users To This Event:
         <br>
         <app-search-travelers></app-search-travelers>
       </div>
     </div>
-
     <div class="col-sm-8">
-
       <ul class="list-group">
         <h1>Activities</h1>
         <li class="list-group-item" *ngFor="let activity of activities">
@@ -61,14 +56,8 @@
           </div>
         </li>
       </ul>
-
-
-
     </div>
   </div>
-
-
 </div>
-
 
 <app-footer></app-footer>

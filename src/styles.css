@@ -126,6 +126,10 @@ html, body, .aj-content-full-height, .aj-split-content-left {
   text-align: center;
   margin-bottom: 0px;
 }
+.pull-middle {
+  vertical-align: middle;
+  padding: 5px;
+}
 .aj-nav-padding-zero-except-left {
   padding-right: 0px;
   padding-top: 0px;
@@ -181,6 +185,9 @@ https://stackoverflow.com/questions/19055811/twitter-bootstrap-responsive-backgr
   border-color: #dddddd !important;
   padding: 5px;
 }
+.aj-panel-no-border {
+  padding: 5px;
+}
 .aj-bump-for-nav {
   padding-top: 60px;
 }
@@ -190,4 +197,13 @@ https://stackoverflow.com/questions/19055811/twitter-bootstrap-responsive-backgr
 .aj-fixed-thumbnail {
   width: 100px;
   height: 100px;
+}
+.promotion {
+  background-color: yellow;
+}
+.aj-pad-for-footer {
+  padding-bottom: 60px;
+}
+.aj-button-margin {
+  margin: 5px;
 }

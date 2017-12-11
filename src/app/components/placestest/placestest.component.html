@@ -1,7 +1,9 @@
 <div class="main-body-content">
   <ul class="list-group">
     <li class="list-group-item">
-      Search for a place
+      <h1>
+        Search for a place
+      </h1>
       <input   placeholder="Golden Gate Bridge"
                name="theSearchTerm"
                type="text"
@@ -14,9 +16,12 @@
     <li class="list-group-item">
       <div class="row" *ngFor="let aResult of result">
         <div class="col-xs-9 col-sm-11">
-          <a class="btn"
-             (click)="moreDetails(aResult.place_id)">More Details</a> {{aResult.description}}
+          {{aResult.description}}
           <br>
+          <a class="btn"
+             (click)="moreDetails(aResult.place_id)">
+            <h4>More Details</h4>
+          </a>
         </div>
       </div>
     </li>

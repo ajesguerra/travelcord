@@ -1,13 +1,10 @@
 <nav class="navbar navbar-fixed-top">
   <div class="container-fluid header-footer-blue-steel">
-
     <p class="navbar-text pull-left">
       <a [routerLink]="['/event', eventId, activityId]">
         <span class="glyphicon glyphicon-chevron-left glyphicon-nav header-main-text-color"></span>
       </a>
     </p>
-
-
     <p class="navbar-header pull-left">
       <a class="navbar-brand thick">
         <b>Suggestions</b>
@@ -18,49 +15,73 @@
 </nav>
 
 <div class="main-body-content aj-bump-for-nav">
-  <ul class="list-group">
-    <li class="list-group-item">
+
+  <div>
+    <div class="col-sm-4">
       Search for a place
-      <input   placeholder="Golden Gate Bridge"
-               name="username"
-               type="text"
-               class="form-control"
-               required
-               [(ngModel)]="searchTerm"/>
+      <input placeholder="Golden Gate Bridge"
+             name="username"
+             type="text"
+             class="form-control"
+             required
+             [(ngModel)]="searchTerm"/>
       <a class="btn btn-primary btn-block"
          (click)="placesAutoComplete()">Predict</a>
-    </li>
-    <li class="list-group-item">
+
+
       <div class="row" *ngFor="let aResult of result">
+
+
         <div class="col-xs-9 col-sm-11">
+          <h3>
+            {{aResult.description}}
+          </h3>
+          <a class="btn btn-success" (click)="addSuggestion(aResult.place_id)">Suggest as activity</a>
           <a class="btn"
-             (click)="moreDetails(aResult.place_id)">More Details</a> {{aResult.description}} || =>
-          <a (click)="addSuggestion(aResult.place_id)">Suggest as activity.</a>
-          <br>
+             (click)="moreDetails(aResult.place_id)">More Details</a>
         </div>
       </div>
-    </li>
-    <li class="list-group-item">
+
+    </div>
+    <div class="col-sm-8">
+
       <div *ngIf="detailsFlag">
-        Address: {{details['formatted_address']}}
-        <br>
-        OverallRating: {{details['rating']}}
-        <br>
-        <br>
+        <h3>
+          Address: {{details['formatted_address']}}
+        </h3>
+        <h4>
+          {{details['formatted_phone_number']}}
+        </h4>
 
-        <div class="row" *ngFor="let review of reviews">
-          Review by {{review.author_name}} gives a {{review.rating}}
-          <br>
-          <img src="{{review.profile_photo_url}}"/>
-          <br>
-          {{review.text}}
-          <br>
-          <br>
-
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Users rate this place: {{details['rating']}}</h3>
+          </div>
         </div>
+
+        <div class="panel panel-primary aj-panel-no-border">
+          <div class="row pull-middle" *ngFor="let review of reviews">
+            <div>
+              <div class="col-sm-3 pull-center">
+                <img src="{{review.profile_photo_url}}" class="img-circle"/>
+              </div>
+              <div class="col-sm-9">
+                <h4>
+                  {{review.author_name}}
+                </h4>
+                Rate it a {{review.rating}}
+                <p>
+                  {{review.text}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
-    </li>
-  </ul>
+
+    </div>
+  </div>
 </div>
 
 
