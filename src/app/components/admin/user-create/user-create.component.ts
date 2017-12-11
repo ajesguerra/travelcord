@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TravelerService} from '../../../services/traveler.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SharedService} from '../../../services/shared.service.client';
@@ -25,7 +25,7 @@ export class UserCreateComponent implements OnInit {
   isMarketer: boolean;
   isTraveler: boolean;
   errorFlag: boolean;
-  errorMsg = 'Someone else is already registered with that email.';
+  errorMsg = 'Email required. Role must be TRAVELER, MARKETER, or ADMIN';
 
   constructor(private travelerService: TravelerService,
               private activatedRoute: ActivatedRoute,
@@ -38,23 +38,17 @@ export class UserCreateComponent implements OnInit {
 
   createTraveler() {
     this.travelerService.findTravelerByEmail(this.email).subscribe((traveler: any) => {
-      if (traveler) {
+      if (traveler !== null) {
         this.errorFlag = true;
-      } else if ((this.email !== '') || ((this.role !== 'MARKETER')
-          && (this.role !== 'ADMIN')
-          && (this.role !== 'TRAVELER'))) {
+      } else if ((this.email === '') || (this.password === '')) {
         this.errorFlag = true;
-    } else {
+      } else {
         this.traveler['email'] = this.email;
-        this.traveler['firstName'] = this.firstName;
-        this.traveler['lastName'] = this.lastName;
-        this.traveler['phone'] = this.phone;
-        this.traveler['role'] = this.role;
-        this.travelerService.createTraveler(this.traveler).subscribe((theTraveler: any) => {
+        this.traveler['password'] = this.password;
+        this.travelerService.register(this.email, this.password).subscribe((theTraveler: any) => {
           this.router.navigate(['/admin']);
         });
       }
     });
   }
-
 }

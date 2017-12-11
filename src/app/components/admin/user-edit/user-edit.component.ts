@@ -70,6 +70,7 @@ export class UserEditComponent implements OnInit {
         this.traveler['lastName'] = this.lastName;
         this.traveler['phone'] = this.phone;
         this.traveler['role'] = this.role;
+        this.traveler['password'] = this.password;
         this.travelerService.updateTraveler(this.travelerId, this.traveler).subscribe((theTraveler: any) => {
           this.router.navigate(['/admin']);
         });
@@ -79,7 +80,7 @@ export class UserEditComponent implements OnInit {
 
   deleteTraveler() {
     this.travelerService.deleteTraveler(this.traveler).subscribe((theTraveler: any) => {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/admin']);
     });
   }
 

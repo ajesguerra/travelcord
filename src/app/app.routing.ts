@@ -40,7 +40,7 @@ const APP_ROUTES: Routes = [
   { path : 'traveler' , component: ProfileComponent, canActivate: [AllUsersGuardService]},
   { path : 'admin' , component: AdminMainComponent, canActivate: [AdminServiceClient]},
   { path : 'admin/:travelerId' , component: UserEditComponent, canActivate: [AdminServiceClient]},
-  { path : 'admin/create' , component: UserCreateComponent, canActivate: [AdminServiceClient]},
+  { path : 'admin/create/user' , component: UserCreateComponent, canActivate: [AdminServiceClient]},
   { path : 'event-list/:tid' , component: EventListComponent, canActivate: [AuthGuard]},
   { path : 'event-list' , component: MainComponent, canActivate: [AuthGuard]},
   { path : 'marketer' , component: ProfileMarketerComponent, canActivate: [MarketerServiceClient]},
