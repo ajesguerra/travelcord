@@ -18,7 +18,8 @@ export class ActivitysuggestionListComponent implements OnInit {
   isLoggedIn: boolean;
   promotions: any;
   activity: any;
-
+  editSuggestionId: string;
+  canEdit: boolean;
   constructor(private activitiesService: ActivitiesService,
               private eventService: EventService,
               private router: Router,
@@ -28,13 +29,17 @@ export class ActivitysuggestionListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.canEdit = false;
     this.isEventOwner = false;
     this.isLoggedIn = false;
     this.activatedRoute.params
       .subscribe((params: any) => {
         this.activityId = params['activityId'];
         this.eventId = params['eventId'];
-
+        this.editSuggestionId = params['suggestionId'];
+        if (this.editSuggestionId) {
+          this.canEdit = true;
+        }
         this.eventService.findEventById(params['eventId']).subscribe((theEvent: any) => {
           if (theEvent) {
             if (this.sharedService.user['_id'] == theEvent['owner']['_id']) {

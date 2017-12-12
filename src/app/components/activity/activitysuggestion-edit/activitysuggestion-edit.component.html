@@ -1,36 +1,121 @@
-<div *ngIf="isEventOwner">
-  <div *ngIf="errorFlag"
-       class="alert alert-danger">
-    {{errorMsg}}
+<nav class="navbar navbar-fixed-top">
+  <div class="container-fluid header-footer-blue-steel">
+    <p class="navbar-text pull-left">
+      <a [routerLink]="['/event', eventId, 'activity']">
+        <span class="glyphicon glyphicon-chevron-left glyphicon-nav header-main-text-color"></span>
+      </a>
+    </p>
+    <p class="navbar-header pull-left">
+      <a class="navbar-brand thick">
+        <b>Suggestions</b>
+      </a>
+    </p>
+    <p class="navbar-text pull-right" *ngIf="isLoggedIn">
+      <a [routerLink]="['/event', eventId, activityId, 'newSuggestion']">
+        <span class="glyphicon glyphicon-plus navbar-link"></span>
+      </a>
+    </p>
   </div>
-  <form>
-    <div class="form-group">
-      <label for="activitySuggestionName">Suggestion Name</label>
-      <input placeholder="McDonalds"
-             id="activitySuggestionName"
-             name="activitySuggestionName"
-             type="text"
-             class="form-control"
-             required
-             [(ngModel)]="activitySuggestionName"/>
+</nav>
+
+
+<div class="main-body-content">
+  <div class="aj-pad-for-footer">
+
+    <div class="col-md-2 aj-pad-for-footer">
+      <app-activity-details></app-activity-details>
     </div>
 
-    <div class="form-group">
-      <label for="suggestionLocation">Location</label>
-      <input placeholder="1337 Leet Lane"
-             id="suggestionLocation"
-             name="suggestionLocation"
-             type="text"
-             class="form-control"
-             required
-             [(ngModel)]="suggestionLocation"/>
+    <div class="col-md-6 aj-pad-for-footer">
+
+      <h1>Suggestions</h1>
+
+      <div class="panel panel-warning" *ngFor="let promotion of promotions">
+        <div class="panel-heading">
+          <h3 class="panel-title">Promoted Content</h3>
+        </div>
+        <li class="list-group-item">
+          <strong>{{promotion['suggestionName']}}</strong>
+          <br>{{promotion['suggestionLocation']}}
+          <br><a href="http://{{promotion['businessURL']}}" target="new">{{promotion['businessName']}}</a>
+          <br><a (click)="removePromotionForMe(promotion['_id'])" *ngIf="isLoggedIn">Remove Promotion</a>
+        </li>
+      </div>
+
+
+      <div class="panel panel-primary" *ngFor="let suggestion of suggestions">
+        <div class="panel-heading">
+          <span class="panel-title">Suggestion</span>
+          <a class="btn btn-success aj-btn-margin" (click)="markAsDecided(suggestion['_id'])" *ngIf="isLoggedIn">Mark as
+            decided</a>
+        </div>
+        <li class="list-group-item">
+          <strong>{{suggestion['activitySuggestionName']}}</strong>
+          <a [routerLink]="['/event', eventId, activityId, suggestion['_id']]" (click)="setEdit()"><span
+            class="glyphicon glyphicon-cog"></span></a>
+
+          <br>Location: {{suggestion['suggestionLocation']}}
+          <br>Votes: {{suggestion['travelerUpVoters'].length}}
+          <br>People who voted for this suggestion:
+          <div *ngFor="let voter of suggestion['travelerUpVoters']">
+            {{voter['firstName']}}
+          </div>
+
+          <div *ngIf="isLoggedIn" class="aj-btn-margin">
+            <span>
+              <a class="btn btn-primary" (click)="upVote(suggestion['_id'])">Upvote</a>
+              <a (click)="unVote(suggestion['_id'])">Undo Vote</a>
+            </span>
+          </div>
+
+          <div *ngIf="!isLoggedIn">
+            <app-prompt-to-login-or-register></app-prompt-to-login-or-register>
+          </div>
+        </li>
+      </div>
+
+
+      <div *ngIf="isEventOwner">
+        <div *ngIf="errorFlag"
+             class="alert alert-danger">
+          {{errorMsg}}
+        </div>
+        <form>
+          <div class="form-group">
+            <label for="activitySuggestionName">Suggestion Name</label>
+            <input placeholder="McDonalds"
+                   id="activitySuggestionName"
+                   name="activitySuggestionName"
+                   type="text"
+                   class="form-control"
+                   required
+                   [(ngModel)]="activitySuggestionName"/>
+          </div>
+
+          <div class="form-group">
+            <label for="suggestionLocation">Location</label>
+            <input placeholder="1337 Leet Lane"
+                   id="suggestionLocation"
+                   name="suggestionLocation"
+                   type="text"
+                   class="form-control"
+                   required
+                   [(ngModel)]="suggestionLocation"/>
+          </div>
+
+          <a class="btn btn-primary btn-block"
+             (click)="updateSuggestion()">Update</a>
+
+          <a class="btn btn-danger btn-block"
+             (click)="deleteSuggestion()">Delete</a>
+
+        </form>
+      </div>
+
     </div>
 
-    <a class="btn btn-primary btn-block"
-       (click)="updateSuggestion()">Update</a>
-
-    <a class="btn btn-danger btn-block"
-       (click)="deleteSuggestion()">Delete</a>
-
-  </form>
+  </div>
 </div>
+
+
+<app-footer></app-footer>

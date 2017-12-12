@@ -50,7 +50,7 @@ const APP_ROUTES: Routes = [
   { path : 'promotion/:promotionId' , component: PromotionEditComponent, canActivate: [MarketerServiceClient]},
   { path : 'event/:eventId/activity' , component: ActivityListComponent},
   { path : 'event/:eventId/activity/new' , component: ActivityNewComponent, canActivate: [AuthGuard]},
-  { path : 'event/:eventId/:activityId' , component: ActivitysuggestionListComponent},
+  { path : 'event/:eventId/:activityId' , component: ActivitysuggestionListComponent, canActivate: [AuthGuard]},
   { path : 'event/:eventId/:activityId/newSuggestion' , component: ActivitysuggestionNewComponent, canActivate: [AuthGuard]},
   { path : 'event/:eventId/:activityId/:suggestionId' , component: ActivitysuggestionEditComponent, canActivate: [AuthGuard]},
   { path : 'following' , component: ViewFollowingComponent, canActivate: [AuthGuard]},
