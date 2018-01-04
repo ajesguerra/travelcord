@@ -8,7 +8,7 @@ module.exports = function (app) {
   app.get("/api/places/photo/:photoreference", placePhoto);
 
   var googleMapsClient = require('@google/maps').createClient({
-    key: process.env.PLACES_KEY;
+    key: process.env.PLACES_KEY
   });
 
   function placesAutoComplete(req, res) {
