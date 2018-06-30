@@ -316,10 +316,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_promotion_promotion_edit_promotion_edit_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/promotion/promotion-edit/promotion-edit.component */ "./src/app/components/promotion/promotion-edit/promotion-edit.component.ts");
 /* harmony import */ var _components_admin_admin_main_admin_main_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/admin/admin-main/admin-main.component */ "./src/app/components/admin/admin-main/admin-main.component.ts");
 /* harmony import */ var _components_home_home_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/home/home.component */ "./src/app/components/home/home.component.ts");
-/* harmony import */ var _components_homepage_homepage_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/homepage/homepage.component */ "./src/app/components/homepage/homepage.component.ts");
-/* harmony import */ var _components_admin_user_edit_user_edit_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/admin/user-edit/user-edit.component */ "./src/app/components/admin/user-edit/user-edit.component.ts");
-/* harmony import */ var _components_admin_user_create_user_create_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/admin/user-create/user-create.component */ "./src/app/components/admin/user-create/user-create.component.ts");
-
+/* harmony import */ var _components_admin_user_edit_user_edit_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/admin/user-edit/user-edit.component */ "./src/app/components/admin/user-edit/user-edit.component.ts");
+/* harmony import */ var _components_admin_user_create_user_create_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/admin/user-create/user-create.component */ "./src/app/components/admin/user-create/user-create.component.ts");
 
 
 
@@ -350,7 +348,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var APP_ROUTES = [
     { path: 'places', component: _components_placestest_placestest_component__WEBPACK_IMPORTED_MODULE_5__["PlacestestComponent"] },
-    { path: '', component: _components_homepage_homepage_component__WEBPACK_IMPORTED_MODULE_26__["HomepageComponent"] },
+    { path: '', component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_25__["HomeComponent"] },
     { path: 'test', component: _components_test_test_component__WEBPACK_IMPORTED_MODULE_4__["TestComponent"] },
     { path: 'login', component: _components_user_login_login_component__WEBPACK_IMPORTED_MODULE_1__["LoginComponent"] },
     { path: 'main', component: _components_user_main_main_component__WEBPACK_IMPORTED_MODULE_15__["MainComponent"] },
@@ -358,8 +356,8 @@ var APP_ROUTES = [
     { path: 'travelcord', component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_25__["HomeComponent"] },
     { path: 'traveler', component: _components_user_profile_profile_component__WEBPACK_IMPORTED_MODULE_3__["ProfileComponent"], canActivate: [_services_all_users_guard_service__WEBPACK_IMPORTED_MODULE_21__["AllUsersGuardService"]] },
     { path: 'admin', component: _components_admin_admin_main_admin_main_component__WEBPACK_IMPORTED_MODULE_24__["AdminMainComponent"], canActivate: [_services_admin_service_client__WEBPACK_IMPORTED_MODULE_19__["AdminServiceClient"]] },
-    { path: 'admin/:travelerId', component: _components_admin_user_edit_user_edit_component__WEBPACK_IMPORTED_MODULE_27__["UserEditComponent"], canActivate: [_services_admin_service_client__WEBPACK_IMPORTED_MODULE_19__["AdminServiceClient"]] },
-    { path: 'admin/create/user', component: _components_admin_user_create_user_create_component__WEBPACK_IMPORTED_MODULE_28__["UserCreateComponent"], canActivate: [_services_admin_service_client__WEBPACK_IMPORTED_MODULE_19__["AdminServiceClient"]] },
+    { path: 'admin/:travelerId', component: _components_admin_user_edit_user_edit_component__WEBPACK_IMPORTED_MODULE_26__["UserEditComponent"], canActivate: [_services_admin_service_client__WEBPACK_IMPORTED_MODULE_19__["AdminServiceClient"]] },
+    { path: 'admin/create/user', component: _components_admin_user_create_user_create_component__WEBPACK_IMPORTED_MODULE_27__["UserCreateComponent"], canActivate: [_services_admin_service_client__WEBPACK_IMPORTED_MODULE_19__["AdminServiceClient"]] },
     { path: 'event-list/:tid', component: _components_event_event_list_event_list_component__WEBPACK_IMPORTED_MODULE_6__["EventListComponent"], canActivate: [_services_auth_guard_service__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] },
     { path: 'event-list', component: _components_user_main_main_component__WEBPACK_IMPORTED_MODULE_15__["MainComponent"], canActivate: [_services_auth_guard_service__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] },
     { path: 'marketer', component: _components_marketer_profile_profile_component__WEBPACK_IMPORTED_MODULE_18__["ProfileMarketerComponent"], canActivate: [_services_marketer_service_client__WEBPACK_IMPORTED_MODULE_20__["MarketerServiceClient"]] },

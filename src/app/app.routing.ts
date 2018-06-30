@@ -31,7 +31,7 @@ import {UserCreateComponent} from './components/admin/user-create/user-create.co
 
 const APP_ROUTES: Routes = [
   { path : 'places' , component: PlacestestComponent},
-  { path : '' , component: HomepageComponent},
+  { path : '' , component: HomeComponent},
   { path : 'test', component: TestComponent},
   { path : 'login' , component: LoginComponent},
   { path : 'main' , component: MainComponent},
